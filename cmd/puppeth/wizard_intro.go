@@ -26,7 +26,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/SFT-project/go-sft/log"
 )
 
 // makeWizard creates and returns a new puppeth wizard.
@@ -49,7 +49,7 @@ func (w *wizard) run() {
 	fmt.Println("| Welcome to puppeth, your Ethereum private network manager |")
 	fmt.Println("|                                                           |")
 	fmt.Println("| This tool lets you create a new Ethereum network down to  |")
-	fmt.Println("| the genesis block, bootnodes, miners and ethstats servers |")
+	fmt.Println("| the genesis block, bootnodes, miners and sftstats servers |")
 	fmt.Println("| without the hassle that it would normally entail.         |")
 	fmt.Println("|                                                           |")
 	fmt.Println("| Puppeth uses SSH to dial in to remote servers, and builds |")

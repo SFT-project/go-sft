@@ -21,10 +21,10 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/sftdb"
+	"github.com/SFT-project/go-sft/log"
+	"github.com/SFT-project/go-sft/rlp"
 )
 
 var ErrCommitDisabled = errors.New("no database for committing")
@@ -35,7 +35,7 @@ var stPool = sync.Pool{
 	},
 }
 
-func stackTrieFromPool(db ethdb.KeyValueStore) *StackTrie {
+func stackTrieFromPool(db sftdb.KeyValueStore) *StackTrie {
 	st := stPool.Get().(*StackTrie)
 	st.db = db
 	return st
@@ -56,18 +56,18 @@ type StackTrie struct {
 	keyOffset int            // offset of the key chunk inside a full key
 	children  [16]*StackTrie // list of children (for fullnodes and exts)
 
-	db ethdb.KeyValueStore // Pointer to the commit db, can be nil
+	db sftdb.KeyValueStore // Pointer to the commit db, can be nil
 }
 
 // NewStackTrie allocates and initializes an empty trie.
-func NewStackTrie(db ethdb.KeyValueStore) *StackTrie {
+func NewStackTrie(db sftdb.KeyValueStore) *StackTrie {
 	return &StackTrie{
 		nodeType: emptyNode,
 		db:       db,
 	}
 }
 
-func newLeaf(ko int, key, val []byte, db ethdb.KeyValueStore) *StackTrie {
+func newLeaf(ko int, key, val []byte, db sftdb.KeyValueStore) *StackTrie {
 	st := stackTrieFromPool(db)
 	st.nodeType = leafNode
 	st.keyOffset = ko
@@ -76,7 +76,7 @@ func newLeaf(ko int, key, val []byte, db ethdb.KeyValueStore) *StackTrie {
 	return st
 }
 
-func newExt(ko int, key []byte, child *StackTrie, db ethdb.KeyValueStore) *StackTrie {
+func newExt(ko int, key []byte, child *StackTrie, db sftdb.KeyValueStore) *StackTrie {
 	st := stackTrieFromPool(db)
 	st.nodeType = extNode
 	st.keyOffset = ko
@@ -314,22 +314,19 @@ func (st *StackTrie) hash() {
 			panic(err)
 		}
 	case extNode:
-		st.children[0].hash()
 		h = newHasher(false)
 		defer returnHasherToPool(h)
 		h.tmp.Reset()
-		var valuenode node
-		if len(st.children[0].val) < 32 {
-			valuenode = rawNode(st.children[0].val)
-		} else {
-			valuenode = hashNode(st.children[0].val)
-		}
-		n := struct {
-			Key []byte
-			Val node
-		}{
-			Key: hexToCompact(st.key),
-			Val: valuenode,
+		st.children[0].hash()
+		// This is also possible:
+		//sz := hexToCompactInPlace(st.key)
+		//n := [][]byte{
+		//	st.key[:sz],
+		//	st.children[0].val,
+		//}
+		n := [][]byte{
+			hexToCompact(st.key),
+			st.children[0].val,
 		}
 		if err := rlp.Encode(&h.tmp, n); err != nil {
 			panic(err)
@@ -409,18 +406,6 @@ func (st *StackTrie) Commit() (common.Hash, error) {
 		return common.Hash{}, ErrCommitDisabled
 	}
 	st.hash()
-	if len(st.val) != 32 {
-		// If the node's RLP isn't 32 bytes long, the node will not
-		// be hashed (and committed), and instead contain the  rlp-encoding of the
-		// node. For the top level node, we need to force the hashing+commit.
-		ret := make([]byte, 32)
-		h := newHasher(false)
-		defer returnHasherToPool(h)
-		h.sha.Reset()
-		h.sha.Write(st.val)
-		h.sha.Read(ret)
-		st.db.Put(ret, st.val)
-		return common.BytesToHash(ret), nil
-	}
-	return common.BytesToHash(st.val), nil
+	h := common.BytesToHash(st.val)
+	return h, nil
 }

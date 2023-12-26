@@ -20,22 +20,23 @@ import (
 	"context"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common/mclock"
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/light"
+	"github.com/SFT-project/go-sft/common/mclock"
+	"github.com/SFT-project/go-sft/core"
+	"github.com/SFT-project/go-sft/sftdb"
+	"github.com/SFT-project/go-sft/light"
+	"github.com/SFT-project/go-sft/log"
 )
 
 // LesOdr implements light.OdrBackend
 type LesOdr struct {
-	db                                         ethdb.Database
+	db                                         sftdb.Database
 	indexerConfig                              *light.IndexerConfig
 	chtIndexer, bloomTrieIndexer, bloomIndexer *core.ChainIndexer
 	retriever                                  *retrieveManager
 	stop                                       chan struct{}
 }
 
-func NewLesOdr(db ethdb.Database, config *light.IndexerConfig, retriever *retrieveManager) *LesOdr {
+func NewLesOdr(db sftdb.Database, config *light.IndexerConfig, retriever *retrieveManager) *LesOdr {
 	return &LesOdr{
 		db:            db,
 		indexerConfig: config,
@@ -50,7 +51,7 @@ func (odr *LesOdr) Stop() {
 }
 
 // Database returns the backing database
-func (odr *LesOdr) Database() ethdb.Database {
+func (odr *LesOdr) Database() sftdb.Database {
 	return odr.db
 }
 
@@ -82,8 +83,7 @@ func (odr *LesOdr) IndexerConfig() *light.IndexerConfig {
 }
 
 const (
-	MsgBlockHeaders = iota
-	MsgBlockBodies
+	MsgBlockBodies = iota
 	MsgCode
 	MsgReceipts
 	MsgProofsV2
@@ -122,17 +122,13 @@ func (odr *LesOdr) Retrieve(ctx context.Context, req light.OdrRequest) (err erro
 			return func() { lreq.Request(reqID, p) }
 		},
 	}
-
-	defer func(sent mclock.AbsTime) {
-		if err != nil {
-			return
-		}
+	sent := mclock.Now()
+	if err = odr.retriever.retrieve(ctx, reqID, rq, func(p distPeer, msg *Msg) error { return lreq.Validate(odr.db, msg) }, odr.stop); err == nil {
+		// retrieved from network, store in db
+		req.StoreResult(odr.db)
 		requestRTT.Update(time.Duration(mclock.Now() - sent))
-	}(mclock.Now())
-
-	if err := odr.retriever.retrieve(ctx, reqID, rq, func(p distPeer, msg *Msg) error { return lreq.Validate(odr.db, msg) }, odr.stop); err != nil {
-		return err
+	} else {
+		log.Debug("Failed to retrieve data from network", "err", err)
 	}
-	req.StoreResult(odr.db)
-	return nil
+	return
 }

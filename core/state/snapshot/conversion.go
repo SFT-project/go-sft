@@ -22,11 +22,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/ethdb/memorydb"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/rlp"
-	"github.com/ethereum/go-ethereum/trie"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/sftdb/memorydb"
+	"github.com/SFT-project/go-sft/log"
+	"github.com/SFT-project/go-sft/rlp"
+	"github.com/SFT-project/go-sft/trie"
 )
 
 // trieKV represents a trie key-value pair

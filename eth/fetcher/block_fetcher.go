@@ -22,13 +22,13 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/prque"
-	"github.com/ethereum/go-ethereum/consensus"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/metrics"
-	"github.com/ethereum/go-ethereum/trie"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/common/prque"
+	"github.com/SFT-project/go-sft/consensus"
+	"github.com/SFT-project/go-sft/core/types"
+	"github.com/SFT-project/go-sft/log"
+	"github.com/SFT-project/go-sft/metrics"
+	"github.com/SFT-project/go-sft/trie"
 )
 
 const (

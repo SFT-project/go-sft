@@ -21,16 +21,16 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/ethdb"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/core/rawdb"
+	"github.com/SFT-project/go-sft/crypto"
+	"github.com/SFT-project/go-sft/sftdb"
 )
 
 var toAddr = common.BytesToAddress
 
 type stateTest struct {
-	db    ethdb.Database
+	db    sftdb.Database
 	state *StateDB
 }
 
@@ -41,9 +41,7 @@ func newStateTest() *stateTest {
 }
 
 func TestDump(t *testing.T) {
-	db := rawdb.NewMemoryDatabase()
-	sdb, _ := New(common.Hash{}, NewDatabaseWithConfig(db, nil), nil)
-	s := &stateTest{db: db, state: sdb}
+	s := newStateTest()
 
 	// generate a few entries
 	obj1 := s.state.GetOrNewStateObject(toAddr([]byte{0x01}))

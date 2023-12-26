@@ -29,12 +29,12 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common/mclock"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/p2p/discover/v5wire"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"github.com/ethereum/go-ethereum/p2p/enr"
-	"github.com/ethereum/go-ethereum/p2p/netutil"
+	"github.com/SFT-project/go-sft/common/mclock"
+	"github.com/SFT-project/go-sft/log"
+	"github.com/SFT-project/go-sft/p2p/discover/v5wire"
+	"github.com/SFT-project/go-sft/p2p/enode"
+	"github.com/SFT-project/go-sft/p2p/enr"
+	"github.com/SFT-project/go-sft/p2p/netutil"
 )
 
 const (
@@ -454,20 +454,9 @@ func (t *UDPv5) call(node *enode.Node, responseType byte, packet v5wire.Packet) 
 
 // callDone tells dispatch that the active call is done.
 func (t *UDPv5) callDone(c *callV5) {
-	// This needs a loop because further responses may be incoming until the
-	// send to callDoneCh has completed. Such responses need to be discarded
-	// in order to avoid blocking the dispatch loop.
-	for {
-		select {
-		case <-c.ch:
-			// late response, discard.
-		case <-c.err:
-			// late error, discard.
-		case t.callDoneCh <- c:
-			return
-		case <-t.closeCtx.Done():
-			return
-		}
+	select {
+	case t.callDoneCh <- c:
+	case <-t.closeCtx.Done():
 	}
 }
 

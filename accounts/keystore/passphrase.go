@@ -38,10 +38,10 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/ethereum/go-ethereum/accounts"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/math"
-	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/SFT-project/go-sft/accounts"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/common/math"
+	"github.com/SFT-project/go-sft/crypto"
 	"github.com/pborman/uuid"
 	"golang.org/x/crypto/pbkdf2"
 	"golang.org/x/crypto/scrypt"
@@ -121,7 +121,7 @@ func (ks keyStorePassphrase) StoreKey(filename string, key *Key, auth string) er
 				"This indicates that the keystore is corrupted. \n" +
 				"The corrupted file is stored at \n%v\n" +
 				"Please file a ticket at:\n\n" +
-				"https://github.com/ethereum/go-ethereum/issues." +
+				"https://github.com/SFT-project/go-sft/issues." +
 				"The error was : %s"
 			//lint:ignore ST1005 This is a message for the user
 			return fmt.Errorf(msg, tmpName, err)
@@ -230,7 +230,7 @@ func DecryptKey(keyjson []byte, auth string) (*Key, error) {
 	key := crypto.ToECDSAUnsafe(keyBytes)
 
 	return &Key{
-		Id:         keyId,
+		Id:         uuid.UUID(keyId),
 		Address:    crypto.PubkeyToAddress(key.PublicKey),
 		PrivateKey: key,
 	}, nil

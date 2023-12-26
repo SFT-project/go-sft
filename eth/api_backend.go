@@ -21,22 +21,22 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/accounts"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/consensus"
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/core/bloombits"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/core/state"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/eth/downloader"
-	"github.com/ethereum/go-ethereum/eth/gasprice"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/event"
-	"github.com/ethereum/go-ethereum/miner"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/SFT-project/go-sft/accounts"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/consensus"
+	"github.com/SFT-project/go-sft/core"
+	"github.com/SFT-project/go-sft/core/bloombits"
+	"github.com/SFT-project/go-sft/core/rawdb"
+	"github.com/SFT-project/go-sft/core/state"
+	"github.com/SFT-project/go-sft/core/types"
+	"github.com/SFT-project/go-sft/core/vm"
+	"github.com/SFT-project/go-sft/eth/downloader"
+	"github.com/SFT-project/go-sft/eth/gasprice"
+	"github.com/SFT-project/go-sft/sftdb"
+	"github.com/SFT-project/go-sft/event"
+	"github.com/SFT-project/go-sft/miner"
+	"github.com/SFT-project/go-sft/params"
+	"github.com/SFT-project/go-sft/rpc"
 )
 
 // EthAPIBackend implements ethapi.Backend for full nodes
@@ -194,9 +194,8 @@ func (b *EthAPIBackend) GetTd(ctx context.Context, hash common.Hash) *big.Int {
 func (b *EthAPIBackend) GetEVM(ctx context.Context, msg core.Message, state *state.StateDB, header *types.Header) (*vm.EVM, func() error, error) {
 	vmError := func() error { return nil }
 
-	txContext := core.NewEVMTxContext(msg)
-	context := core.NewEVMBlockContext(header, b.eth.BlockChain(), nil)
-	return vm.NewEVM(context, txContext, state, b.eth.blockchain.Config(), *b.eth.blockchain.GetVMConfig()), vmError, nil
+	context := core.NewEVMContext(msg, header, b.eth.BlockChain(), nil)
+	return vm.NewEVM(context, state, b.eth.blockchain.Config(), *b.eth.blockchain.GetVMConfig()), vmError, nil
 }
 
 func (b *EthAPIBackend) SubscribeRemovedLogsEvent(ch chan<- core.RemovedLogsEvent) event.Subscription {
@@ -280,7 +279,7 @@ func (b *EthAPIBackend) SuggestPrice(ctx context.Context) (*big.Int, error) {
 	return b.gpo.SuggestPrice(ctx)
 }
 
-func (b *EthAPIBackend) ChainDb() ethdb.Database {
+func (b *EthAPIBackend) ChainDb() sftdb.Database {
 	return b.eth.ChainDb()
 }
 

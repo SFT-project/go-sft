@@ -26,11 +26,11 @@ import (
 	"os"
 	"strings"
 
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/core/forkid"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/SFT-project/go-sft/core"
+	"github.com/SFT-project/go-sft/core/forkid"
+	"github.com/SFT-project/go-sft/core/types"
+	"github.com/SFT-project/go-sft/params"
+	"github.com/SFT-project/go-sft/rlp"
 )
 
 type Chain struct {
@@ -124,6 +124,32 @@ func (c *Chain) GetHeaders(req GetBlockHeaders) (BlockHeaders, error) {
 // loadChain takes the given chain.rlp file, and decodes and returns
 // the blocks from the file.
 func loadChain(chainfile string, genesis string) (*Chain, error) {
+	// Open the file handle and potentially unwrap the gzip stream
+	fh, err := os.Open(chainfile)
+	if err != nil {
+		return nil, err
+	}
+	defer fh.Close()
+
+	var reader io.Reader = fh
+	if strings.HasSuffix(chainfile, ".gz") {
+		if reader, err = gzip.NewReader(reader); err != nil {
+			return nil, err
+		}
+	}
+	stream := rlp.NewStream(reader, 0)
+	var blocks []*types.Block
+	for i := 0; ; i++ {
+		var b types.Block
+		if err := stream.Decode(&b); err == io.EOF {
+			break
+		} else if err != nil {
+			return nil, fmt.Errorf("at block %d: %v", i, err)
+		}
+		blocks = append(blocks, &b)
+	}
+
+	// Open the file handle and potentially unwrap the gzip stream
 	chainConfig, err := ioutil.ReadFile(genesis)
 	if err != nil {
 		return nil, err
@@ -132,36 +158,9 @@ func loadChain(chainfile string, genesis string) (*Chain, error) {
 	if err := json.Unmarshal(chainConfig, &gen); err != nil {
 		return nil, err
 	}
-	gblock := gen.ToBlock(nil)
 
-	// Load chain.rlp.
-	fh, err := os.Open(chainfile)
-	if err != nil {
-		return nil, err
-	}
-	defer fh.Close()
-	var reader io.Reader = fh
-	if strings.HasSuffix(chainfile, ".gz") {
-		if reader, err = gzip.NewReader(reader); err != nil {
-			return nil, err
-		}
-	}
-	stream := rlp.NewStream(reader, 0)
-	var blocks = make([]*types.Block, 1)
-	blocks[0] = gblock
-	for i := 0; ; i++ {
-		var b types.Block
-		if err := stream.Decode(&b); err == io.EOF {
-			break
-		} else if err != nil {
-			return nil, fmt.Errorf("at block index %d: %v", i, err)
-		}
-		if b.NumberU64() != uint64(i+1) {
-			return nil, fmt.Errorf("block at index %d has wrong number %d", i, b.NumberU64())
-		}
-		blocks = append(blocks, &b)
-	}
-
-	c := &Chain{blocks: blocks, chainConfig: gen.Config}
-	return c, nil
+	return &Chain{
+		blocks:      blocks,
+		chainConfig: gen.Config,
+	}, nil
 }

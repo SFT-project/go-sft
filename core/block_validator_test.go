@@ -21,11 +21,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum/go-ethereum/consensus/ethash"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/params"
+	"github.com/SFT-project/go-sft/consensus/ethash"
+	"github.com/SFT-project/go-sft/core/rawdb"
+	"github.com/SFT-project/go-sft/core/types"
+	"github.com/SFT-project/go-sft/core/vm"
+	"github.com/SFT-project/go-sft/params"
 )
 
 // Tests that simple header verification works, for both good and bad blocks.

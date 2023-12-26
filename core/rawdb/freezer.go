@@ -26,11 +26,11 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/metrics"
-	"github.com/ethereum/go-ethereum/params"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/sftdb"
+	"github.com/SFT-project/go-sft/log"
+	"github.com/SFT-project/go-sft/metrics"
+	"github.com/SFT-project/go-sft/params"
 	"github.com/prometheus/tsdb/fileutil"
 )
 
@@ -264,7 +264,7 @@ func (f *freezer) Sync() error {
 //
 // This functionality is deliberately broken off from block importing to avoid
 // incurring additional data shuffling delays on block propagation.
-func (f *freezer) freeze(db ethdb.KeyValueStore) {
+func (f *freezer) freeze(db sftdb.KeyValueStore) {
 	nfdb := &nofreezedb{KeyValueStore: db}
 
 	var (

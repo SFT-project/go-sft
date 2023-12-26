@@ -22,9 +22,9 @@ import (
 	"math/big"
 	"os"
 
-	"github.com/ethereum/go-ethereum/cmd/evm/internal/t8ntool"
-	"github.com/ethereum/go-ethereum/cmd/utils"
-	"github.com/ethereum/go-ethereum/internal/flags"
+	"github.com/SFT-project/go-sft/cmd/evm/internal/t8ntool"
+	"github.com/SFT-project/go-sft/cmd/utils"
+	"github.com/SFT-project/go-sft/internal/flags"
 	"gopkg.in/urfave/cli.v1"
 )
 

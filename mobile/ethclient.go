@@ -21,18 +21,18 @@ package geth
 import (
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/ethclient"
+	"github.com/SFT-project/go-sft/core/types"
+	"github.com/SFT-project/go-sft/sftclient"
 )
 
 // EthereumClient provides access to the Ethereum APIs.
 type EthereumClient struct {
-	client *ethclient.Client
+	client *sftclient.Client
 }
 
 // NewEthereumClient connects a client to the given URL.
 func NewEthereumClient(rawurl string) (client *EthereumClient, _ error) {
-	rawClient, err := ethclient.Dial(rawurl)
+	rawClient, err := sftclient.Dial(rawurl)
 	return &EthereumClient{rawClient}, err
 }
 

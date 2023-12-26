@@ -21,8 +21,8 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/crypto"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/crypto"
 	"golang.org/x/crypto/sha3"
 )
 
@@ -267,5 +267,6 @@ func estimateSize(n node) int {
 		return 1 + len(n)
 	default:
 		panic(fmt.Sprintf("node type %T", n))
+
 	}
 }

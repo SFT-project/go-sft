@@ -6,9 +6,9 @@ import (
 	"encoding/json"
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/ethereum/go-ethereum/common/math"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/common/hexutil"
+	"github.com/SFT-project/go-sft/common/math"
 )
 
 var _ = (*structLogMarshaling)(nil)
@@ -24,7 +24,7 @@ func (s StructLog) MarshalJSON() ([]byte, error) {
 		MemorySize    int                         `json:"memSize"`
 		Stack         []*math.HexOrDecimal256     `json:"stack"`
 		ReturnStack   []math.HexOrDecimal64       `json:"returnStack"`
-		ReturnData    hexutil.Bytes               `json:"returnData"`
+		ReturnData    []byte                      `json:"returnData"`
 		Storage       map[common.Hash]common.Hash `json:"-"`
 		Depth         int                         `json:"depth"`
 		RefundCounter uint64                      `json:"refund"`
@@ -72,7 +72,7 @@ func (s *StructLog) UnmarshalJSON(input []byte) error {
 		MemorySize    *int                        `json:"memSize"`
 		Stack         []*math.HexOrDecimal256     `json:"stack"`
 		ReturnStack   []math.HexOrDecimal64       `json:"returnStack"`
-		ReturnData    *hexutil.Bytes              `json:"returnData"`
+		ReturnData    []byte                      `json:"returnData"`
 		Storage       map[common.Hash]common.Hash `json:"-"`
 		Depth         *int                        `json:"depth"`
 		RefundCounter *uint64                     `json:"refund"`
@@ -113,7 +113,7 @@ func (s *StructLog) UnmarshalJSON(input []byte) error {
 		}
 	}
 	if dec.ReturnData != nil {
-		s.ReturnData = *dec.ReturnData
+		s.ReturnData = dec.ReturnData
 	}
 	if dec.Storage != nil {
 		s.Storage = dec.Storage

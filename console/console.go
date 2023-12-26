@@ -29,11 +29,11 @@ import (
 	"syscall"
 
 	"github.com/dop251/goja"
-	"github.com/ethereum/go-ethereum/console/prompt"
-	"github.com/ethereum/go-ethereum/internal/jsre"
-	"github.com/ethereum/go-ethereum/internal/jsre/deps"
-	"github.com/ethereum/go-ethereum/internal/web3ext"
-	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/SFT-project/go-sft/console/prompt"
+	"github.com/SFT-project/go-sft/internal/jsre"
+	"github.com/SFT-project/go-sft/internal/jsre/deps"
+	"github.com/SFT-project/go-sft/internal/web3ext"
+	"github.com/SFT-project/go-sft/rpc"
 	"github.com/mattn/go-colorable"
 	"github.com/peterh/liner"
 )
@@ -324,7 +324,6 @@ func (c *Console) Welcome() {
 		sort.Strings(modules)
 		message += " modules: " + strings.Join(modules, " ") + "\n"
 	}
-	message += "\nTo exit, press ctrl-d"
 	fmt.Fprintln(c.printer, message)
 }
 
@@ -373,7 +372,7 @@ func (c *Console) Interactive() {
 			return
 
 		case err := <-inputErr:
-			if err == liner.ErrPromptAborted {
+			if err == liner.ErrPromptAborted && indents > 0 {
 				// When prompting for multi-line input, the first Ctrl-C resets
 				// the multi-line state.
 				prompt, indents, input = c.prompt, 0, ""

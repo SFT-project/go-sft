@@ -21,7 +21,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/p2p"
+	"github.com/SFT-project/go-sft/p2p"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -73,7 +73,7 @@ func TestEthProtocolNegotiation(t *testing.T) {
 // TestChain_GetHeaders tests whether the test suite can correctly
 // respond to a GetBlockHeaders request from a node.
 func TestChain_GetHeaders(t *testing.T) {
-	chainFile, err := filepath.Abs("./testdata/chain.rlp")
+	chainFile, err := filepath.Abs("./testdata/chain.rlp.gz")
 	if err != nil {
 		t.Fatal(err)
 	}

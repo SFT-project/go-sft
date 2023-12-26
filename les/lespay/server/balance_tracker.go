@@ -21,11 +21,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common/mclock"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/les/utils"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"github.com/ethereum/go-ethereum/p2p/nodestate"
+	"github.com/SFT-project/go-sft/common/mclock"
+	"github.com/SFT-project/go-sft/sftdb"
+	"github.com/SFT-project/go-sft/les/utils"
+	"github.com/SFT-project/go-sft/p2p/enode"
+	"github.com/SFT-project/go-sft/p2p/nodestate"
 )
 
 const (
@@ -87,7 +87,7 @@ type BalanceTracker struct {
 }
 
 // NewBalanceTracker creates a new BalanceTracker
-func NewBalanceTracker(ns *nodestate.NodeStateMachine, setup BalanceTrackerSetup, db ethdb.KeyValueStore, clock mclock.Clock, posExp, negExp utils.ValueExpirer) *BalanceTracker {
+func NewBalanceTracker(ns *nodestate.NodeStateMachine, setup BalanceTrackerSetup, db sftdb.KeyValueStore, clock mclock.Clock, posExp, negExp utils.ValueExpirer) *BalanceTracker {
 	ndb := newNodeDB(db, clock)
 	bt := &BalanceTracker{
 		ns:                  ns,
@@ -261,8 +261,9 @@ func (bt *BalanceTracker) storeBalance(id []byte, neg bool, value utils.ExpiredV
 func (bt *BalanceTracker) canDropBalance(now mclock.AbsTime, neg bool, b utils.ExpiredValue) bool {
 	if neg {
 		return b.Value(bt.negExp.LogOffset(now)) <= negThreshold
+	} else {
+		return b.Value(bt.posExp.LogOffset(now)) <= posThreshold
 	}
-	return b.Value(bt.posExp.LogOffset(now)) <= posThreshold
 }
 
 // updateTotalBalance adjusts the total balance after executing given callback.

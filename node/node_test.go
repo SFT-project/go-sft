@@ -28,10 +28,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/p2p"
-	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/SFT-project/go-sft/crypto"
+	"github.com/SFT-project/go-sft/sftdb"
+	"github.com/SFT-project/go-sft/p2p"
+	"github.com/SFT-project/go-sft/rpc"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -177,7 +177,7 @@ func TestNodeOpenDatabaseFromLifecycleStart(t *testing.T) {
 	stack, _ := New(testNodeConfig())
 	defer stack.Close()
 
-	var db ethdb.Database
+	var db sftdb.Database
 	var err error
 	stack.RegisterLifecycle(&InstrumentedService{
 		startHook: func() {

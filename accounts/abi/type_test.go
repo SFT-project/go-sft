@@ -22,7 +22,7 @@ import (
 	"testing"
 
 	"github.com/davecgh/go-spew/spew"
-	"github.com/ethereum/go-ethereum/common"
+	"github.com/SFT-project/go-sft/common"
 )
 
 // typeWithoutStringer is a alias for the Type type which simply doesn't implement
@@ -255,7 +255,7 @@ func TestTypeCheck(t *testing.T) {
 		{"bytes", nil, [2]byte{0, 1}, "abi: cannot use array as type slice as argument"},
 		{"bytes", nil, common.Hash{1}, "abi: cannot use array as type slice as argument"},
 		{"string", nil, "hello world", ""},
-		{"string", nil, "", ""},
+		{"string", nil, string(""), ""},
 		{"string", nil, []byte{}, "abi: cannot use slice as type string as argument"},
 		{"bytes32[]", nil, [][32]byte{{}}, ""},
 		{"function", nil, [24]byte{}, ""},

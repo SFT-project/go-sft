@@ -21,19 +21,19 @@ import (
 	"context"
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/accounts"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/consensus"
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/core/bloombits"
-	"github.com/ethereum/go-ethereum/core/state"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/eth/downloader"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/event"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/SFT-project/go-sft/accounts"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/consensus"
+	"github.com/SFT-project/go-sft/core"
+	"github.com/SFT-project/go-sft/core/bloombits"
+	"github.com/SFT-project/go-sft/core/state"
+	"github.com/SFT-project/go-sft/core/types"
+	"github.com/SFT-project/go-sft/core/vm"
+	"github.com/SFT-project/go-sft/eth/downloader"
+	"github.com/SFT-project/go-sft/sftdb"
+	"github.com/SFT-project/go-sft/event"
+	"github.com/SFT-project/go-sft/params"
+	"github.com/SFT-project/go-sft/rpc"
 )
 
 // Backend interface provides the common API services (that are provided by
@@ -43,7 +43,7 @@ type Backend interface {
 	Downloader() *downloader.Downloader
 	ProtocolVersion() int
 	SuggestPrice(ctx context.Context) (*big.Int, error)
-	ChainDb() ethdb.Database
+	ChainDb() sftdb.Database
 	AccountManager() *accounts.Manager
 	ExtRPCEnabled() bool
 	RPCGasCap() uint64    // global gas cap for eth_call over rpc: DoS protection

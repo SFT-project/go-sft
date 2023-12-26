@@ -21,17 +21,18 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/consensus/clique"
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/core/state"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/eth/downloader"
-	"github.com/ethereum/go-ethereum/ethdb/memorydb"
-	"github.com/ethereum/go-ethereum/event"
-	"github.com/ethereum/go-ethereum/trie"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/consensus/ethash"
+	"github.com/SFT-project/go-sft/core"
+	"github.com/SFT-project/go-sft/core/rawdb"
+	"github.com/SFT-project/go-sft/core/state"
+	"github.com/SFT-project/go-sft/core/types"
+	"github.com/SFT-project/go-sft/core/vm"
+	"github.com/SFT-project/go-sft/eth/downloader"
+	"github.com/SFT-project/go-sft/sftdb/memorydb"
+	"github.com/SFT-project/go-sft/event"
+	"github.com/SFT-project/go-sft/params"
+	"github.com/SFT-project/go-sft/trie"
 )
 
 type mockBackend struct {
@@ -242,20 +243,26 @@ func createMiner(t *testing.T) (*Miner, *event.TypeMux) {
 	if err != nil {
 		t.Fatalf("can't create new chain config: %v", err)
 	}
+	// Create event Mux
+	mux := new(event.TypeMux)
 	// Create consensus engine
-	engine := clique.New(chainConfig.Clique, chainDB)
+	engine := ethash.New(ethash.Config{}, []string{}, false)
+	engine.SetThreads(-1)
+	// Create isLocalBlock
+	isLocalBlock := func(block *types.Block) bool {
+		return true
+	}
 	// Create Ethereum backend
-	bc, err := core.NewBlockChain(chainDB, nil, chainConfig, engine, vm.Config{}, nil, nil)
+	limit := uint64(1000)
+	bc, err := core.NewBlockChain(chainDB, new(core.CacheConfig), chainConfig, engine, vm.Config{}, isLocalBlock, &limit)
 	if err != nil {
 		t.Fatalf("can't create new chain %v", err)
 	}
-	statedb, _ := state.New(common.Hash{}, state.NewDatabase(chainDB), nil)
+	statedb, _ := state.New(common.Hash{}, state.NewDatabase(rawdb.NewMemoryDatabase()), nil)
 	blockchain := &testBlockChain{statedb, 10000000, new(event.Feed)}
 
-	pool := core.NewTxPool(testTxPoolConfig, chainConfig, blockchain)
+	pool := core.NewTxPool(testTxPoolConfig, params.TestChainConfig, blockchain)
 	backend := NewMockBackend(bc, pool)
-	// Create event Mux
-	mux := new(event.TypeMux)
 	// Create Miner
-	return New(backend, &config, chainConfig, mux, engine, nil), mux
+	return New(backend, &config, chainConfig, mux, engine, isLocalBlock), mux
 }

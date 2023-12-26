@@ -28,17 +28,17 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum/go-ethereum/cmd/evm/internal/compiler"
-	"github.com/ethereum/go-ethereum/cmd/utils"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/core/state"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/core/vm/runtime"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/params"
-	"gopkg.in/urfave/cli.v1"
+	"github.com/SFT-project/go-sft/cmd/evm/internal/compiler"
+	"github.com/SFT-project/go-sft/cmd/utils"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/core"
+	"github.com/SFT-project/go-sft/core/rawdb"
+	"github.com/SFT-project/go-sft/core/state"
+	"github.com/SFT-project/go-sft/core/vm"
+	"github.com/SFT-project/go-sft/core/vm/runtime"
+	"github.com/SFT-project/go-sft/log"
+	"github.com/SFT-project/go-sft/params"
+	cli "gopkg.in/urfave/cli.v1"
 )
 
 var runCommand = cli.Command{

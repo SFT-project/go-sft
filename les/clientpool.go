@@ -18,17 +18,18 @@ package les
 
 import (
 	"fmt"
+	"reflect"
 	"sync"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common/mclock"
-	"github.com/ethereum/go-ethereum/ethdb"
-	lps "github.com/ethereum/go-ethereum/les/lespay/server"
-	"github.com/ethereum/go-ethereum/les/utils"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"github.com/ethereum/go-ethereum/p2p/enr"
-	"github.com/ethereum/go-ethereum/p2p/nodestate"
+	"github.com/SFT-project/go-sft/common/mclock"
+	"github.com/SFT-project/go-sft/sftdb"
+	lps "github.com/SFT-project/go-sft/les/lespay/server"
+	"github.com/SFT-project/go-sft/les/utils"
+	"github.com/SFT-project/go-sft/log"
+	"github.com/SFT-project/go-sft/p2p/enode"
+	"github.com/SFT-project/go-sft/p2p/enr"
+	"github.com/SFT-project/go-sft/p2p/nodestate"
 )
 
 const (
@@ -44,6 +45,19 @@ const (
 	defaultConnectedBias = time.Minute * 3
 	inactiveTimeout      = time.Second * 10
 )
+
+var (
+	clientPoolSetup     = &nodestate.Setup{}
+	clientField         = clientPoolSetup.NewField("clientInfo", reflect.TypeOf(&clientInfo{}))
+	connAddressField    = clientPoolSetup.NewField("connAddr", reflect.TypeOf(""))
+	balanceTrackerSetup = lps.NewBalanceTrackerSetup(clientPoolSetup)
+	priorityPoolSetup   = lps.NewPriorityPoolSetup(clientPoolSetup)
+)
+
+func init() {
+	balanceTrackerSetup.Connect(connAddressField, priorityPoolSetup.CapacityField)
+	priorityPoolSetup.Connect(balanceTrackerSetup.BalanceField, balanceTrackerSetup.UpdateFlag) // NodeBalance implements nodePriority
+}
 
 // clientPool implements a client database that assigns a priority to each client
 // based on a positive and negative balance. Positive balance is externally assigned
@@ -105,7 +119,8 @@ type clientInfo struct {
 }
 
 // newClientPool creates a new client pool
-func newClientPool(ns *nodestate.NodeStateMachine, lespayDb ethdb.Database, minCap uint64, connectedBias time.Duration, clock mclock.Clock, removePeer func(enode.ID)) *clientPool {
+func newClientPool(lespayDb sftdb.Database, minCap uint64, connectedBias time.Duration, clock mclock.Clock, removePeer func(enode.ID)) *clientPool {
+	ns := nodestate.NewNodeStateMachine(nil, nil, clock, clientPoolSetup)
 	pool := &clientPool{
 		ns:                  ns,
 		BalanceTrackerSetup: balanceTrackerSetup,
@@ -132,7 +147,7 @@ func newClientPool(ns *nodestate.NodeStateMachine, lespayDb ethdb.Database, minC
 	})
 
 	ns.SubscribeState(pool.ActiveFlag.Or(pool.PriorityFlag), func(node *enode.Node, oldState, newState nodestate.Flags) {
-		c, _ := ns.GetField(node, clientInfoField).(*clientInfo)
+		c, _ := ns.GetField(node, clientField).(*clientInfo)
 		if c == nil {
 			return
 		}
@@ -157,7 +172,7 @@ func newClientPool(ns *nodestate.NodeStateMachine, lespayDb ethdb.Database, minC
 		if oldState.Equals(pool.ActiveFlag) && newState.Equals(pool.InactiveFlag) {
 			clientDeactivatedMeter.Mark(1)
 			log.Debug("Client deactivated", "id", node.ID())
-			c, _ := ns.GetField(node, clientInfoField).(*clientInfo)
+			c, _ := ns.GetField(node, clientField).(*clientInfo)
 			if c == nil || !c.peer.allowInactive() {
 				pool.removePeer(node.ID())
 			}
@@ -175,11 +190,13 @@ func newClientPool(ns *nodestate.NodeStateMachine, lespayDb ethdb.Database, minC
 		newCap, _ := newValue.(uint64)
 		totalConnected += newCap - oldCap
 		totalConnectedGauge.Update(int64(totalConnected))
-		c, _ := ns.GetField(node, clientInfoField).(*clientInfo)
+		c, _ := ns.GetField(node, clientField).(*clientInfo)
 		if c != nil {
 			c.peer.updateCapacity(newCap)
 		}
 	})
+
+	ns.Start()
 	return pool
 }
 
@@ -193,6 +210,7 @@ func (f *clientPool) stop() {
 		f.disconnectNode(node)
 	})
 	f.bt.Stop()
+	f.ns.Stop()
 }
 
 // connect should be called after a successful handshake. If the connection was
@@ -207,7 +225,7 @@ func (f *clientPool) connect(peer clientPoolPeer) (uint64, error) {
 	}
 	// Dedup connected peers.
 	node, freeID := peer.Node(), peer.freeClientId()
-	if f.ns.GetField(node, clientInfoField) != nil {
+	if f.ns.GetField(node, clientField) != nil {
 		log.Debug("Client already connected", "address", freeID, "id", node.ID().String())
 		return 0, fmt.Errorf("Client already connected address=%s id=%s", freeID, node.ID().String())
 	}
@@ -219,7 +237,7 @@ func (f *clientPool) connect(peer clientPoolPeer) (uint64, error) {
 		connected:   true,
 		connectedAt: now,
 	}
-	f.ns.SetField(node, clientInfoField, c)
+	f.ns.SetField(node, clientField, c)
 	f.ns.SetField(node, connAddressField, freeID)
 	if c.balance, _ = f.ns.GetField(node, f.BalanceField).(*lps.NodeBalance); c.balance == nil {
 		f.disconnect(peer)
@@ -262,7 +280,7 @@ func (f *clientPool) disconnect(p clientPoolPeer) {
 // disconnectNode removes node fields and flags related to connected status
 func (f *clientPool) disconnectNode(node *enode.Node) {
 	f.ns.SetField(node, connAddressField, nil)
-	f.ns.SetField(node, clientInfoField, nil)
+	f.ns.SetField(node, clientField, nil)
 }
 
 // setDefaultFactors sets the default price factors applied to subsequently connected clients
@@ -281,8 +299,7 @@ func (f *clientPool) capacityInfo() (uint64, uint64, uint64) {
 	defer f.lock.Unlock()
 
 	// total priority active cap will be supported when the token issuer module is added
-	_, activeCap := f.pp.Active()
-	return f.capLimit, activeCap, 0
+	return f.capLimit, f.pp.ActiveCapacity(), 0
 }
 
 // setLimits sets the maximum number and total capacity of connected clients,
@@ -297,13 +314,13 @@ func (f *clientPool) setLimits(totalConn int, totalCap uint64) {
 
 // setCapacity sets the assigned capacity of a connected client
 func (f *clientPool) setCapacity(node *enode.Node, freeID string, capacity uint64, bias time.Duration, setCap bool) (uint64, error) {
-	c, _ := f.ns.GetField(node, clientInfoField).(*clientInfo)
+	c, _ := f.ns.GetField(node, clientField).(*clientInfo)
 	if c == nil {
 		if setCap {
 			return 0, fmt.Errorf("client %064x is not connected", node.ID())
 		}
 		c = &clientInfo{node: node}
-		f.ns.SetField(node, clientInfoField, c)
+		f.ns.SetField(node, clientField, c)
 		f.ns.SetField(node, connAddressField, freeID)
 		if c.balance, _ = f.ns.GetField(node, f.BalanceField).(*lps.NodeBalance); c.balance == nil {
 			log.Error("BalanceField is missing", "node", node.ID())
@@ -311,7 +328,7 @@ func (f *clientPool) setCapacity(node *enode.Node, freeID string, capacity uint6
 		}
 		defer func() {
 			f.ns.SetField(node, connAddressField, nil)
-			f.ns.SetField(node, clientInfoField, nil)
+			f.ns.SetField(node, clientField, nil)
 		}()
 	}
 	var (
@@ -353,7 +370,7 @@ func (f *clientPool) forClients(ids []enode.ID, cb func(client *clientInfo)) {
 
 	if len(ids) == 0 {
 		f.ns.ForEach(nodestate.Flags{}, nodestate.Flags{}, func(node *enode.Node, state nodestate.Flags) {
-			c, _ := f.ns.GetField(node, clientInfoField).(*clientInfo)
+			c, _ := f.ns.GetField(node, clientField).(*clientInfo)
 			if c != nil {
 				cb(c)
 			}
@@ -364,12 +381,12 @@ func (f *clientPool) forClients(ids []enode.ID, cb func(client *clientInfo)) {
 			if node == nil {
 				node = enode.SignNull(&enr.Record{}, id)
 			}
-			c, _ := f.ns.GetField(node, clientInfoField).(*clientInfo)
+			c, _ := f.ns.GetField(node, clientField).(*clientInfo)
 			if c != nil {
 				cb(c)
 			} else {
 				c = &clientInfo{node: node}
-				f.ns.SetField(node, clientInfoField, c)
+				f.ns.SetField(node, clientField, c)
 				f.ns.SetField(node, connAddressField, "")
 				if c.balance, _ = f.ns.GetField(node, f.BalanceField).(*lps.NodeBalance); c.balance != nil {
 					cb(c)
@@ -377,7 +394,7 @@ func (f *clientPool) forClients(ids []enode.ID, cb func(client *clientInfo)) {
 					log.Error("BalanceField is missing")
 				}
 				f.ns.SetField(node, connAddressField, nil)
-				f.ns.SetField(node, clientInfoField, nil)
+				f.ns.SetField(node, clientField, nil)
 			}
 		}
 	}

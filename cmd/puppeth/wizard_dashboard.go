@@ -19,7 +19,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/SFT-project/go-sft/log"
 )
 
 // deployDashboard queries the user for various input on deploying a web-service
@@ -60,7 +60,7 @@ func (w *wizard) deployDashboard() {
 			available[service] = append(available[service], server)
 		}
 	}
-	for _, service := range []string{"ethstats", "explorer", "wallet", "faucet"} {
+	for _, service := range []string{"sftstats", "explorer", "wallet", "faucet"} {
 		// Gather all the locally hosted pages of this type
 		var pages []string
 		for _, server := range available[service] {
@@ -71,7 +71,7 @@ func (w *wizard) deployDashboard() {
 			// If there's a service running on the machine, retrieve it's port number
 			var port int
 			switch service {
-			case "ethstats":
+			case "sftstats":
 				if infos, err := checkEthstats(client, w.network); err == nil {
 					port = infos.port
 				}
@@ -123,8 +123,8 @@ func (w *wizard) deployDashboard() {
 		}
 		// Save the users choice
 		switch service {
-		case "ethstats":
-			infos.ethstats = page
+		case "sftstats":
+			infos.sftstats = page
 		case "explorer":
 			infos.explorer = page
 		case "wallet":
@@ -133,10 +133,10 @@ func (w *wizard) deployDashboard() {
 			infos.faucet = page
 		}
 	}
-	// If we have ethstats running, ask whether to make the secret public or not
-	if w.conf.ethstats != "" {
+	// If we have sftstats running, ask whether to make the secret public or not
+	if w.conf.sftstats != "" {
 		fmt.Println()
-		fmt.Println("Include ethstats secret on dashboard (y/n)? (default = yes)")
+		fmt.Println("Include sftstats secret on dashboard (y/n)? (default = yes)")
 		infos.trusted = w.readDefaultYesNo(true)
 	}
 	// Try to deploy the dashboard container on the host

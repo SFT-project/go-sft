@@ -21,13 +21,13 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/ethdb/memorydb"
-	"github.com/ethereum/go-ethereum/rlp"
-	"github.com/ethereum/go-ethereum/trie"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/core/rawdb"
+	"github.com/SFT-project/go-sft/crypto"
+	"github.com/SFT-project/go-sft/sftdb"
+	"github.com/SFT-project/go-sft/sftdb/memorydb"
+	"github.com/SFT-project/go-sft/rlp"
+	"github.com/SFT-project/go-sft/trie"
 )
 
 // testAccount is the data associated with an account used by the state tests.
@@ -62,8 +62,7 @@ func makeTestState() (Database, common.Hash, []*testAccount) {
 		}
 		if i%5 == 0 {
 			for j := byte(0); j < 5; j++ {
-				hash := crypto.Keccak256Hash([]byte{i, i, i, i, i, j, j})
-				obj.SetState(db, hash, hash)
+				obj.SetState(db, crypto.Keccak256Hash([]byte{i, i, i, i, i, j, j}), crypto.Keccak256Hash([]byte{i, i, i, i, i, j, j}))
 			}
 		}
 		state.updateStateObject(obj)
@@ -77,7 +76,7 @@ func makeTestState() (Database, common.Hash, []*testAccount) {
 
 // checkStateAccounts cross references a reconstructed state with an expected
 // account array.
-func checkStateAccounts(t *testing.T, db ethdb.Database, root common.Hash, accounts []*testAccount) {
+func checkStateAccounts(t *testing.T, db sftdb.Database, root common.Hash, accounts []*testAccount) {
 	// Check root availability and state contents
 	state, err := New(root, NewDatabase(db), nil)
 	if err != nil {
@@ -100,7 +99,7 @@ func checkStateAccounts(t *testing.T, db ethdb.Database, root common.Hash, accou
 }
 
 // checkTrieConsistency checks that all nodes in a (sub-)trie are indeed present.
-func checkTrieConsistency(db ethdb.Database, root common.Hash) error {
+func checkTrieConsistency(db sftdb.Database, root common.Hash) error {
 	if v, _ := db.Get(root[:]); v == nil {
 		return nil // Consider a non existent state consistent.
 	}
@@ -115,7 +114,7 @@ func checkTrieConsistency(db ethdb.Database, root common.Hash) error {
 }
 
 // checkStateConsistency checks that all data of a state root is present.
-func checkStateConsistency(db ethdb.Database, root common.Hash) error {
+func checkStateConsistency(db sftdb.Database, root common.Hash) error {
 	// Create and iterate a state trie rooted in a sub-node
 	if _, err := db.Get(root.Bytes()); err != nil {
 		return nil // Consider a non existent state consistent.
@@ -402,15 +401,16 @@ func TestIncompleteStateSync(t *testing.T) {
 	// Create a random state to copy
 	srcDb, srcRoot, srcAccounts := makeTestState()
 
-	// isCodeLookup to save some hashing
-	var isCode = make(map[common.Hash]struct{})
-	for _, acc := range srcAccounts {
-		if len(acc.code) > 0 {
-			isCode[crypto.Keccak256Hash(acc.code)] = struct{}{}
+	// isCode reports whether the hash is contract code hash.
+	isCode := func(hash common.Hash) bool {
+		for _, acc := range srcAccounts {
+			if hash == crypto.Keccak256Hash(acc.code) {
+				return true
+			}
 		}
+		return false
 	}
-	isCode[common.BytesToHash(emptyCodeHash)] = struct{}{}
-	checkTrieConsistency(srcDb.TrieDB().DiskDB().(ethdb.Database), srcRoot)
+	checkTrieConsistency(srcDb.TrieDB().DiskDB().(sftdb.Database), srcRoot)
 
 	// Create a destination state and sync with the scheduler
 	dstDb := rawdb.NewMemoryDatabase()
@@ -447,13 +447,15 @@ func TestIncompleteStateSync(t *testing.T) {
 		batch.Write()
 		for _, result := range results {
 			added = append(added, result.Hash)
-			// Check that all known sub-tries added so far are complete or missing entirely.
-			if _, ok := isCode[result.Hash]; ok {
+		}
+		// Check that all known sub-tries added so far are complete or missing entirely.
+		for _, hash := range added {
+			if isCode(hash) {
 				continue
 			}
 			// Can't use checkStateConsistency here because subtrie keys may have odd
 			// length and crash in LeafKey.
-			if err := checkTrieConsistency(dstDb, result.Hash); err != nil {
+			if err := checkTrieConsistency(dstDb, hash); err != nil {
 				t.Fatalf("state inconsistent: %v", err)
 			}
 		}
@@ -464,9 +466,9 @@ func TestIncompleteStateSync(t *testing.T) {
 	// Sanity check that removing any node from the database is detected
 	for _, node := range added[1:] {
 		var (
-			key     = node.Bytes()
-			_, code = isCode[node]
-			val     []byte
+			key  = node.Bytes()
+			code = isCode(node)
+			val  []byte
 		)
 		if code {
 			val = rawdb.ReadCode(dstDb, node)

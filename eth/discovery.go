@@ -17,11 +17,12 @@
 package eth
 
 import (
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/core/forkid"
-	"github.com/ethereum/go-ethereum/p2p/dnsdisc"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/SFT-project/go-sft/core"
+	"github.com/SFT-project/go-sft/core/forkid"
+	"github.com/SFT-project/go-sft/p2p"
+	"github.com/SFT-project/go-sft/p2p/dnsdisc"
+	"github.com/SFT-project/go-sft/p2p/enode"
+	"github.com/SFT-project/go-sft/rlp"
 )
 
 // ethEntry is the "eth" ENR entry which advertises eth protocol
@@ -64,8 +65,8 @@ func (eth *Ethereum) currentEthEntry() *ethEntry {
 }
 
 // setupDiscovery creates the node discovery source for the eth protocol.
-func (eth *Ethereum) setupDiscovery() (enode.Iterator, error) {
-	if len(eth.config.DiscoveryURLs) == 0 {
+func (eth *Ethereum) setupDiscovery(cfg *p2p.Config) (enode.Iterator, error) {
+	if cfg.NoDiscovery || len(eth.config.DiscoveryURLs) == 0 {
 		return nil, nil
 	}
 	client := dnsdisc.NewClient(dnsdisc.Config{})

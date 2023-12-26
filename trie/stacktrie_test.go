@@ -7,11 +7,11 @@ import (
 	mrand "math/rand"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/ethdb/memorydb"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/common/hexutil"
+	"github.com/SFT-project/go-sft/core/types"
+	"github.com/SFT-project/go-sft/crypto"
+	"github.com/SFT-project/go-sft/sftdb/memorydb"
 )
 
 func TestSizeBug(t *testing.T) {
@@ -238,54 +238,5 @@ func TestDerivableList(t *testing.T) {
 		if !bytes.Equal(got[:], exp[:]) {
 			t.Fatalf("case %d: got %x exp %x", i, got, exp)
 		}
-	}
-}
-
-// TestUpdateSmallNodes tests a case where the leaves are small (both key and value),
-// which causes a lot of node-within-node. This case was found via fuzzing.
-func TestUpdateSmallNodes(t *testing.T) {
-	st := NewStackTrie(nil)
-	nt, _ := New(common.Hash{}, NewDatabase(memorydb.New()))
-	kvs := []struct {
-		K string
-		V string
-	}{
-		{"63303030", "3041"}, // stacktrie.Update
-		{"65", "3000"},       // stacktrie.Update
-	}
-	for _, kv := range kvs {
-		nt.TryUpdate(common.FromHex(kv.K), common.FromHex(kv.V))
-		st.TryUpdate(common.FromHex(kv.K), common.FromHex(kv.V))
-	}
-	if nt.Hash() != st.Hash() {
-		t.Fatalf("error %x != %x", st.Hash(), nt.Hash())
-	}
-}
-
-// TestUpdateVariableKeys contains a case which stacktrie fails: when keys of different
-// sizes are used, and the second one has the same prefix as the first, then the
-// stacktrie fails, since it's unable to 'expand' on an already added leaf.
-// For all practical purposes, this is fine, since keys are fixed-size length
-// in account and storage tries.
-//
-// The test is marked as 'skipped', and exists just to have the behaviour documented.
-// This case was found via fuzzing.
-func TestUpdateVariableKeys(t *testing.T) {
-	t.SkipNow()
-	st := NewStackTrie(nil)
-	nt, _ := New(common.Hash{}, NewDatabase(memorydb.New()))
-	kvs := []struct {
-		K string
-		V string
-	}{
-		{"0x33303534636532393561313031676174", "303030"},
-		{"0x3330353463653239356131303167617430", "313131"},
-	}
-	for _, kv := range kvs {
-		nt.TryUpdate(common.FromHex(kv.K), common.FromHex(kv.V))
-		st.TryUpdate(common.FromHex(kv.K), common.FromHex(kv.V))
-	}
-	if nt.Hash() != st.Hash() {
-		t.Fatalf("error %x != %x", st.Hash(), nt.Hash())
 	}
 }

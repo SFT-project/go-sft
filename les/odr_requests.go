@@ -21,15 +21,15 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/light"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/rlp"
-	"github.com/ethereum/go-ethereum/trie"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/core/rawdb"
+	"github.com/SFT-project/go-sft/core/types"
+	"github.com/SFT-project/go-sft/crypto"
+	"github.com/SFT-project/go-sft/sftdb"
+	"github.com/SFT-project/go-sft/light"
+	"github.com/SFT-project/go-sft/log"
+	"github.com/SFT-project/go-sft/rlp"
+	"github.com/SFT-project/go-sft/trie"
 )
 
 var (
@@ -49,7 +49,7 @@ type LesOdrRequest interface {
 	GetCost(*serverPeer) uint64
 	CanSend(*serverPeer) bool
 	Request(uint64, *serverPeer) error
-	Validate(ethdb.Database, *Msg) error
+	Validate(sftdb.Database, *Msg) error
 }
 
 func LesRequest(req light.OdrRequest) LesOdrRequest {
@@ -96,7 +96,7 @@ func (r *BlockRequest) Request(reqID uint64, peer *serverPeer) error {
 // Valid processes an ODR request reply message from the LES network
 // returns true and stores results in memory if the message was a valid reply
 // to the request (implementation of LesOdrRequest)
-func (r *BlockRequest) Validate(db ethdb.Database, msg *Msg) error {
+func (r *BlockRequest) Validate(db sftdb.Database, msg *Msg) error {
 	log.Debug("Validating block body", "hash", r.Hash)
 
 	// Ensure we have a correct message with a single block body
@@ -154,7 +154,7 @@ func (r *ReceiptsRequest) Request(reqID uint64, peer *serverPeer) error {
 // Valid processes an ODR request reply message from the LES network
 // returns true and stores results in memory if the message was a valid reply
 // to the request (implementation of LesOdrRequest)
-func (r *ReceiptsRequest) Validate(db ethdb.Database, msg *Msg) error {
+func (r *ReceiptsRequest) Validate(db sftdb.Database, msg *Msg) error {
 	log.Debug("Validating block receipts", "hash", r.Hash)
 
 	// Ensure we have a correct message with a single block receipt
@@ -216,7 +216,7 @@ func (r *TrieRequest) Request(reqID uint64, peer *serverPeer) error {
 // Valid processes an ODR request reply message from the LES network
 // returns true and stores results in memory if the message was a valid reply
 // to the request (implementation of LesOdrRequest)
-func (r *TrieRequest) Validate(db ethdb.Database, msg *Msg) error {
+func (r *TrieRequest) Validate(db sftdb.Database, msg *Msg) error {
 	log.Debug("Validating trie proof", "root", r.Id.Root, "key", r.Key)
 
 	if msg.MsgType != MsgProofsV2 {
@@ -269,7 +269,7 @@ func (r *CodeRequest) Request(reqID uint64, peer *serverPeer) error {
 // Valid processes an ODR request reply message from the LES network
 // returns true and stores results in memory if the message was a valid reply
 // to the request (implementation of LesOdrRequest)
-func (r *CodeRequest) Validate(db ethdb.Database, msg *Msg) error {
+func (r *CodeRequest) Validate(db sftdb.Database, msg *Msg) error {
 	log.Debug("Validating code data", "hash", r.Hash)
 
 	// Ensure we have a correct message with a single code element
@@ -327,7 +327,11 @@ func (r *ChtRequest) CanSend(peer *serverPeer) bool {
 	peer.lock.RLock()
 	defer peer.lock.RUnlock()
 
-	return peer.headInfo.Number >= r.Config.ChtConfirms && r.ChtNum <= (peer.headInfo.Number-r.Config.ChtConfirms)/r.Config.ChtSize
+	if r.Untrusted {
+		return peer.headInfo.Number >= r.BlockNum && peer.id == r.PeerId
+	} else {
+		return peer.headInfo.Number >= r.Config.ChtConfirms && r.ChtNum <= (peer.headInfo.Number-r.Config.ChtConfirms)/r.Config.ChtSize
+	}
 }
 
 // Request sends an ODR request to the LES network (implementation of LesOdrRequest)
@@ -347,7 +351,7 @@ func (r *ChtRequest) Request(reqID uint64, peer *serverPeer) error {
 // Valid processes an ODR request reply message from the LES network
 // returns true and stores results in memory if the message was a valid reply
 // to the request (implementation of LesOdrRequest)
-func (r *ChtRequest) Validate(db ethdb.Database, msg *Msg) error {
+func (r *ChtRequest) Validate(db sftdb.Database, msg *Msg) error {
 	log.Debug("Validating CHT", "cht", r.ChtNum, "block", r.BlockNum)
 
 	if msg.MsgType != MsgHelperTrieProofs {
@@ -366,34 +370,39 @@ func (r *ChtRequest) Validate(db ethdb.Database, msg *Msg) error {
 	if err := rlp.DecodeBytes(headerEnc, header); err != nil {
 		return errHeaderUnavailable
 	}
-	// Verify the CHT
-	var (
-		node      light.ChtNode
-		encNumber [8]byte
-	)
-	binary.BigEndian.PutUint64(encNumber[:], r.BlockNum)
 
-	reads := &readTraceDB{db: nodeSet}
-	value, err := trie.VerifyProof(r.ChtRoot, encNumber[:], reads)
-	if err != nil {
-		return fmt.Errorf("merkle proof verification failed: %v", err)
-	}
-	if len(reads.reads) != nodeSet.KeyCount() {
-		return errUselessNodes
-	}
-	if err := rlp.DecodeBytes(value, &node); err != nil {
-		return err
-	}
-	if node.Hash != header.Hash() {
-		return errCHTHashMismatch
-	}
-	if r.BlockNum != header.Number.Uint64() {
-		return errCHTNumberMismatch
+	// Verify the CHT
+	// Note: For untrusted CHT request, there is no proof response but
+	// header data.
+	var node light.ChtNode
+	if !r.Untrusted {
+		var encNumber [8]byte
+		binary.BigEndian.PutUint64(encNumber[:], r.BlockNum)
+
+		reads := &readTraceDB{db: nodeSet}
+		value, err := trie.VerifyProof(r.ChtRoot, encNumber[:], reads)
+		if err != nil {
+			return fmt.Errorf("merkle proof verification failed: %v", err)
+		}
+		if len(reads.reads) != nodeSet.KeyCount() {
+			return errUselessNodes
+		}
+
+		if err := rlp.DecodeBytes(value, &node); err != nil {
+			return err
+		}
+		if node.Hash != header.Hash() {
+			return errCHTHashMismatch
+		}
+		if r.BlockNum != header.Number.Uint64() {
+			return errCHTNumberMismatch
+		}
 	}
 	// Verifications passed, store and return
 	r.Header = header
 	r.Proof = nodeSet
-	r.Td = node.Td
+	r.Td = node.Td // For untrusted request, td here is nil, todo improve the les/2 protocol
+
 	return nil
 }
 
@@ -443,7 +452,7 @@ func (r *BloomRequest) Request(reqID uint64, peer *serverPeer) error {
 // Valid processes an ODR request reply message from the LES network
 // returns true and stores results in memory if the message was a valid reply
 // to the request (implementation of LesOdrRequest)
-func (r *BloomRequest) Validate(db ethdb.Database, msg *Msg) error {
+func (r *BloomRequest) Validate(db sftdb.Database, msg *Msg) error {
 	log.Debug("Validating BloomBits", "bloomTrie", r.BloomTrieNum, "bitIdx", r.BitIdx, "sections", r.SectionIndexList)
 
 	// Ensure we have a correct message with a single proof element
@@ -500,7 +509,7 @@ func (r *TxStatusRequest) Request(reqID uint64, peer *serverPeer) error {
 // Valid processes an ODR request reply message from the LES network
 // returns true and stores results in memory if the message was a valid reply
 // to the request (implementation of LesOdrRequest)
-func (r *TxStatusRequest) Validate(db ethdb.Database, msg *Msg) error {
+func (r *TxStatusRequest) Validate(db sftdb.Database, msg *Msg) error {
 	log.Debug("Validating transaction status", "count", len(r.Hashes))
 
 	// Ensure we have a correct message with a single block body
@@ -518,7 +527,7 @@ func (r *TxStatusRequest) Validate(db ethdb.Database, msg *Msg) error {
 // readTraceDB stores the keys of database reads. We use this to check that received node
 // sets contain only the trie nodes necessary to make proofs pass.
 type readTraceDB struct {
-	db    ethdb.KeyValueReader
+	db    sftdb.KeyValueReader
 	reads map[string]struct{}
 }
 

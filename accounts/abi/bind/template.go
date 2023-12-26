@@ -16,7 +16,7 @@
 
 package bind
 
-import "github.com/ethereum/go-ethereum/accounts/abi"
+import "github.com/SFT-project/go-sft/accounts/abi"
 
 // tmplData is the data structure required to fill the binding template.
 type tmplData struct {
@@ -91,12 +91,12 @@ import (
 	"math/big"
 	"strings"
 
-	ethereum "github.com/ethereum/go-ethereum"
-	"github.com/ethereum/go-ethereum/accounts/abi"
-	"github.com/ethereum/go-ethereum/accounts/abi/bind"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/event"
+	ethereum "github.com/SFT-project/go-sft"
+	"github.com/SFT-project/go-sft/accounts/abi"
+	"github.com/SFT-project/go-sft/accounts/abi/bind"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/core/types"
+	"github.com/SFT-project/go-sft/event"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -541,7 +541,6 @@ var (
 			if err := _{{$contract.Type}}.contract.UnpackLog(event, "{{.Original.Name}}", log); err != nil {
 				return nil, err
 			}
-			event.Raw = log
 			return event, nil
 		}
 

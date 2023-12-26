@@ -24,13 +24,13 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/consensus/ethash"
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/eth/downloader"
-	"github.com/ethereum/go-ethereum/eth/gasprice"
-	"github.com/ethereum/go-ethereum/miner"
-	"github.com/ethereum/go-ethereum/params"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/consensus/ethash"
+	"github.com/SFT-project/go-sft/core"
+	"github.com/SFT-project/go-sft/eth/downloader"
+	"github.com/SFT-project/go-sft/eth/gasprice"
+	"github.com/SFT-project/go-sft/miner"
+	"github.com/SFT-project/go-sft/params"
 )
 
 // DefaultFullGPOConfig contains default gasprice oracle settings for full node.
@@ -149,7 +149,6 @@ type Config struct {
 	TrieDirtyCache          int
 	TrieTimeout             time.Duration
 	SnapshotCache           int
-	Preimages               bool
 
 	// Mining options
 	Miner miner.Config

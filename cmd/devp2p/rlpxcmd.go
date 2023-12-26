@@ -19,12 +19,14 @@ package main
 import (
 	"fmt"
 	"net"
+	"os"
 
-	"github.com/ethereum/go-ethereum/cmd/devp2p/internal/ethtest"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/p2p"
-	"github.com/ethereum/go-ethereum/p2p/rlpx"
-	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/SFT-project/go-sft/cmd/devp2p/internal/ethtest"
+	"github.com/SFT-project/go-sft/crypto"
+	"github.com/SFT-project/go-sft/internal/utesting"
+	"github.com/SFT-project/go-sft/p2p"
+	"github.com/SFT-project/go-sft/p2p/rlpx"
+	"github.com/SFT-project/go-sft/rlp"
 	"gopkg.in/urfave/cli.v1"
 )
 
@@ -45,12 +47,9 @@ var (
 	rlpxEthTestCommand = cli.Command{
 		Name:      "eth-test",
 		Usage:     "Runs tests against a node",
-		ArgsUsage: "<node> <chain.rlp> <genesis.json>",
+		ArgsUsage: "<node> <path_to_chain.rlp_file>",
 		Action:    rlpxEthTest,
-		Flags: []cli.Flag{
-			testPatternFlag,
-			testTAPFlag,
-		},
+		Flags:     []cli.Flag{testPatternFlag},
 	}
 )
 
@@ -89,11 +88,22 @@ func rlpxPing(ctx *cli.Context) error {
 	return nil
 }
 
-// rlpxEthTest runs the eth protocol test suite.
 func rlpxEthTest(ctx *cli.Context) error {
 	if ctx.NArg() < 3 {
 		exit("missing path to chain.rlp as command-line argument")
 	}
+
 	suite := ethtest.NewSuite(getNodeArg(ctx), ctx.Args()[1], ctx.Args()[2])
-	return runTests(ctx, suite.AllTests())
+
+	// Filter and run test cases.
+	tests := suite.AllTests()
+	if ctx.IsSet(testPatternFlag.Name) {
+		tests = utesting.MatchTests(tests, ctx.String(testPatternFlag.Name))
+	}
+	results := utesting.RunTests(tests, os.Stdout)
+	if fails := utesting.CountFailures(results); fails > 0 {
+		return fmt.Errorf("%v of %v tests passed.", len(tests)-fails, len(tests))
+	}
+	fmt.Printf("all tests passed\n")
+	return nil
 }

@@ -21,12 +21,12 @@ import (
 	"io"
 	"math/big"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/core/forkid"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/event"
-	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/core"
+	"github.com/SFT-project/go-sft/core/forkid"
+	"github.com/SFT-project/go-sft/core/types"
+	"github.com/SFT-project/go-sft/event"
+	"github.com/SFT-project/go-sft/rlp"
 )
 
 // Constants to match up protocol versions and messages

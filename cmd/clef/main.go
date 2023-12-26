@@ -35,26 +35,26 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ethereum/go-ethereum/accounts"
-	"github.com/ethereum/go-ethereum/accounts/keystore"
-	"github.com/ethereum/go-ethereum/cmd/utils"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/internal/ethapi"
-	"github.com/ethereum/go-ethereum/internal/flags"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/node"
-	"github.com/ethereum/go-ethereum/params"
-	"github.com/ethereum/go-ethereum/rlp"
-	"github.com/ethereum/go-ethereum/rpc"
-	"github.com/ethereum/go-ethereum/signer/core"
-	"github.com/ethereum/go-ethereum/signer/fourbyte"
-	"github.com/ethereum/go-ethereum/signer/rules"
-	"github.com/ethereum/go-ethereum/signer/storage"
+	"github.com/SFT-project/go-sft/accounts"
+	"github.com/SFT-project/go-sft/accounts/keystore"
+	"github.com/SFT-project/go-sft/cmd/utils"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/common/hexutil"
+	"github.com/SFT-project/go-sft/core/types"
+	"github.com/SFT-project/go-sft/crypto"
+	"github.com/SFT-project/go-sft/internal/ethapi"
+	"github.com/SFT-project/go-sft/internal/flags"
+	"github.com/SFT-project/go-sft/log"
+	"github.com/SFT-project/go-sft/node"
+	"github.com/SFT-project/go-sft/params"
+	"github.com/SFT-project/go-sft/rlp"
+	"github.com/SFT-project/go-sft/rpc"
+	"github.com/SFT-project/go-sft/signer/core"
+	"github.com/SFT-project/go-sft/signer/fourbyte"
+	"github.com/SFT-project/go-sft/signer/rules"
+	"github.com/SFT-project/go-sft/signer/storage"
 
-	"github.com/mattn/go-colorable"
+	colorable "github.com/mattn/go-colorable"
 	"github.com/mattn/go-isatty"
 	"gopkg.in/urfave/cli.v1"
 )
@@ -747,10 +747,12 @@ func DefaultConfigDir() string {
 			appdata := os.Getenv("APPDATA")
 			if appdata != "" {
 				return filepath.Join(appdata, "Signer")
+			} else {
+				return filepath.Join(home, "AppData", "Roaming", "Signer")
 			}
-			return filepath.Join(home, "AppData", "Roaming", "Signer")
+		} else {
+			return filepath.Join(home, ".clef")
 		}
-		return filepath.Join(home, ".clef")
 	}
 	// As we cannot guess a stable location, return empty and handle later
 	return ""

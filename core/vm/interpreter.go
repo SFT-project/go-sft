@@ -20,9 +20,9 @@ import (
 	"hash"
 	"sync/atomic"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/math"
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/common/math"
+	"github.com/SFT-project/go-sft/log"
 )
 
 // Config are the configuration options for the Interpreter
@@ -99,8 +99,8 @@ func NewEVMInterpreter(evm *EVM, cfg Config) *EVMInterpreter {
 	if cfg.JumpTable[STOP] == nil {
 		var jt JumpTable
 		switch {
-		case evm.chainRules.IsYoloV2:
-			jt = yoloV2InstructionSet
+		case evm.chainRules.IsYoloV1:
+			jt = yoloV1InstructionSet
 		case evm.chainRules.IsIstanbul:
 			jt = istanbulInstructionSet
 		case evm.chainRules.IsConstantinople:

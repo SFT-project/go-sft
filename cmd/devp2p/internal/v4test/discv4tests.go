@@ -24,9 +24,9 @@ import (
 	"reflect"
 	"time"
 
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/internal/utesting"
-	"github.com/ethereum/go-ethereum/p2p/discover/v4wire"
+	"github.com/SFT-project/go-sft/crypto"
+	"github.com/SFT-project/go-sft/internal/utesting"
+	"github.com/SFT-project/go-sft/p2p/discover/v4wire"
 )
 
 const (

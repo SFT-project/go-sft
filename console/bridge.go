@@ -25,12 +25,12 @@ import (
 	"time"
 
 	"github.com/dop251/goja"
-	"github.com/ethereum/go-ethereum/accounts/scwallet"
-	"github.com/ethereum/go-ethereum/accounts/usbwallet"
-	"github.com/ethereum/go-ethereum/common/hexutil"
-	"github.com/ethereum/go-ethereum/console/prompt"
-	"github.com/ethereum/go-ethereum/internal/jsre"
-	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/SFT-project/go-sft/accounts/scwallet"
+	"github.com/SFT-project/go-sft/accounts/usbwallet"
+	"github.com/SFT-project/go-sft/common/hexutil"
+	"github.com/SFT-project/go-sft/console/prompt"
+	"github.com/SFT-project/go-sft/internal/jsre"
+	"github.com/SFT-project/go-sft/rpc"
 )
 
 // bridge is a collection of JavaScript utility methods to bride the .js runtime
@@ -144,14 +144,15 @@ func (b *bridge) OpenWallet(call jsre.Call) (goja.Value, error) {
 		if val, err = openWallet(goja.Null(), wallet, passwd); err != nil {
 			if !strings.HasSuffix(err.Error(), scwallet.ErrPINNeeded.Error()) {
 				return nil, err
-			}
-			// PIN input requested, fetch from the user and call open again
-			input, err := b.prompter.PromptPassword("Please enter current PIN: ")
-			if err != nil {
-				return nil, err
-			}
-			if val, err = openWallet(goja.Null(), wallet, call.VM.ToValue(input)); err != nil {
-				return nil, err
+			} else {
+				// PIN input requested, fetch from the user and call open again
+				input, err := b.prompter.PromptPassword("Please enter current PIN: ")
+				if err != nil {
+					return nil, err
+				}
+				if val, err = openWallet(goja.Null(), wallet, call.VM.ToValue(input)); err != nil {
+					return nil, err
+				}
 			}
 		}
 

@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/SFT-project/go-sft/log"
 )
 
 // deployExplorer creates a new block explorer based on some user input.
@@ -31,8 +31,8 @@ func (w *wizard) deployExplorer() {
 		log.Error("No genesis block configured")
 		return
 	}
-	if w.conf.ethstats == "" {
-		log.Error("No ethstats server configured")
+	if w.conf.sftstats == "" {
+		log.Error("No sftstats server configured")
 		return
 	}
 	// Select the server to interact with
@@ -61,7 +61,7 @@ func (w *wizard) deployExplorer() {
 	fmt.Printf("Which port should the explorer listen on? (default = %d)\n", infos.port)
 	infos.port = w.readDefaultInt(infos.port)
 
-	// Figure which virtual-host to deploy ethstats on
+	// Figure which virtual-host to deploy sftstats on
 	if infos.host, err = w.ensureVirtualHost(client, infos.port, infos.host); err != nil {
 		log.Error("Failed to decide on explorer host", "err", err)
 		return
@@ -91,12 +91,12 @@ func (w *wizard) deployExplorer() {
 
 	// Set a proper name to report on the stats page
 	fmt.Println()
-	if infos.node.ethstats == "" {
+	if infos.node.sftstats == "" {
 		fmt.Printf("What should the explorer be called on the stats page?\n")
-		infos.node.ethstats = w.readString() + ":" + w.conf.ethstats
+		infos.node.sftstats = w.readString() + ":" + w.conf.sftstats
 	} else {
-		fmt.Printf("What should the explorer be called on the stats page? (default = %s)\n", infos.node.ethstats)
-		infos.node.ethstats = w.readDefaultString(infos.node.ethstats) + ":" + w.conf.ethstats
+		fmt.Printf("What should the explorer be called on the stats page? (default = %s)\n", infos.node.sftstats)
+		infos.node.sftstats = w.readDefaultString(infos.node.sftstats) + ":" + w.conf.sftstats
 	}
 	// Try to deploy the explorer on the host
 	nocache := false

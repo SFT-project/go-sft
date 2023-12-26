@@ -25,12 +25,12 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/ethereum/go-ethereum/accounts/keystore"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/console/prompt"
-	"github.com/ethereum/go-ethereum/p2p/dnsdisc"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"gopkg.in/urfave/cli.v1"
+	"github.com/SFT-project/go-sft/accounts/keystore"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/console/prompt"
+	"github.com/SFT-project/go-sft/p2p/dnsdisc"
+	"github.com/SFT-project/go-sft/p2p/enode"
+	cli "gopkg.in/urfave/cli.v1"
 )
 
 var (

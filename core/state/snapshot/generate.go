@@ -19,19 +19,18 @@ package snapshot
 import (
 	"bytes"
 	"encoding/binary"
-	"fmt"
 	"math/big"
 	"time"
 
 	"github.com/VictoriaMetrics/fastcache"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/math"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/rlp"
-	"github.com/ethereum/go-ethereum/trie"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/common/math"
+	"github.com/SFT-project/go-sft/core/rawdb"
+	"github.com/SFT-project/go-sft/crypto"
+	"github.com/SFT-project/go-sft/sftdb"
+	"github.com/SFT-project/go-sft/log"
+	"github.com/SFT-project/go-sft/rlp"
+	"github.com/SFT-project/go-sft/trie"
 )
 
 var (
@@ -94,7 +93,7 @@ func (gs *generatorStats) Log(msg string, root common.Hash, marker []byte) {
 // generateSnapshot regenerates a brand new snapshot based on an existing state
 // database and head block asynchronously. The snapshot is returned immediately
 // and generation is continued in the background until done.
-func generateSnapshot(diskdb ethdb.KeyValueStore, triedb *trie.Database, cache int, root common.Hash, wiper chan struct{}) *diskLayer {
+func generateSnapshot(diskdb sftdb.KeyValueStore, triedb *trie.Database, cache int, root common.Hash, wiper chan struct{}) *diskLayer {
 	// Wipe any previously existing snapshot from the database if no wiper is
 	// currently in progress.
 	if wiper == nil {
@@ -113,40 +112,7 @@ func generateSnapshot(diskdb ethdb.KeyValueStore, triedb *trie.Database, cache i
 		genAbort:   make(chan chan *generatorStats),
 	}
 	go base.generate(&generatorStats{wiping: wiper, start: time.Now()})
-	log.Debug("Start snapshot generation", "root", root)
 	return base
-}
-
-// journalProgress persists the generator stats into the database to resume later.
-func journalProgress(db ethdb.KeyValueWriter, marker []byte, stats *generatorStats) {
-	// Write out the generator marker. Note it's a standalone disk layer generator
-	// which is not mixed with journal. It's ok if the generator is persisted while
-	// journal is not.
-	entry := journalGenerator{
-		Done:   marker == nil,
-		Marker: marker,
-	}
-	if stats != nil {
-		entry.Wiping = (stats.wiping != nil)
-		entry.Accounts = stats.accounts
-		entry.Slots = stats.slots
-		entry.Storage = uint64(stats.storage)
-	}
-	blob, err := rlp.EncodeToBytes(entry)
-	if err != nil {
-		panic(err) // Cannot happen, here to catch dev errors
-	}
-	var logstr string
-	switch len(marker) {
-	case 0:
-		logstr = "done"
-	case common.HashLength:
-		logstr = fmt.Sprintf("%#x", marker)
-	default:
-		logstr = fmt.Sprintf("%#x:%#x", marker[:common.HashLength], marker[common.HashLength:])
-	}
-	log.Debug("Journalled generator progress", "progress", logstr)
-	rawdb.WriteSnapshotGenerator(db, blob)
 }
 
 // generate is a background thread that iterates over the state and storage tries,
@@ -217,18 +183,14 @@ func (dl *diskLayer) generate(stats *generatorStats) {
 		case abort = <-dl.genAbort:
 		default:
 		}
-		if batch.ValueSize() > ethdb.IdealBatchSize || abort != nil {
+		if batch.ValueSize() > sftdb.IdealBatchSize || abort != nil {
 			// Only write and set the marker if we actually did something useful
 			if batch.ValueSize() > 0 {
-				// Ensure the generator entry is in sync with the data
-				marker := accountHash[:]
-				journalProgress(batch, marker, stats)
-
 				batch.Write()
 				batch.Reset()
 
 				dl.lock.Lock()
-				dl.genMarker = marker
+				dl.genMarker = accountHash[:]
 				dl.lock.Unlock()
 			}
 			if abort != nil {
@@ -262,18 +224,14 @@ func (dl *diskLayer) generate(stats *generatorStats) {
 				case abort = <-dl.genAbort:
 				default:
 				}
-				if batch.ValueSize() > ethdb.IdealBatchSize || abort != nil {
+				if batch.ValueSize() > sftdb.IdealBatchSize || abort != nil {
 					// Only write and set the marker if we actually did something useful
 					if batch.ValueSize() > 0 {
-						// Ensure the generator entry is in sync with the data
-						marker := append(accountHash[:], storeIt.Key...)
-						journalProgress(batch, marker, stats)
-
 						batch.Write()
 						batch.Reset()
 
 						dl.lock.Lock()
-						dl.genMarker = marker
+						dl.genMarker = append(accountHash[:], storeIt.Key...)
 						dl.lock.Unlock()
 					}
 					if abort != nil {
@@ -305,9 +263,6 @@ func (dl *diskLayer) generate(stats *generatorStats) {
 	}
 	// Snapshot fully generated, set the marker to nil
 	if batch.ValueSize() > 0 {
-		// Ensure the generator entry is in sync with the data
-		journalProgress(batch, nil, stats)
-
 		batch.Write()
 	}
 	log.Info("Generated state snapshot", "accounts", stats.accounts, "slots", stats.slots,

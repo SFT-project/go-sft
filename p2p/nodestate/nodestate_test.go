@@ -23,11 +23,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common/mclock"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"github.com/ethereum/go-ethereum/p2p/enr"
-	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/SFT-project/go-sft/common/mclock"
+	"github.com/SFT-project/go-sft/core/rawdb"
+	"github.com/SFT-project/go-sft/p2p/enode"
+	"github.com/SFT-project/go-sft/p2p/enr"
+	"github.com/SFT-project/go-sft/rlp"
 )
 
 func testSetup(flagPersist []bool, fieldType []reflect.Type) (*Setup, []Flags, []Field) {
@@ -240,8 +240,9 @@ func uint64FieldEnc(field interface{}) ([]byte, error) {
 	if u, ok := field.(uint64); ok {
 		enc, err := rlp.EncodeToBytes(&u)
 		return enc, err
+	} else {
+		return nil, errors.New("invalid field type")
 	}
-	return nil, errors.New("invalid field type")
 }
 
 func uint64FieldDec(enc []byte) (interface{}, error) {
@@ -253,8 +254,9 @@ func uint64FieldDec(enc []byte) (interface{}, error) {
 func stringFieldEnc(field interface{}) ([]byte, error) {
 	if s, ok := field.(string); ok {
 		return []byte(s), nil
+	} else {
+		return nil, errors.New("invalid field type")
 	}
-	return nil, errors.New("invalid field type")
 }
 
 func stringFieldDec(enc []byte) (interface{}, error) {

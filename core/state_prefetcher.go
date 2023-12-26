@@ -19,12 +19,12 @@ package core
 import (
 	"sync/atomic"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/consensus"
-	"github.com/ethereum/go-ethereum/core/state"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/params"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/consensus"
+	"github.com/SFT-project/go-sft/core/state"
+	"github.com/SFT-project/go-sft/core/types"
+	"github.com/SFT-project/go-sft/core/vm"
+	"github.com/SFT-project/go-sft/params"
 )
 
 // statePrefetcher is a basic Prefetcher, which blindly executes a block on top
@@ -86,9 +86,8 @@ func precacheTransaction(config *params.ChainConfig, bc ChainContext, author *co
 		return err
 	}
 	// Create the EVM and execute the transaction
-	context := NewEVMBlockContext(header, bc, author)
-	txContext := NewEVMTxContext(msg)
-	vm := vm.NewEVM(context, txContext, statedb, config, cfg)
+	context := NewEVMContext(msg, header, bc, author)
+	vm := vm.NewEVM(context, statedb, config, cfg)
 
 	_, err = ApplyMessage(vm, msg, gaspool)
 	return err

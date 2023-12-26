@@ -21,8 +21,8 @@ import (
 	"bytes"
 	"encoding/binary"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/metrics"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/metrics"
 )
 
 // The fields below define the low level database schema prefixing.
@@ -50,12 +50,6 @@ var (
 
 	// snapshotJournalKey tracks the in-memory diff layers across restarts.
 	snapshotJournalKey = []byte("SnapshotJournal")
-
-	// snapshotGeneratorKey tracks the snapshot generation marker across restarts.
-	snapshotGeneratorKey = []byte("SnapshotGenerator")
-
-	// snapshotRecoveryKey tracks the snapshot recovery marker across restarts.
-	snapshotRecoveryKey = []byte("SnapshotRecovery")
 
 	// txIndexTailKey tracks the oldest block whose transactions have been indexed.
 	txIndexTailKey = []byte("TransactionIndexTail")

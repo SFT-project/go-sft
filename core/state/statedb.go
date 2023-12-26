@@ -24,15 +24,15 @@ import (
 	"sort"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/core/state/snapshot"
-	"github.com/ethereum/go-ethereum/core/types"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/metrics"
-	"github.com/ethereum/go-ethereum/rlp"
-	"github.com/ethereum/go-ethereum/trie"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/core/rawdb"
+	"github.com/SFT-project/go-sft/core/state/snapshot"
+	"github.com/SFT-project/go-sft/core/types"
+	"github.com/SFT-project/go-sft/crypto"
+	"github.com/SFT-project/go-sft/log"
+	"github.com/SFT-project/go-sft/metrics"
+	"github.com/SFT-project/go-sft/rlp"
+	"github.com/SFT-project/go-sft/trie"
 )
 
 type revision struct {
@@ -93,9 +93,6 @@ type StateDB struct {
 
 	preimages map[common.Hash][]byte
 
-	// Per-transaction access list
-	accessList *accessList
-
 	// Journal of state modifications. This is the backbone of
 	// Snapshot and RevertToSnapshot.
 	journal        *journal
@@ -132,7 +129,6 @@ func New(root common.Hash, db Database, snaps *snapshot.Tree) (*StateDB, error) 
 		logs:                make(map[common.Hash][]*types.Log),
 		preimages:           make(map[common.Hash][]byte),
 		journal:             newJournal(),
-		accessList:          newAccessList(),
 	}
 	if sdb.snaps != nil {
 		if sdb.snap = sdb.snaps.Snapshot(root); sdb.snap != nil {
@@ -182,7 +178,6 @@ func (s *StateDB) Reset(root common.Hash) error {
 			s.snapStorage = make(map[common.Hash]map[common.Hash][]byte)
 		}
 	}
-	s.accessList = newAccessList()
 	return nil
 }
 
@@ -318,7 +313,7 @@ func (s *StateDB) GetState(addr common.Address, hash common.Hash) common.Hash {
 func (s *StateDB) GetProof(a common.Address) ([][]byte, error) {
 	var proof proofList
 	err := s.trie.Prove(crypto.Keccak256(a.Bytes()), 0, &proof)
-	return proof, err
+	return [][]byte(proof), err
 }
 
 // GetStorageProof returns the StorageProof for given key
@@ -329,7 +324,7 @@ func (s *StateDB) GetStorageProof(a common.Address, key common.Hash) ([][]byte, 
 		return proof, errors.New("storage trie for requested address does not exist")
 	}
 	err := trie.Prove(crypto.Keccak256(key.Bytes()), 0, &proof)
-	return proof, err
+	return [][]byte(proof), err
 }
 
 // GetCommittedState retrieves a value from the given account's committed storage trie.
@@ -662,7 +657,7 @@ func (s *StateDB) Copy() *StateDB {
 	}
 	// Copy the dirty states, logs, and preimages
 	for addr := range s.journal.dirties {
-		// As documented [here](https://github.com/ethereum/go-ethereum/pull/16485#issuecomment-380438527),
+		// As documented [here](https://github.com/SFT-project/go-sft/pull/16485#issuecomment-380438527),
 		// and in the Finalise-method, there is a case where an object is in the journal but not
 		// in the stateObjects: OOG after touch on ripeMD prior to Byzantium. Thus, we need to check for
 		// nil
@@ -702,12 +697,6 @@ func (s *StateDB) Copy() *StateDB {
 	for hash, preimage := range s.preimages {
 		state.preimages[hash] = preimage
 	}
-	// Do we need to copy the access list? In practice: No. At the start of a
-	// transaction, the access list is empty. In practice, we only ever copy state
-	// _between_ transactions/blocks, never in the middle of a transaction.
-	// However, it doesn't cost us much to copy an empty list, so we do it anyway
-	// to not blow up if we ever decide copy it in the middle of a transaction
-	state.accessList = s.accessList.Copy()
 	return state
 }
 
@@ -809,7 +798,6 @@ func (s *StateDB) Prepare(thash, bhash common.Hash, ti int) {
 	s.thash = thash
 	s.bhash = bhash
 	s.txIndex = ti
-	s.accessList = newAccessList()
 }
 
 func (s *StateDB) clearJournalAndRefund() {
@@ -881,50 +869,11 @@ func (s *StateDB) Commit(deleteEmptyObjects bool) (common.Hash, error) {
 			if err := s.snaps.Update(root, parent, s.snapDestructs, s.snapAccounts, s.snapStorage); err != nil {
 				log.Warn("Failed to update snapshot tree", "from", parent, "to", root, "err", err)
 			}
-			// Keep 128 diff layers in the memory, persistent layer is 129th.
-			// - head layer is paired with HEAD state
-			// - head-1 layer is paired with HEAD-1 state
-			// - head-127 layer(bottom-most diff layer) is paired with HEAD-127 state
-			if err := s.snaps.Cap(root, 128); err != nil {
-				log.Warn("Failed to cap snapshot tree", "root", root, "layers", 128, "err", err)
+			if err := s.snaps.Cap(root, 127); err != nil { // Persistent layer is 128th, the last available trie
+				log.Warn("Failed to cap snapshot tree", "root", root, "layers", 127, "err", err)
 			}
 		}
 		s.snap, s.snapDestructs, s.snapAccounts, s.snapStorage = nil, nil, nil, nil
 	}
 	return root, err
-}
-
-// AddAddressToAccessList adds the given address to the access list
-func (s *StateDB) AddAddressToAccessList(addr common.Address) {
-	if s.accessList.AddAddress(addr) {
-		s.journal.append(accessListAddAccountChange{&addr})
-	}
-}
-
-// AddSlotToAccessList adds the given (address, slot)-tuple to the access list
-func (s *StateDB) AddSlotToAccessList(addr common.Address, slot common.Hash) {
-	addrMod, slotMod := s.accessList.AddSlot(addr, slot)
-	if addrMod {
-		// In practice, this should not happen, since there is no way to enter the
-		// scope of 'address' without having the 'address' become already added
-		// to the access list (via call-variant, create, etc).
-		// Better safe than sorry, though
-		s.journal.append(accessListAddAccountChange{&addr})
-	}
-	if slotMod {
-		s.journal.append(accessListAddSlotChange{
-			address: &addr,
-			slot:    &slot,
-		})
-	}
-}
-
-// AddressInAccessList returns true if the given address is in the access list.
-func (s *StateDB) AddressInAccessList(addr common.Address) bool {
-	return s.accessList.ContainsAddress(addr)
-}
-
-// SlotInAccessList returns true if the given (address, slot)-tuple is in the access list.
-func (s *StateDB) SlotInAccessList(addr common.Address, slot common.Hash) (addressPresent bool, slotPresent bool) {
-	return s.accessList.Contains(addr, slot)
 }

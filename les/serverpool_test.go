@@ -22,13 +22,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common/mclock"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/ethdb/memorydb"
-	lpc "github.com/ethereum/go-ethereum/les/lespay/client"
-	"github.com/ethereum/go-ethereum/p2p"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"github.com/ethereum/go-ethereum/p2p/enr"
+	"github.com/SFT-project/go-sft/common/mclock"
+	"github.com/SFT-project/go-sft/sftdb"
+	"github.com/SFT-project/go-sft/sftdb/memorydb"
+	lpc "github.com/SFT-project/go-sft/les/lespay/client"
+	"github.com/SFT-project/go-sft/p2p"
+	"github.com/SFT-project/go-sft/p2p/enode"
+	"github.com/SFT-project/go-sft/p2p/enr"
 )
 
 const (
@@ -51,7 +51,7 @@ func testNodeIndex(id enode.ID) int {
 }
 
 type serverPoolTest struct {
-	db                   ethdb.KeyValueStore
+	db                   sftdb.KeyValueStore
 	clock                *mclock.Simulated
 	quit                 chan struct{}
 	preNeg, preNegFail   bool
@@ -119,28 +119,31 @@ func (s *serverPoolTest) start() {
 				s.clock.Sleep(time.Second * 5)
 				s.endWait()
 				return -1
-			}
-			switch idx % 3 {
-			case 0:
-				// pre-neg returns true only if connection is possible
-				if canConnect {
+			} else {
+				switch idx % 3 {
+				case 0:
+					// pre-neg returns true only if connection is possible
+					if canConnect {
+						return 1
+					} else {
+						return 0
+					}
+				case 1:
+					// pre-neg returns true but connection might still fail
 					return 1
+				case 2:
+					// pre-neg returns true if connection is possible, otherwise timeout (node unresponsive)
+					if canConnect {
+						return 1
+					} else {
+						s.beginWait()
+						s.clock.Sleep(time.Second * 5)
+						s.endWait()
+						return -1
+					}
 				}
-				return 0
-			case 1:
-				// pre-neg returns true but connection might still fail
-				return 1
-			case 2:
-				// pre-neg returns true if connection is possible, otherwise timeout (node unresponsive)
-				if canConnect {
-					return 1
-				}
-				s.beginWait()
-				s.clock.Sleep(time.Second * 5)
-				s.endWait()
 				return -1
 			}
-			return -1
 		}
 	}
 

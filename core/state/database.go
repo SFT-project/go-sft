@@ -21,10 +21,10 @@ import (
 	"fmt"
 
 	"github.com/VictoriaMetrics/fastcache"
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/trie"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/core/rawdb"
+	"github.com/SFT-project/go-sft/sftdb"
+	"github.com/SFT-project/go-sft/trie"
 	lru "github.com/hashicorp/golang-lru"
 )
 
@@ -99,23 +99,23 @@ type Trie interface {
 	// If the trie does not contain a value for key, the returned proof contains all
 	// nodes of the longest existing prefix of the key (at least the root), ending
 	// with the node that proves the absence of the key.
-	Prove(key []byte, fromLevel uint, proofDb ethdb.KeyValueWriter) error
+	Prove(key []byte, fromLevel uint, proofDb sftdb.KeyValueWriter) error
 }
 
 // NewDatabase creates a backing store for state. The returned database is safe for
 // concurrent use, but does not retain any recent trie nodes in memory. To keep some
-// historical state in memory, use the NewDatabaseWithConfig constructor.
-func NewDatabase(db ethdb.Database) Database {
-	return NewDatabaseWithConfig(db, nil)
+// historical state in memory, use the NewDatabaseWithCache constructor.
+func NewDatabase(db sftdb.Database) Database {
+	return NewDatabaseWithCache(db, 0, "")
 }
 
-// NewDatabaseWithConfig creates a backing store for state. The returned database
+// NewDatabaseWithCache creates a backing store for state. The returned database
 // is safe for concurrent use and retains a lot of collapsed RLP trie nodes in a
 // large memory cache.
-func NewDatabaseWithConfig(db ethdb.Database, config *trie.Config) Database {
+func NewDatabaseWithCache(db sftdb.Database, cache int, journal string) Database {
 	csc, _ := lru.New(codeSizeCacheSize)
 	return &cachingDB{
-		db:            trie.NewDatabaseWithConfig(db, config),
+		db:            trie.NewDatabaseWithCache(db, cache, journal),
 		codeSizeCache: csc,
 		codeCache:     fastcache.New(codeCacheSize),
 	}

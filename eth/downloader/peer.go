@@ -28,9 +28,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/event"
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/event"
+	"github.com/SFT-project/go-sft/log"
 )
 
 const (

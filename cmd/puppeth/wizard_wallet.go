@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/SFT-project/go-sft/log"
 )
 
 // deployWallet creates a new web wallet based on some user input.
@@ -31,8 +31,8 @@ func (w *wizard) deployWallet() {
 		log.Error("No genesis block configured")
 		return
 	}
-	if w.conf.ethstats == "" {
-		log.Error("No ethstats server configured")
+	if w.conf.sftstats == "" {
+		log.Error("No sftstats server configured")
 		return
 	}
 	// Select the server to interact with
@@ -59,7 +59,7 @@ func (w *wizard) deployWallet() {
 	fmt.Printf("Which port should the wallet listen on? (default = %d)\n", infos.webPort)
 	infos.webPort = w.readDefaultInt(infos.webPort)
 
-	// Figure which virtual-host to deploy ethstats on
+	// Figure which virtual-host to deploy sftstats on
 	if infos.webHost, err = w.ensureVirtualHost(client, infos.webPort, infos.webHost); err != nil {
 		log.Error("Failed to decide on wallet host", "err", err)
 		return
@@ -84,12 +84,12 @@ func (w *wizard) deployWallet() {
 
 	// Set a proper name to report on the stats page
 	fmt.Println()
-	if infos.ethstats == "" {
+	if infos.sftstats == "" {
 		fmt.Printf("What should the wallet be called on the stats page?\n")
-		infos.ethstats = w.readString() + ":" + w.conf.ethstats
+		infos.sftstats = w.readString() + ":" + w.conf.sftstats
 	} else {
-		fmt.Printf("What should the wallet be called on the stats page? (default = %s)\n", infos.ethstats)
-		infos.ethstats = w.readDefaultString(infos.ethstats) + ":" + w.conf.ethstats
+		fmt.Printf("What should the wallet be called on the stats page? (default = %s)\n", infos.sftstats)
+		infos.sftstats = w.readDefaultString(infos.sftstats) + ":" + w.conf.sftstats
 	}
 	// Try to deploy the wallet on the host
 	nocache := false

@@ -22,11 +22,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common/mclock"
-	"github.com/ethereum/go-ethereum/common/prque"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"github.com/ethereum/go-ethereum/p2p/nodestate"
+	"github.com/SFT-project/go-sft/common/mclock"
+	"github.com/SFT-project/go-sft/common/prque"
+	"github.com/SFT-project/go-sft/log"
+	"github.com/SFT-project/go-sft/p2p/enode"
+	"github.com/SFT-project/go-sft/p2p/nodestate"
 )
 
 const (
@@ -253,12 +253,12 @@ func (pp *PriorityPool) SetActiveBias(bias time.Duration) {
 	pp.tryActivate()
 }
 
-// Active returns the number and total capacity of currently active nodes
-func (pp *PriorityPool) Active() (uint64, uint64) {
+// ActiveCapacity returns the total capacity of currently active nodes
+func (pp *PriorityPool) ActiveCapacity() uint64 {
 	pp.lock.Lock()
 	defer pp.lock.Unlock()
 
-	return pp.activeCount, pp.activeCap
+	return pp.activeCap
 }
 
 // inactiveSetIndex callback updates ppNodeInfo item index in inactiveQueue
@@ -288,8 +288,9 @@ func activePriority(a interface{}, now mclock.AbsTime) int64 {
 	}
 	if c.bias == 0 {
 		return invertPriority(c.nodePriority.Priority(now, c.capacity))
+	} else {
+		return invertPriority(c.nodePriority.EstMinPriority(now+mclock.AbsTime(c.bias), c.capacity, true))
 	}
-	return invertPriority(c.nodePriority.EstMinPriority(now+mclock.AbsTime(c.bias), c.capacity, true))
 }
 
 // activeMaxPriority callback returns estimated maximum priority of ppNodeInfo item in activeQueue

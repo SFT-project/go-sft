@@ -20,9 +20,9 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/ethdb/memorydb"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/crypto"
+	"github.com/SFT-project/go-sft/sftdb/memorydb"
 )
 
 // makeTestTrie create a sample test trie to test node-wise reconstruction.
@@ -377,6 +377,7 @@ func TestIncompleteSync(t *testing.T) {
 
 	nodes, _, codes := sched.Missing(1)
 	queue := append(append([]common.Hash{}, nodes...), codes...)
+
 	for len(queue) > 0 {
 		// Fetch a batch of trie nodes
 		results := make([]SyncResult, len(queue))
@@ -400,8 +401,10 @@ func TestIncompleteSync(t *testing.T) {
 		batch.Write()
 		for _, result := range results {
 			added = append(added, result.Hash)
-			// Check that all known sub-tries in the synced trie are complete
-			if err := checkTrieConsistency(triedb, result.Hash); err != nil {
+		}
+		// Check that all known sub-tries in the synced trie are complete
+		for _, root := range added {
+			if err := checkTrieConsistency(triedb, root); err != nil {
 				t.Fatalf("trie inconsistent: %v", err)
 			}
 		}

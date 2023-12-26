@@ -25,7 +25,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/SFT-project/go-sft/log"
 )
 
 // explorerDockerfile is the Dockerfile required to run a block explorer.
@@ -35,8 +35,8 @@ FROM puppeth/blockscout:latest
 ADD genesis.json /genesis.json
 RUN \
   echo 'geth --cache 512 init /genesis.json' > explorer.sh && \
-  echo $'geth --networkid {{.NetworkID}} --syncmode "full" --gcmode "archive" --port {{.EthPort}} --bootnodes {{.Bootnodes}} --ethstats \'{{.Ethstats}}\' --cache=512 --http --http.api "net,web3,eth,shh,debug" --http.corsdomain "*" --http.vhosts "*" --ws --ws.origins "*" --exitwhensynced' >> explorer.sh && \
-  echo $'exec geth --networkid {{.NetworkID}} --syncmode "full" --gcmode "archive" --port {{.EthPort}} --bootnodes {{.Bootnodes}} --ethstats \'{{.Ethstats}}\' --cache=512 --http --http.api "net,web3,eth,shh,debug" --http.corsdomain "*" --http.vhosts "*" --ws --ws.origins "*" &' >> explorer.sh && \
+  echo $'geth --networkid {{.NetworkID}} --syncmode "full" --gcmode "archive" --port {{.EthPort}} --bootnodes {{.Bootnodes}} --sftstats \'{{.Ethstats}}\' --cache=512 --http --http.api "net,web3,eth,shh,debug" --http.corsdomain "*" --http.vhosts "*" --ws --ws.origins "*" --exitwhensynced' >> explorer.sh && \
+  echo $'exec geth --networkid {{.NetworkID}} --syncmode "full" --gcmode "archive" --port {{.EthPort}} --bootnodes {{.Bootnodes}} --sftstats \'{{.Ethstats}}\' --cache=512 --http --http.api "net,web3,eth,shh,debug" --http.corsdomain "*" --http.vhosts "*" --ws --ws.origins "*" &' >> explorer.sh && \
   echo '/usr/local/bin/docker-entrypoint.sh postgres &' >> explorer.sh && \
   echo 'sleep 5' >> explorer.sh && \
   echo 'mix do ecto.drop --force, ecto.create, ecto.migrate' >> explorer.sh && \
@@ -87,7 +87,7 @@ func deployExplorer(client *sshClient, network string, bootnodes []string, confi
 	template.Must(template.New("").Parse(explorerDockerfile)).Execute(dockerfile, map[string]interface{}{
 		"NetworkID": config.node.network,
 		"Bootnodes": strings.Join(bootnodes, ","),
-		"Ethstats":  config.node.ethstats,
+		"Ethstats":  config.node.sftstats,
 		"EthPort":   config.node.port,
 	})
 	files[filepath.Join(workdir, "Dockerfile")] = dockerfile.Bytes()
@@ -100,11 +100,11 @@ func deployExplorer(client *sshClient, network string, bootnodes []string, confi
 	template.Must(template.New("").Parse(explorerComposefile)).Execute(composefile, map[string]interface{}{
 		"Network":     network,
 		"VHost":       config.host,
-		"Ethstats":    config.node.ethstats,
+		"Ethstats":    config.node.sftstats,
 		"Datadir":     config.node.datadir,
 		"DBDir":       config.dbdir,
 		"EthPort":     config.node.port,
-		"EthName":     config.node.ethstats[:strings.Index(config.node.ethstats, ":")],
+		"EthName":     config.node.sftstats[:strings.Index(config.node.sftstats, ":")],
 		"WebPort":     config.port,
 		"Transformer": transformer,
 	})
@@ -140,7 +140,7 @@ func (info *explorerInfos) Report() map[string]string {
 		"Website address ":        info.host,
 		"Website listener port ":  strconv.Itoa(info.port),
 		"Ethereum listener port ": strconv.Itoa(info.node.port),
-		"Ethstats username":       info.node.ethstats,
+		"Ethstats username":       info.node.sftstats,
 	}
 	return report
 }
@@ -184,7 +184,7 @@ func checkExplorer(client *sshClient, network string) (*explorerInfos, error) {
 		node: &nodeInfos{
 			datadir:  infos.volumes["/opt/app/.ethereum"],
 			port:     infos.portmap[infos.envvars["ETH_PORT"]+"/tcp"],
-			ethstats: infos.envvars["ETH_NAME"],
+			sftstats: infos.envvars["ETH_NAME"],
 		},
 		dbdir: infos.volumes["/var/lib/postgresql/data"],
 		host:  host,

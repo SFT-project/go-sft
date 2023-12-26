@@ -24,13 +24,13 @@ import (
 	"net"
 	"sync"
 
-	"github.com/ethereum/go-ethereum/event"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/node"
-	"github.com/ethereum/go-ethereum/p2p"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"github.com/ethereum/go-ethereum/p2p/simulations/pipes"
-	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/SFT-project/go-sft/event"
+	"github.com/SFT-project/go-sft/log"
+	"github.com/SFT-project/go-sft/node"
+	"github.com/SFT-project/go-sft/p2p"
+	"github.com/SFT-project/go-sft/p2p/enode"
+	"github.com/SFT-project/go-sft/p2p/simulations/pipes"
+	"github.com/SFT-project/go-sft/rpc"
 	"github.com/gorilla/websocket"
 )
 
@@ -99,9 +99,8 @@ func (s *SimAdapter) NewNode(config *NodeConfig) (Node, error) {
 			Dialer:          s,
 			EnableMsgEvents: config.EnableMsgEvents,
 		},
-		ExternalSigner: config.ExternalSigner,
-		NoUSB:          true,
-		Logger:         log.New("node.id", id.String()),
+		NoUSB:  true,
+		Logger: log.New("node.id", id.String()),
 	})
 	if err != nil {
 		return nil, err
@@ -264,6 +263,7 @@ func (sn *SimNode) Start(snapshots map[string][]byte) error {
 				continue
 			}
 			sn.running[name] = service
+			sn.node.RegisterLifecycle(service)
 		}
 	})
 	if regErr != nil {

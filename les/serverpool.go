@@ -24,15 +24,15 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common/mclock"
-	"github.com/ethereum/go-ethereum/ethdb"
-	lpc "github.com/ethereum/go-ethereum/les/lespay/client"
-	"github.com/ethereum/go-ethereum/les/utils"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"github.com/ethereum/go-ethereum/p2p/enr"
-	"github.com/ethereum/go-ethereum/p2p/nodestate"
-	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/SFT-project/go-sft/common/mclock"
+	"github.com/SFT-project/go-sft/sftdb"
+	lpc "github.com/SFT-project/go-sft/les/lespay/client"
+	"github.com/SFT-project/go-sft/les/utils"
+	"github.com/SFT-project/go-sft/log"
+	"github.com/SFT-project/go-sft/p2p/enode"
+	"github.com/SFT-project/go-sft/p2p/enr"
+	"github.com/SFT-project/go-sft/p2p/nodestate"
+	"github.com/SFT-project/go-sft/rlp"
 )
 
 const (
@@ -55,7 +55,7 @@ const (
 type serverPool struct {
 	clock    mclock.Clock
 	unixTime func() int64
-	db       ethdb.KeyValueStore
+	db       sftdb.KeyValueStore
 
 	ns           *nodestate.NodeStateMachine
 	vt           *lpc.ValueTracker
@@ -112,8 +112,9 @@ var (
 				}
 				enc, err := rlp.EncodeToBytes(&ne)
 				return enc, err
+			} else {
+				return nil, errors.New("invalid field type")
 			}
-			return nil, errors.New("invalid field type")
 		},
 		func(enc []byte) (interface{}, error) {
 			var ne nodeHistoryEnc
@@ -131,7 +132,7 @@ var (
 )
 
 // newServerPool creates a new server pool
-func newServerPool(db ethdb.KeyValueStore, dbKey []byte, vt *lpc.ValueTracker, discovery enode.Iterator, mixTimeout time.Duration, query queryFunc, clock mclock.Clock, trustedURLs []string) *serverPool {
+func newServerPool(db sftdb.KeyValueStore, dbKey []byte, vt *lpc.ValueTracker, discovery enode.Iterator, mixTimeout time.Duration, query queryFunc, clock mclock.Clock, trustedURLs []string) *serverPool {
 	s := &serverPool{
 		db:           db,
 		clock:        clock,

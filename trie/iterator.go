@@ -21,8 +21,8 @@ import (
 	"container/heap"
 	"errors"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/rlp"
 )
 
 // Iterator is a key-value trie iterator that traverses a Trie.
@@ -173,7 +173,7 @@ func (it *nodeIterator) LeafKey() []byte {
 func (it *nodeIterator) LeafBlob() []byte {
 	if len(it.stack) > 0 {
 		if node, ok := it.stack[len(it.stack)-1].node.(valueNode); ok {
-			return node
+			return []byte(node)
 		}
 	}
 	panic("not at leaf")

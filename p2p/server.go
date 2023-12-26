@@ -29,17 +29,17 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/mclock"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/event"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/p2p/discover"
-	"github.com/ethereum/go-ethereum/p2p/discv5"
-	"github.com/ethereum/go-ethereum/p2p/enode"
-	"github.com/ethereum/go-ethereum/p2p/enr"
-	"github.com/ethereum/go-ethereum/p2p/nat"
-	"github.com/ethereum/go-ethereum/p2p/netutil"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/common/mclock"
+	"github.com/SFT-project/go-sft/crypto"
+	"github.com/SFT-project/go-sft/event"
+	"github.com/SFT-project/go-sft/log"
+	"github.com/SFT-project/go-sft/p2p/discover"
+	"github.com/SFT-project/go-sft/p2p/discv5"
+	"github.com/SFT-project/go-sft/p2p/enode"
+	"github.com/SFT-project/go-sft/p2p/enr"
+	"github.com/SFT-project/go-sft/p2p/nat"
+	"github.com/SFT-project/go-sft/p2p/netutil"
 )
 
 const (
@@ -854,18 +854,13 @@ func (srv *Server) listenLoop() {
 		<-slots
 
 		var (
-			fd      net.Conn
-			err     error
-			lastLog time.Time
+			fd  net.Conn
+			err error
 		)
 		for {
 			fd, err = srv.listener.Accept()
 			if netutil.IsTemporaryError(err) {
-				if time.Since(lastLog) > 1*time.Second {
-					srv.log.Debug("Temporary read error", "err", err)
-					lastLog = time.Now()
-				}
-				time.Sleep(time.Millisecond * 200)
+				srv.log.Debug("Temporary read error", "err", err)
 				continue
 			} else if err != nil {
 				srv.log.Debug("Read error", "err", err)

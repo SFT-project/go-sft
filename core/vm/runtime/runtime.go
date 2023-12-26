@@ -21,12 +21,12 @@ import (
 	"math/big"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/core/rawdb"
-	"github.com/ethereum/go-ethereum/core/state"
-	"github.com/ethereum/go-ethereum/core/vm"
-	"github.com/ethereum/go-ethereum/crypto"
-	"github.com/ethereum/go-ethereum/params"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/core/rawdb"
+	"github.com/SFT-project/go-sft/core/state"
+	"github.com/SFT-project/go-sft/core/vm"
+	"github.com/SFT-project/go-sft/crypto"
+	"github.com/SFT-project/go-sft/params"
 )
 
 // Config is a basic type specifying certain configuration flags for running
@@ -65,7 +65,7 @@ func setDefaults(cfg *Config) {
 			PetersburgBlock:     new(big.Int),
 			IstanbulBlock:       new(big.Int),
 			MuirGlacierBlock:    new(big.Int),
-			YoloV2Block:         nil,
+			YoloV1Block:         nil,
 		}
 	}
 
@@ -113,13 +113,6 @@ func Execute(code, input []byte, cfg *Config) ([]byte, *state.StateDB, error) {
 		vmenv   = NewEnv(cfg)
 		sender  = vm.AccountRef(cfg.Origin)
 	)
-	if cfg.ChainConfig.IsYoloV2(vmenv.Context.BlockNumber) {
-		cfg.State.AddAddressToAccessList(cfg.Origin)
-		cfg.State.AddAddressToAccessList(address)
-		for _, addr := range vmenv.ActivePrecompiles() {
-			cfg.State.AddAddressToAccessList(addr)
-		}
-	}
 	cfg.State.CreateAccount(address)
 	// set the receiver's (the executing contract) code for execution.
 	cfg.State.SetCode(address, code)
@@ -149,12 +142,6 @@ func Create(input []byte, cfg *Config) ([]byte, common.Address, uint64, error) {
 		vmenv  = NewEnv(cfg)
 		sender = vm.AccountRef(cfg.Origin)
 	)
-	if cfg.ChainConfig.IsYoloV2(vmenv.Context.BlockNumber) {
-		cfg.State.AddAddressToAccessList(cfg.Origin)
-		for _, addr := range vmenv.ActivePrecompiles() {
-			cfg.State.AddAddressToAccessList(addr)
-		}
-	}
 
 	// Call the code with the given configuration.
 	code, address, leftOverGas, err := vmenv.Create(
@@ -177,14 +164,6 @@ func Call(address common.Address, input []byte, cfg *Config) ([]byte, uint64, er
 	vmenv := NewEnv(cfg)
 
 	sender := cfg.State.GetOrNewStateObject(cfg.Origin)
-	if cfg.ChainConfig.IsYoloV2(vmenv.Context.BlockNumber) {
-		cfg.State.AddAddressToAccessList(cfg.Origin)
-		cfg.State.AddAddressToAccessList(address)
-		for _, addr := range vmenv.ActivePrecompiles() {
-			cfg.State.AddAddressToAccessList(addr)
-		}
-	}
-
 	// Call the code with the given configuration.
 	ret, leftOverGas, err := vmenv.Call(
 		sender,

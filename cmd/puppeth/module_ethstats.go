@@ -25,26 +25,26 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/ethereum/go-ethereum/log"
+	"github.com/SFT-project/go-sft/log"
 )
 
-// ethstatsDockerfile is the Dockerfile required to build an ethstats backend
+// sftstatsDockerfile is the Dockerfile required to build an sftstats backend
 // and associated monitoring site.
-var ethstatsDockerfile = `
-FROM puppeth/ethstats:latest
+var sftstatsDockerfile = `
+FROM puppeth/sftstats:latest
 
 RUN echo 'module.exports = {trusted: [{{.Trusted}}], banned: [{{.Banned}}], reserved: ["yournode"]};' > lib/utils/config.js
 `
 
-// ethstatsComposefile is the docker-compose.yml file required to deploy and
-// maintain an ethstats monitoring site.
-var ethstatsComposefile = `
+// sftstatsComposefile is the docker-compose.yml file required to deploy and
+// maintain an sftstats monitoring site.
+var sftstatsComposefile = `
 version: '2'
 services:
-  ethstats:
+  sftstats:
     build: .
-    image: {{.Network}}/ethstats
-    container_name: {{.Network}}_ethstats_1{{if not .VHost}}
+    image: {{.Network}}/sftstats
+    container_name: {{.Network}}_sftstats_1{{if not .VHost}}
     ports:
       - "{{.Port}}:3000"{{end}}
     environment:
@@ -59,7 +59,7 @@ services:
     restart: always
 `
 
-// deployEthstats deploys a new ethstats container to a remote machine via SSH,
+// deployEthstats deploys a new sftstats container to a remote machine via SSH,
 // docker and docker-compose. If an instance with the specified network name
 // already exists there, it will be overwritten!
 func deployEthstats(client *sshClient, network string, port int, secret string, vhost string, trusted []string, banned []string, nocache bool) ([]byte, error) {
@@ -77,14 +77,14 @@ func deployEthstats(client *sshClient, network string, port int, secret string, 
 	}
 
 	dockerfile := new(bytes.Buffer)
-	template.Must(template.New("").Parse(ethstatsDockerfile)).Execute(dockerfile, map[string]interface{}{
+	template.Must(template.New("").Parse(sftstatsDockerfile)).Execute(dockerfile, map[string]interface{}{
 		"Trusted": strings.Join(trustedLabels, ", "),
 		"Banned":  strings.Join(bannedLabels, ", "),
 	})
 	files[filepath.Join(workdir, "Dockerfile")] = dockerfile.Bytes()
 
 	composefile := new(bytes.Buffer)
-	template.Must(template.New("").Parse(ethstatsComposefile)).Execute(composefile, map[string]interface{}{
+	template.Must(template.New("").Parse(sftstatsComposefile)).Execute(composefile, map[string]interface{}{
 		"Network": network,
 		"Port":    port,
 		"Secret":  secret,
@@ -99,16 +99,16 @@ func deployEthstats(client *sshClient, network string, port int, secret string, 
 	}
 	defer client.Run("rm -rf " + workdir)
 
-	// Build and deploy the ethstats service
+	// Build and deploy the sftstats service
 	if nocache {
 		return nil, client.Stream(fmt.Sprintf("cd %s && docker-compose -p %s build --pull --no-cache && docker-compose -p %s up -d --force-recreate --timeout 60", workdir, network, network))
 	}
 	return nil, client.Stream(fmt.Sprintf("cd %s && docker-compose -p %s up -d --build --force-recreate --timeout 60", workdir, network))
 }
 
-// ethstatsInfos is returned from an ethstats status check to allow reporting
+// sftstatsInfos is returned from an sftstats status check to allow reporting
 // various configuration parameters.
-type ethstatsInfos struct {
+type sftstatsInfos struct {
 	host   string
 	port   int
 	secret string
@@ -118,7 +118,7 @@ type ethstatsInfos struct {
 
 // Report converts the typed struct into a plain string->string map, containing
 // most - but not all - fields for reporting to the user.
-func (info *ethstatsInfos) Report() map[string]string {
+func (info *sftstatsInfos) Report() map[string]string {
 	return map[string]string{
 		"Website address":       info.host,
 		"Website listener port": strconv.Itoa(info.port),
@@ -127,11 +127,11 @@ func (info *ethstatsInfos) Report() map[string]string {
 	}
 }
 
-// checkEthstats does a health-check against an ethstats server to verify whether
+// checkEthstats does a health-check against an sftstats server to verify whether
 // it's running, and if yes, gathering a collection of useful infos about it.
-func checkEthstats(client *sshClient, network string) (*ethstatsInfos, error) {
-	// Inspect a possible ethstats container on the host
-	infos, err := inspectContainer(client, fmt.Sprintf("%s_ethstats_1", network))
+func checkEthstats(client *sshClient, network string) (*sftstatsInfos, error) {
+	// Inspect a possible sftstats container on the host
+	infos, err := inspectContainer(client, fmt.Sprintf("%s_sftstats_1", network))
 	if err != nil {
 		return nil, err
 	}
@@ -166,7 +166,7 @@ func checkEthstats(client *sshClient, network string) (*ethstatsInfos, error) {
 		log.Warn("Ethstats service seems unreachable", "server", host, "port", port, "err", err)
 	}
 	// Container available, assemble and return the useful infos
-	return &ethstatsInfos{
+	return &sftstatsInfos{
 		host:   host,
 		port:   port,
 		secret: secret,

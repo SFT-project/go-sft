@@ -26,14 +26,14 @@ import (
 	"testing"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/consensus/ethash"
-	"github.com/ethereum/go-ethereum/console/prompt"
-	"github.com/ethereum/go-ethereum/core"
-	"github.com/ethereum/go-ethereum/eth"
-	"github.com/ethereum/go-ethereum/internal/jsre"
-	"github.com/ethereum/go-ethereum/miner"
-	"github.com/ethereum/go-ethereum/node"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/consensus/ethash"
+	"github.com/SFT-project/go-sft/console/prompt"
+	"github.com/SFT-project/go-sft/core"
+	"github.com/SFT-project/go-sft/eth"
+	"github.com/SFT-project/go-sft/internal/jsre"
+	"github.com/SFT-project/go-sft/miner"
+	"github.com/SFT-project/go-sft/node"
 )
 
 const (

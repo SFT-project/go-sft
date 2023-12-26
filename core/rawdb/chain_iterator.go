@@ -21,18 +21,18 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/ethereum/go-ethereum/common"
-	"github.com/ethereum/go-ethereum/common/prque"
-	"github.com/ethereum/go-ethereum/ethdb"
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/rlp"
+	"github.com/SFT-project/go-sft/common"
+	"github.com/SFT-project/go-sft/common/prque"
+	"github.com/SFT-project/go-sft/sftdb"
+	"github.com/SFT-project/go-sft/log"
+	"github.com/SFT-project/go-sft/rlp"
 	"golang.org/x/crypto/sha3"
 )
 
 // InitDatabaseFromFreezer reinitializes an empty database from a previous batch
 // of frozen ancient blocks. The method iterates over all the frozen blocks and
 // injects into the database the block hash->number mappings.
-func InitDatabaseFromFreezer(db ethdb.Database) {
+func InitDatabaseFromFreezer(db sftdb.Database) {
 	// If we can't access the freezer or it's empty, abort
 	frozen, err := db.Ancients()
 	if err != nil || frozen == 0 {
@@ -56,7 +56,7 @@ func InitDatabaseFromFreezer(db ethdb.Database) {
 		}
 		WriteHeaderNumber(batch, hash, i)
 		// If enough data was accumulated in memory or we're at the last block, dump to disk
-		if batch.ValueSize() > ethdb.IdealBatchSize {
+		if batch.ValueSize() > sftdb.IdealBatchSize {
 			if err := batch.Write(); err != nil {
 				log.Crit("Failed to write data to db", "err", err)
 			}
@@ -84,17 +84,15 @@ type blockTxHashes struct {
 }
 
 // iterateTransactions iterates over all transactions in the (canon) block
-// number(s) given, and yields the hashes on a channel. If there is a signal
-// received from interrupt channel, the iteration will be aborted and result
-// channel will be closed.
-func iterateTransactions(db ethdb.Database, from uint64, to uint64, reverse bool, interrupt chan struct{}) chan *blockTxHashes {
+// number(s) given, and yields the hashes on a channel
+func iterateTransactions(db sftdb.Database, from uint64, to uint64, reverse bool) (chan *blockTxHashes, chan struct{}) {
 	// One thread sequentially reads data from db
 	type numberRlp struct {
 		number uint64
 		rlp    rlp.RawValue
 	}
 	if to == from {
-		return nil
+		return nil, nil
 	}
 	threads := to - from
 	if cpus := runtime.NumCPU(); threads > uint64(cpus) {
@@ -103,6 +101,7 @@ func iterateTransactions(db ethdb.Database, from uint64, to uint64, reverse bool
 	var (
 		rlpCh    = make(chan *numberRlp, threads*2)     // we send raw rlp over this channel
 		hashesCh = make(chan *blockTxHashes, threads*2) // send hashes over hashesCh
+		abortCh  = make(chan struct{})
 	)
 	// lookup runs in one instance
 	lookup := func() {
@@ -116,7 +115,7 @@ func iterateTransactions(db ethdb.Database, from uint64, to uint64, reverse bool
 			// Feed the block to the aggregator, or abort on interrupt
 			select {
 			case rlpCh <- &numberRlp{n, data}:
-			case <-interrupt:
+			case <-abortCh:
 				return
 			}
 			if reverse {
@@ -169,7 +168,7 @@ func iterateTransactions(db ethdb.Database, from uint64, to uint64, reverse bool
 			// Feed the block to the aggregator, or abort on interrupt
 			select {
 			case hashesCh <- result:
-			case <-interrupt:
+			case <-abortCh:
 				return
 			}
 		}
@@ -178,28 +177,25 @@ func iterateTransactions(db ethdb.Database, from uint64, to uint64, reverse bool
 	for i := 0; i < int(threads); i++ {
 		go process()
 	}
-	return hashesCh
+	return hashesCh, abortCh
 }
 
-// indexTransactions creates txlookup indices of the specified block range.
+// IndexTransactions creates txlookup indices of the specified block range.
 //
 // This function iterates canonical chain in reverse order, it has one main advantage:
 // We can write tx index tail flag periodically even without the whole indexing
 // procedure is finished. So that we can resume indexing procedure next time quickly.
-//
-// There is a passed channel, the whole procedure will be interrupted if any
-// signal received.
-func indexTransactions(db ethdb.Database, from uint64, to uint64, interrupt chan struct{}, hook func(uint64) bool) {
+func IndexTransactions(db sftdb.Database, from uint64, to uint64) {
 	// short circuit for invalid range
 	if from >= to {
 		return
 	}
 	var (
-		hashesCh = iterateTransactions(db, from, to, true, interrupt)
-		batch    = db.NewBatch()
-		start    = time.Now()
-		logged   = start.Add(-7 * time.Second)
-		// Since we iterate in reverse, we expect the first number to come
+		hashesCh, abortCh = iterateTransactions(db, from, to, true)
+		batch             = db.NewBatch()
+		start             = time.Now()
+		logged            = start.Add(-7 * time.Second)
+		//  Since we iterate in reverse, we expect the first number to come
 		// in to be [to-1]. Therefore, setting lastNum to means that the
 		// prqueue gap-evaluation will work correctly
 		lastNum = to
@@ -207,6 +203,8 @@ func indexTransactions(db ethdb.Database, from uint64, to uint64, interrupt chan
 		// for stats reporting
 		blocks, txs = 0, 0
 	)
+	defer close(abortCh)
+
 	for chanDelivery := range hashesCh {
 		// Push the delivery into the queue and process contiguous ranges.
 		// Since we iterate in reverse, so lower numbers have lower prio, and
@@ -217,10 +215,6 @@ func indexTransactions(db ethdb.Database, from uint64, to uint64, interrupt chan
 			if _, priority := queue.Peek(); priority != int64(lastNum-1) {
 				break
 			}
-			// For testing
-			if hook != nil && !hook(lastNum-1) {
-				break
-			}
 			// Next block available, pop it off and index it
 			delivery := queue.PopItem().(*blockTxHashes)
 			lastNum = delivery.number
@@ -228,8 +222,9 @@ func indexTransactions(db ethdb.Database, from uint64, to uint64, interrupt chan
 			blocks++
 			txs += len(delivery.hashes)
 			// If enough data was accumulated in memory or we're at the last block, dump to disk
-			if batch.ValueSize() > ethdb.IdealBatchSize {
-				WriteTxIndexTail(batch, lastNum) // Also write the tail here
+			if batch.ValueSize() > sftdb.IdealBatchSize {
+				// Also write the tail there
+				WriteTxIndexTail(batch, lastNum)
 				if err := batch.Write(); err != nil {
 					log.Crit("Failed writing batch to db", "error", err)
 					return
@@ -243,122 +238,67 @@ func indexTransactions(db ethdb.Database, from uint64, to uint64, interrupt chan
 			}
 		}
 	}
-	// If there exists uncommitted data, flush them.
-	if batch.ValueSize() > 0 {
-		WriteTxIndexTail(batch, lastNum) // Also write the tail there
+	if lastNum < to {
+		WriteTxIndexTail(batch, lastNum)
+		// No need to write the batch if we never entered the loop above...
 		if err := batch.Write(); err != nil {
 			log.Crit("Failed writing batch to db", "error", err)
 			return
 		}
 	}
-	select {
-	case <-interrupt:
-		log.Debug("Transaction indexing interrupted", "blocks", blocks, "txs", txs, "tail", lastNum, "elapsed", common.PrettyDuration(time.Since(start)))
-	default:
-		log.Info("Indexed transactions", "blocks", blocks, "txs", txs, "tail", lastNum, "elapsed", common.PrettyDuration(time.Since(start)))
-	}
+	log.Info("Indexed transactions", "blocks", blocks, "txs", txs, "tail", lastNum, "elapsed", common.PrettyDuration(time.Since(start)))
 }
 
-// IndexTransactions creates txlookup indices of the specified block range.
-//
-// This function iterates canonical chain in reverse order, it has one main advantage:
-// We can write tx index tail flag periodically even without the whole indexing
-// procedure is finished. So that we can resume indexing procedure next time quickly.
-//
-// There is a passed channel, the whole procedure will be interrupted if any
-// signal received.
-func IndexTransactions(db ethdb.Database, from uint64, to uint64, interrupt chan struct{}) {
-	indexTransactions(db, from, to, interrupt, nil)
-}
-
-// indexTransactionsForTesting is the internal debug version with an additional hook.
-func indexTransactionsForTesting(db ethdb.Database, from uint64, to uint64, interrupt chan struct{}, hook func(uint64) bool) {
-	indexTransactions(db, from, to, interrupt, hook)
-}
-
-// unindexTransactions removes txlookup indices of the specified block range.
-//
-// There is a passed channel, the whole procedure will be interrupted if any
-// signal received.
-func unindexTransactions(db ethdb.Database, from uint64, to uint64, interrupt chan struct{}, hook func(uint64) bool) {
+// UnindexTransactions removes txlookup indices of the specified block range.
+func UnindexTransactions(db sftdb.Database, from uint64, to uint64) {
 	// short circuit for invalid range
 	if from >= to {
 		return
 	}
+	// Write flag first and then unindex the transaction indices. Some indices
+	// will be left in the database if crash happens but it's fine.
+	WriteTxIndexTail(db, to)
+	// If only one block is unindexed, do it directly
+	//if from+1 == to {
+	//	data := ReadCanonicalBodyRLP(db, uint64(from))
+	//	DeleteTxLookupEntries(db, ReadBlock(db, ReadCanonicalHash(db, from), from))
+	//	log.Info("Unindexed transactions", "blocks", 1, "tail", to)
+	//	return
+	//}
+	// TODO @holiman, add this back (if we want it)
 	var (
-		hashesCh = iterateTransactions(db, from, to, false, interrupt)
-		batch    = db.NewBatch()
-		start    = time.Now()
-		logged   = start.Add(-7 * time.Second)
-		// we expect the first number to come in to be [from]. Therefore, setting
-		// nextNum to from means that the prqueue gap-evaluation will work correctly
-		nextNum = from
-		queue   = prque.New(nil)
-		// for stats reporting
-		blocks, txs = 0, 0
+		hashesCh, abortCh = iterateTransactions(db, from, to, false)
+		batch             = db.NewBatch()
+		start             = time.Now()
+		logged            = start.Add(-7 * time.Second)
 	)
+	defer close(abortCh)
 	// Otherwise spin up the concurrent iterator and unindexer
+	blocks, txs := 0, 0
 	for delivery := range hashesCh {
-		// Push the delivery into the queue and process contiguous ranges.
-		queue.Push(delivery, -int64(delivery.number))
-		for !queue.Empty() {
-			// If the next available item is gapped, return
-			if _, priority := queue.Peek(); -priority != int64(nextNum) {
-				break
-			}
-			// For testing
-			if hook != nil && !hook(nextNum) {
-				break
-			}
-			delivery := queue.PopItem().(*blockTxHashes)
-			nextNum = delivery.number + 1
-			DeleteTxLookupEntries(batch, delivery.hashes)
-			txs += len(delivery.hashes)
-			blocks++
+		DeleteTxLookupEntries(batch, delivery.hashes)
+		txs += len(delivery.hashes)
+		blocks++
 
-			// If enough data was accumulated in memory or we're at the last block, dump to disk
-			// A batch counts the size of deletion as '1', so we need to flush more
-			// often than that.
-			if blocks%1000 == 0 {
-				WriteTxIndexTail(batch, nextNum)
-				if err := batch.Write(); err != nil {
-					log.Crit("Failed writing batch to db", "error", err)
-					return
-				}
-				batch.Reset()
+		// If enough data was accumulated in memory or we're at the last block, dump to disk
+		// A batch counts the size of deletion as '1', so we need to flush more
+		// often than that.
+		if blocks%1000 == 0 {
+			if err := batch.Write(); err != nil {
+				log.Crit("Failed writing batch to db", "error", err)
+				return
 			}
-			// If we've spent too much time already, notify the user of what we're doing
-			if time.Since(logged) > 8*time.Second {
-				log.Info("Unindexing transactions", "blocks", blocks, "txs", txs, "total", to-from, "elapsed", common.PrettyDuration(time.Since(start)))
-				logged = time.Now()
-			}
+			batch.Reset()
+		}
+		// If we've spent too much time already, notify the user of what we're doing
+		if time.Since(logged) > 8*time.Second {
+			log.Info("Unindexing transactions", "blocks", blocks, "txs", txs, "total", to-from, "elapsed", common.PrettyDuration(time.Since(start)))
+			logged = time.Now()
 		}
 	}
-	// Commit the last batch if there exists uncommitted data
-	if batch.ValueSize() > 0 {
-		WriteTxIndexTail(batch, nextNum)
-		if err := batch.Write(); err != nil {
-			log.Crit("Failed writing batch to db", "error", err)
-			return
-		}
+	if err := batch.Write(); err != nil {
+		log.Crit("Failed writing batch to db", "error", err)
+		return
 	}
-	select {
-	case <-interrupt:
-		log.Debug("Transaction unindexing interrupted", "blocks", blocks, "txs", txs, "tail", to, "elapsed", common.PrettyDuration(time.Since(start)))
-	default:
-		log.Info("Unindexed transactions", "blocks", blocks, "txs", txs, "tail", to, "elapsed", common.PrettyDuration(time.Since(start)))
-	}
-}
-
-// UnindexTransactions removes txlookup indices of the specified block range.
-//
-// There is a passed channel, the whole procedure will be interrupted if any
-// signal received.
-func UnindexTransactions(db ethdb.Database, from uint64, to uint64, interrupt chan struct{}) {
-	unindexTransactions(db, from, to, interrupt, nil)
-}
-
-// unindexTransactionsForTesting is the internal debug version with an additional hook.
-func unindexTransactionsForTesting(db ethdb.Database, from uint64, to uint64, interrupt chan struct{}, hook func(uint64) bool) {
-	unindexTransactions(db, from, to, interrupt, hook)
+	log.Info("Unindexed transactions", "blocks", blocks, "txs", txs, "tail", to, "elapsed", common.PrettyDuration(time.Since(start)))
 }

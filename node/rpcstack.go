@@ -29,8 +29,8 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/ethereum/go-ethereum/log"
-	"github.com/ethereum/go-ethereum/rpc"
+	"github.com/SFT-project/go-sft/log"
+	"github.com/SFT-project/go-sft/rpc"
 	"github.com/rs/cors"
 )
 
@@ -448,7 +448,6 @@ func (is *ipcServer) start(apis []rpc.API) error {
 	}
 	listener, srv, err := rpc.StartIPCEndpoint(is.endpoint, apis)
 	if err != nil {
-		is.log.Warn("IPC opening failed", "url", is.endpoint, "error", err)
 		return err
 	}
 	is.log.Info("IPC endpoint opened", "url", is.endpoint)
