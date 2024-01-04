@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/log"
 )
 
 // manageServers displays a list of servers the user can disconnect from, and an

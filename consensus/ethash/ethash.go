@@ -34,10 +34,10 @@ import (
 	"unsafe"
 
 	mmap "github.com/edsrzf/mmap-go"
-	"github.com/SFT-project/go-sft/consensus"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/metrics"
-	"github.com/SFT-project/go-sft/rpc"
+	"github.com/sft-project/go-sft/consensus"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/metrics"
+	"github.com/sft-project/go-sft/rpc"
 	"github.com/hashicorp/golang-lru/simplelru"
 )
 

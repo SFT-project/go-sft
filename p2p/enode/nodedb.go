@@ -26,7 +26,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/rlp"
 	"github.com/syndtr/goleveldb/leveldb"
 	"github.com/syndtr/goleveldb/leveldb/errors"
 	"github.com/syndtr/goleveldb/leveldb/iterator"

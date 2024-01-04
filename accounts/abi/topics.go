@@ -23,8 +23,8 @@ import (
 	"math/big"
 	"reflect"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/crypto"
 )
 
 // MakeTopics converts a filter query argument list into a filter topic set.

@@ -23,7 +23,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/SFT-project/go-sft/p2p/simulations/pipes"
+	"github.com/sft-project/go-sft/p2p/simulations/pipes"
 )
 
 func TestTCPPipe(t *testing.T) {

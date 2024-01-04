@@ -19,10 +19,10 @@ package simulations
 import (
 	"testing"
 
-	"github.com/SFT-project/go-sft/p2p"
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/p2p/enr"
-	"github.com/SFT-project/go-sft/rpc"
+	"github.com/sft-project/go-sft/p2p"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/p2p/enr"
+	"github.com/sft-project/go-sft/rpc"
 )
 
 // NoopService is the service that does not do anything

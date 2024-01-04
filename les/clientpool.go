@@ -22,14 +22,14 @@ import (
 	"sync"
 	"time"
 
-	"github.com/SFT-project/go-sft/common/mclock"
-	"github.com/SFT-project/go-sft/sftdb"
-	lps "github.com/SFT-project/go-sft/les/lespay/server"
-	"github.com/SFT-project/go-sft/les/utils"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/p2p/enr"
-	"github.com/SFT-project/go-sft/p2p/nodestate"
+	"github.com/sft-project/go-sft/common/mclock"
+	"github.com/sft-project/go-sft/sftdb"
+	lps "github.com/sft-project/go-sft/les/lespay/server"
+	"github.com/sft-project/go-sft/les/utils"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/p2p/enr"
+	"github.com/sft-project/go-sft/p2p/nodestate"
 )
 
 const (

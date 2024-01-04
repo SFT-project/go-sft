@@ -22,9 +22,9 @@ import (
 	"math/big"
 	"sort"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/log"
 )
 
 // nonceHeap is a heap.Interface implementation over 64bit unsigned integers for

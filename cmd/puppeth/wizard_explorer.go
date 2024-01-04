@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/log"
 )
 
 // deployExplorer creates a new block explorer based on some user input.

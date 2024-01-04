@@ -22,8 +22,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/SFT-project/go-sft/accounts/abi"
-	"github.com/SFT-project/go-sft/common"
+	"github.com/sft-project/go-sft/accounts/abi"
+	"github.com/sft-project/go-sft/common"
 )
 
 // Tests that all the selectors contained in the 4byte database are valid.

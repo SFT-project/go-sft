@@ -20,8 +20,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/SFT-project/go-sft/accounts/keystore"
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/accounts/keystore"
+	"github.com/sft-project/go-sft/log"
 )
 
 // deployFaucet queries the user for various input on deploying a faucet, after

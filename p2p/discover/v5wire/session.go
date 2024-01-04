@@ -22,9 +22,9 @@ import (
 	"encoding/binary"
 	"time"
 
-	"github.com/SFT-project/go-sft/common/mclock"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/common/mclock"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/p2p/enode"
 	"github.com/hashicorp/golang-lru/simplelru"
 )
 

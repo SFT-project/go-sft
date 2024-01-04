@@ -19,8 +19,8 @@ package client
 import (
 	"io"
 
-	"github.com/SFT-project/go-sft/les/utils"
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/les/utils"
+	"github.com/sft-project/go-sft/rlp"
 )
 
 const basketFactor = 1000000 // reference basket amount and value scale factor

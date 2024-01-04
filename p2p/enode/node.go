@@ -26,8 +26,8 @@ import (
 	"net"
 	"strings"
 
-	"github.com/SFT-project/go-sft/p2p/enr"
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/p2p/enr"
+	"github.com/sft-project/go-sft/rlp"
 )
 
 var errMissingPrefix = errors.New("missing 'enr:' prefix for base64-encoded record")

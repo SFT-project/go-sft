@@ -21,8 +21,8 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/crypto"
 )
 
 // Genesis hashes to enforce below configs on.

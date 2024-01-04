@@ -26,14 +26,14 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft"
-	"github.com/SFT-project/go-sft/accounts/abi"
-	"github.com/SFT-project/go-sft/accounts/abi/bind"
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft"
+	"github.com/sft-project/go-sft/accounts/abi"
+	"github.com/sft-project/go-sft/accounts/abi/bind"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/params"
 )
 
 func TestSimulatedBackend(t *testing.T) {

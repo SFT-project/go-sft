@@ -19,9 +19,9 @@ package main
 import (
 	"math/big"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/hexutil"
-	"github.com/SFT-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/hexutil"
+	"github.com/sft-project/go-sft/core/types"
 )
 
 // RPCTransaction represents a transaction that will serialize to the RPC representation of a transaction

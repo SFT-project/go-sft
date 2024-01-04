@@ -19,7 +19,7 @@ package downloader
 import (
 	"fmt"
 
-	"github.com/SFT-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/core/types"
 )
 
 // peerDropFn is a callback type for dropping a peer detected as malicious.

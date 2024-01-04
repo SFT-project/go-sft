@@ -21,7 +21,7 @@ package metrics
 import (
 	"syscall"
 
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/log"
 )
 
 // getProcessCPUTime retrieves the process' CPU time since program startup.

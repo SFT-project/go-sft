@@ -30,8 +30,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft/accounts/keystore"
-	"github.com/SFT-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/accounts/keystore"
+	"github.com/sft-project/go-sft/core/types"
 )
 
 // Tests that the account management snippets work correctly.

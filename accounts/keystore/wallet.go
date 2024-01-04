@@ -19,10 +19,10 @@ package keystore
 import (
 	"math/big"
 
-	ethereum "github.com/SFT-project/go-sft"
-	"github.com/SFT-project/go-sft/accounts"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/crypto"
+	ethereum "github.com/sft-project/go-sft"
+	"github.com/sft-project/go-sft/accounts"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/crypto"
 )
 
 // keystoreWallet implements the accounts.Wallet interface for the original

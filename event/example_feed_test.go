@@ -19,7 +19,7 @@ package event_test
 import (
 	"fmt"
 
-	"github.com/SFT-project/go-sft/event"
+	"github.com/sft-project/go-sft/event"
 )
 
 func ExampleFeed_acknowledgedEvents() {

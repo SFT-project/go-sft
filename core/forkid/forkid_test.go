@@ -21,9 +21,9 @@ import (
 	"math"
 	"testing"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/params"
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/params"
+	"github.com/sft-project/go-sft/rlp"
 )
 
 // TestCreation tests that different genesis and fork rule combinations result in

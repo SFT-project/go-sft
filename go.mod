@@ -1,4 +1,4 @@
-module github.com/SFT-project/sft-chain
+module github.com/sft-project/go-sft
 
 go 1.13
 

@@ -21,10 +21,10 @@ import (
 	"net"
 	"time"
 
-	"github.com/SFT-project/go-sft/core/forkid"
-	"github.com/SFT-project/go-sft/p2p/enr"
-	"github.com/SFT-project/go-sft/params"
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/core/forkid"
+	"github.com/sft-project/go-sft/p2p/enr"
+	"github.com/sft-project/go-sft/params"
+	"github.com/sft-project/go-sft/rlp"
 	"gopkg.in/urfave/cli.v1"
 )
 

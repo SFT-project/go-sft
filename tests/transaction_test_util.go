@@ -19,12 +19,12 @@ package tests
 import (
 	"fmt"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/hexutil"
-	"github.com/SFT-project/go-sft/core"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/params"
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/hexutil"
+	"github.com/sft-project/go-sft/core"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/params"
+	"github.com/sft-project/go-sft/rlp"
 )
 
 // TransactionTest checks RLP decoding and sender derivation of transactions.

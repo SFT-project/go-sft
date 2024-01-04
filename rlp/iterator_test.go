@@ -19,7 +19,7 @@ package rlp
 import (
 	"testing"
 
-	"github.com/SFT-project/go-sft/common/hexutil"
+	"github.com/sft-project/go-sft/common/hexutil"
 )
 
 // TestIterator tests some basic things about the ListIterator. A more

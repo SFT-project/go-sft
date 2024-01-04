@@ -25,12 +25,12 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/node"
-	"github.com/SFT-project/go-sft/p2p"
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/p2p/simulations"
-	"github.com/SFT-project/go-sft/p2p/simulations/adapters"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/node"
+	"github.com/sft-project/go-sft/p2p"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/p2p/simulations"
+	"github.com/sft-project/go-sft/p2p/simulations/adapters"
 )
 
 var adapterType = flag.String("adapter", "sim", `node adapter to use (one of "sim", "exec" or "docker")`)

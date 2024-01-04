@@ -23,10 +23,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/mclock"
-	"github.com/SFT-project/go-sft/core"
-	"github.com/SFT-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/mclock"
+	"github.com/sft-project/go-sft/core"
+	"github.com/sft-project/go-sft/core/types"
 )
 
 var (

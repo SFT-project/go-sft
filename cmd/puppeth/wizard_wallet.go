@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/log"
 )
 
 // deployWallet creates a new web wallet based on some user input.

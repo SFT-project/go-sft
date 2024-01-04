@@ -19,8 +19,8 @@ package memorydb
 import (
 	"testing"
 
-	"github.com/SFT-project/go-sft/sftdb"
-	"github.com/SFT-project/go-sft/sftdb/dbtest"
+	"github.com/sft-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/sftdb/dbtest"
 )
 
 func TestMemoryDB(t *testing.T) {

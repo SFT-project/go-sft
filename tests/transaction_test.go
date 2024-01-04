@@ -19,7 +19,7 @@ package tests
 import (
 	"testing"
 
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/params"
 )
 
 func TestTransaction(t *testing.T) {

@@ -20,7 +20,7 @@ import (
 	"context"
 	"time"
 
-	"github.com/SFT-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/p2p/enode"
 )
 
 // Simulation provides a framework for running actions in a simulated network

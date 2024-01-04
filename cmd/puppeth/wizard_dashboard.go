@@ -19,7 +19,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/log"
 )
 
 // deployDashboard queries the user for various input on deploying a web-service

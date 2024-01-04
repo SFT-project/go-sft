@@ -22,7 +22,7 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/SFT-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/sftdb"
 )
 
 // TestDatabaseSuite runs a suite of tests against a KeyValueStore database

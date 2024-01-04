@@ -20,10 +20,10 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/internal/utesting"
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/p2p/rlpx"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/internal/utesting"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/p2p/rlpx"
 	"github.com/stretchr/testify/assert"
 )
 

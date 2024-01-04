@@ -22,7 +22,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/SFT-project/go-sft/common"
+	"github.com/sft-project/go-sft/common"
 )
 
 // Strings represents s slice of strs.

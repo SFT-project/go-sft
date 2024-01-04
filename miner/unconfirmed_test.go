@@ -19,8 +19,8 @@ package miner
 import (
 	"testing"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core/types"
 )
 
 // noopChainRetriever is an implementation of headerRetriever that always

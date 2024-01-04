@@ -21,10 +21,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft/common/mclock"
-	"github.com/SFT-project/go-sft/core/rawdb"
-	"github.com/SFT-project/go-sft/les/utils"
-	"github.com/SFT-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/common/mclock"
+	"github.com/sft-project/go-sft/core/rawdb"
+	"github.com/sft-project/go-sft/les/utils"
+	"github.com/sft-project/go-sft/p2p/enode"
 )
 
 func expval(v uint64) utils.ExpiredValue {

@@ -19,7 +19,7 @@ package rpc
 import (
 	"net"
 
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/log"
 )
 
 // StartIPCEndpoint starts an IPC endpoint.

@@ -17,9 +17,9 @@
 package rawdb
 
 import (
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/sftdb"
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/log"
 )
 
 // ReadSnapshotRoot retrieves the root of the block whose state is contained in

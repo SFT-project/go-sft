@@ -20,10 +20,10 @@ import (
 	"context"
 	"encoding/json"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/hexutil"
-	"github.com/SFT-project/go-sft/internal/ethapi"
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/hexutil"
+	"github.com/sft-project/go-sft/internal/ethapi"
+	"github.com/sft-project/go-sft/log"
 )
 
 type AuditLogger struct {

@@ -24,11 +24,11 @@ import (
 	"net"
 	"time"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/p2p/netutil"
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/p2p/netutil"
+	"github.com/sft-project/go-sft/rlp"
 )
 
 const Version = 4

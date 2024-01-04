@@ -31,9 +31,9 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core"
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core"
+	"github.com/sft-project/go-sft/log"
 	"golang.org/x/crypto/ssh/terminal"
 )
 

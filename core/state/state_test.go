@@ -21,10 +21,10 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core/rawdb"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core/rawdb"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/sftdb"
 )
 
 var toAddr = common.BytesToAddress

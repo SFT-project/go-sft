@@ -24,15 +24,15 @@ import (
 	"sort"
 	"time"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core/rawdb"
-	"github.com/SFT-project/go-sft/core/state/snapshot"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/metrics"
-	"github.com/SFT-project/go-sft/rlp"
-	"github.com/SFT-project/go-sft/trie"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core/rawdb"
+	"github.com/sft-project/go-sft/core/state/snapshot"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/metrics"
+	"github.com/sft-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/trie"
 )
 
 type revision struct {
@@ -657,7 +657,7 @@ func (s *StateDB) Copy() *StateDB {
 	}
 	// Copy the dirty states, logs, and preimages
 	for addr := range s.journal.dirties {
-		// As documented [here](https://github.com/SFT-project/go-sft/pull/16485#issuecomment-380438527),
+		// As documented [here](https://github.com/sft/go-sft/pull/16485#issuecomment-380438527),
 		// and in the Finalise-method, there is a case where an object is in the journal but not
 		// in the stateObjects: OOG after touch on ripeMD prior to Byzantium. Thus, we need to check for
 		// nil

@@ -29,17 +29,17 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/mclock"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/event"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/p2p/discover"
-	"github.com/SFT-project/go-sft/p2p/discv5"
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/p2p/enr"
-	"github.com/SFT-project/go-sft/p2p/nat"
-	"github.com/SFT-project/go-sft/p2p/netutil"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/mclock"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/event"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/p2p/discover"
+	"github.com/sft-project/go-sft/p2p/discv5"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/p2p/enr"
+	"github.com/sft-project/go-sft/p2p/nat"
+	"github.com/sft-project/go-sft/p2p/netutil"
 )
 
 const (

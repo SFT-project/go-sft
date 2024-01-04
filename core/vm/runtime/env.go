@@ -17,8 +17,8 @@
 package runtime
 
 import (
-	"github.com/SFT-project/go-sft/core"
-	"github.com/SFT-project/go-sft/core/vm"
+	"github.com/sft-project/go-sft/core"
+	"github.com/sft-project/go-sft/core/vm"
 )
 
 func NewEnv(cfg *Config) *vm.EVM {

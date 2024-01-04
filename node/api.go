@@ -21,12 +21,12 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/SFT-project/go-sft/common/hexutil"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/internal/debug"
-	"github.com/SFT-project/go-sft/p2p"
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/rpc"
+	"github.com/sft-project/go-sft/common/hexutil"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/internal/debug"
+	"github.com/sft-project/go-sft/p2p"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/rpc"
 )
 
 // apis returns the collection of built-in RPC APIs.

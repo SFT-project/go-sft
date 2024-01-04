@@ -22,11 +22,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft/accounts/abi/bind"
-	"github.com/SFT-project/go-sft/core"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/light"
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/accounts/abi/bind"
+	"github.com/sft-project/go-sft/core"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/light"
+	"github.com/sft-project/go-sft/params"
 )
 
 // Test light syncing which will download all headers from genesis.
@@ -182,7 +182,7 @@ func testMissOracleBackend(t *testing.T, hasCheckpoint bool) {
 	// that user wants to unlock something which blocks the oracle backend
 	// initialisation. But at the same time syncing starts.
 	//
-	// See https://github.com/SFT-project/go-sft/issues/20097 for more detail.
+	// See https://github.com/sft/go-sft/issues/20097 for more detail.
 	//
 	// In this case, client should run light sync or legacy checkpoint sync
 	// if hardcoded checkpoint is configured.

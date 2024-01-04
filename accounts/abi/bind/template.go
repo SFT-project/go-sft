@@ -16,7 +16,7 @@
 
 package bind
 
-import "github.com/SFT-project/go-sft/accounts/abi"
+import "github.com/sft-project/go-sft/accounts/abi"
 
 // tmplData is the data structure required to fill the binding template.
 type tmplData struct {
@@ -91,12 +91,12 @@ import (
 	"math/big"
 	"strings"
 
-	ethereum "github.com/SFT-project/go-sft"
-	"github.com/SFT-project/go-sft/accounts/abi"
-	"github.com/SFT-project/go-sft/accounts/abi/bind"
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/event"
+	ethereum "github.com/geth-project/go-geth"
+	"github.com/geth-project/go-geth/accounts/abi"
+	"github.com/geth-project/go-geth/accounts/abi/bind"
+	"github.com/geth-project/go-geth/common"
+	"github.com/geth-project/go-geth/core/types"
+	"github.com/geth-project/go-geth/event"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.

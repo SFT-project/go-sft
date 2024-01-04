@@ -22,8 +22,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/SFT-project/go-sft/common/mclock"
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/common/mclock"
+	"github.com/sft-project/go-sft/log"
 )
 
 const (

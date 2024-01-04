@@ -21,8 +21,8 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/SFT-project/go-sft/common/hexutil"
-	"github.com/SFT-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/common/hexutil"
+	"github.com/sft-project/go-sft/crypto"
 )
 
 type bytesBacked interface {

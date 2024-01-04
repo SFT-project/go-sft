@@ -19,9 +19,9 @@ package client
 import (
 	"time"
 
-	"github.com/SFT-project/go-sft/common/mclock"
-	"github.com/SFT-project/go-sft/les/utils"
-	"github.com/SFT-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/common/mclock"
+	"github.com/sft-project/go-sft/les/utils"
+	"github.com/sft-project/go-sft/p2p/enode"
 )
 
 // PrivateClientAPI implements the lespay client side API

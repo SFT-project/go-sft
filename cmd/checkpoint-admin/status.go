@@ -19,8 +19,8 @@ package main
 import (
 	"fmt"
 
-	"github.com/SFT-project/go-sft/cmd/utils"
-	"github.com/SFT-project/go-sft/common"
+	"github.com/sft-project/go-sft/cmd/utils"
+	"github.com/sft-project/go-sft/common"
 	"gopkg.in/urfave/cli.v1"
 )
 

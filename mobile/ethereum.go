@@ -21,8 +21,8 @@ package geth
 import (
 	"errors"
 
-	ethereum "github.com/SFT-project/go-sft"
-	"github.com/SFT-project/go-sft/common"
+	ethereum "github.com/sft-project/go-sft"
+	"github.com/sft-project/go-sft/common"
 )
 
 // Subscription represents an event subscription where events are

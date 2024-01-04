@@ -21,7 +21,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/log"
 )
 
 // Handler returns a log handler which logs to the unit test log of t.

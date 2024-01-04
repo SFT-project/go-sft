@@ -17,8 +17,8 @@
 package core
 
 import (
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core/types"
 )
 
 // NewTxsEvent is posted when a batch of transactions enter the transaction pool.

@@ -22,11 +22,11 @@ import (
 	"math/big"
 	"strings"
 
-	"github.com/SFT-project/go-sft/accounts/abi"
-	"github.com/SFT-project/go-sft/accounts/abi/bind"
-	"github.com/SFT-project/go-sft/accounts/keystore"
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/accounts/abi"
+	"github.com/sft-project/go-sft/accounts/abi/bind"
+	"github.com/sft-project/go-sft/accounts/keystore"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core/types"
 )
 
 // Signer is an interface defining the callback when a contract requires a

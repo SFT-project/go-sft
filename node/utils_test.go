@@ -20,8 +20,8 @@
 package node
 
 import (
-	"github.com/SFT-project/go-sft/p2p"
-	"github.com/SFT-project/go-sft/rpc"
+	"github.com/sft-project/go-sft/p2p"
+	"github.com/sft-project/go-sft/rpc"
 )
 
 // NoopLifecycle is a trivial implementation of the Service interface.

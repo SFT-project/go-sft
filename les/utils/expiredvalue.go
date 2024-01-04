@@ -20,7 +20,7 @@ import (
 	"math"
 	"sync"
 
-	"github.com/SFT-project/go-sft/common/mclock"
+	"github.com/sft-project/go-sft/common/mclock"
 )
 
 // ExpiredValue is a scalar value that is continuously expired (decreased

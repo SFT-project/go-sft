@@ -26,7 +26,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/log"
 )
 
 // makeWizard creates and returns a new puppeth wizard.

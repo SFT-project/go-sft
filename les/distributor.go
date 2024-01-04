@@ -21,8 +21,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/SFT-project/go-sft/common/mclock"
-	"github.com/SFT-project/go-sft/les/utils"
+	"github.com/sft-project/go-sft/common/mclock"
+	"github.com/sft-project/go-sft/les/utils"
 )
 
 // requestDistributor implements a mechanism that distributes requests to

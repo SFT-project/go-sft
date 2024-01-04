@@ -26,9 +26,9 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/metrics"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/metrics"
 	"github.com/golang/snappy"
 )
 

@@ -19,7 +19,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/log"
 )
 
 // ensureVirtualHost checks whether a reverse-proxy is running on the specified

@@ -23,10 +23,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/SFT-project/go-sft/cmd/utils"
-	"github.com/SFT-project/go-sft/consensus/ethash"
-	"github.com/SFT-project/go-sft/eth"
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/cmd/utils"
+	"github.com/sft-project/go-sft/consensus/ethash"
+	"github.com/sft-project/go-sft/eth"
+	"github.com/sft-project/go-sft/params"
 	"gopkg.in/urfave/cli.v1"
 )
 

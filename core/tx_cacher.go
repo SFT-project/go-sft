@@ -19,7 +19,7 @@ package core
 import (
 	"runtime"
 
-	"github.com/SFT-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/core/types"
 )
 
 // senderCacher is a concurrent transaction sender recoverer and cacher.

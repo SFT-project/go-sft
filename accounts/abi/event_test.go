@@ -25,8 +25,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/crypto"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )

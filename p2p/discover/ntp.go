@@ -25,7 +25,7 @@ import (
 	"sort"
 	"time"
 
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/log"
 )
 
 const (

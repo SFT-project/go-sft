@@ -21,8 +21,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft/common/mclock"
-	"github.com/SFT-project/go-sft/p2p/nodestate"
+	"github.com/sft-project/go-sft/common/mclock"
+	"github.com/sft-project/go-sft/p2p/nodestate"
 )
 
 var (

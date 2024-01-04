@@ -24,17 +24,17 @@ import (
 	"fmt"
 	"path/filepath"
 
-	"github.com/SFT-project/go-sft/core"
-	"github.com/SFT-project/go-sft/eth"
-	"github.com/SFT-project/go-sft/eth/downloader"
-	"github.com/SFT-project/go-sft/sftclient"
-	"github.com/SFT-project/go-sft/sftstats"
-	"github.com/SFT-project/go-sft/internal/debug"
-	"github.com/SFT-project/go-sft/les"
-	"github.com/SFT-project/go-sft/node"
-	"github.com/SFT-project/go-sft/p2p"
-	"github.com/SFT-project/go-sft/p2p/nat"
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/core"
+	"github.com/sft-project/go-sft/eth"
+	"github.com/sft-project/go-sft/eth/downloader"
+	"github.com/sft-project/go-sft/sftclient"
+	"github.com/sft-project/go-sft/sftstats"
+	"github.com/sft-project/go-sft/internal/debug"
+	"github.com/sft-project/go-sft/les"
+	"github.com/sft-project/go-sft/node"
+	"github.com/sft-project/go-sft/p2p"
+	"github.com/sft-project/go-sft/p2p/nat"
+	"github.com/sft-project/go-sft/params"
 )
 
 // NodeConfig represents the collection of configuration values to fine tune the Geth

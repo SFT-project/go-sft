@@ -20,10 +20,10 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/SFT-project/go-sft/common/mclock"
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/p2p/enr"
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/common/mclock"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/p2p/enr"
+	"github.com/sft-project/go-sft/rlp"
 )
 
 // Packet is implemented by all message types.

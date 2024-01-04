@@ -20,9 +20,9 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/rlp"
-	"github.com/SFT-project/go-sft/trie"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/trie"
 )
 
 // NodeIterator is an iterator to traverse the entire state trie post-order,

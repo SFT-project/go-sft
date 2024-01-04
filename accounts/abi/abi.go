@@ -23,8 +23,8 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/crypto"
 )
 
 // The ABI holds information about a contract's context and available

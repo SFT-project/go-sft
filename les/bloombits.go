@@ -19,8 +19,8 @@ package les
 import (
 	"time"
 
-	"github.com/SFT-project/go-sft/common/bitutil"
-	"github.com/SFT-project/go-sft/light"
+	"github.com/sft-project/go-sft/common/bitutil"
+	"github.com/sft-project/go-sft/light"
 )
 
 const (

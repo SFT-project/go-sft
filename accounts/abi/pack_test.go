@@ -27,7 +27,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/SFT-project/go-sft/common"
+	"github.com/sft-project/go-sft/common"
 )
 
 // TestPack tests the general pack/unpack tests in packing_test.go

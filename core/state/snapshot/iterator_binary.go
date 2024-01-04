@@ -19,7 +19,7 @@ package snapshot
 import (
 	"bytes"
 
-	"github.com/SFT-project/go-sft/common"
+	"github.com/sft-project/go-sft/common"
 )
 
 // binaryIterator is a simplistic iterator to step over the accounts or storage

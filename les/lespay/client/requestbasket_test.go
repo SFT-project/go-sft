@@ -20,7 +20,7 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/SFT-project/go-sft/les/utils"
+	"github.com/sft-project/go-sft/les/utils"
 )
 
 func checkU64(t *testing.T, name string, value, exp uint64) {

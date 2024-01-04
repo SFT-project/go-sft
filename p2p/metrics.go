@@ -21,7 +21,7 @@ package p2p
 import (
 	"net"
 
-	"github.com/SFT-project/go-sft/metrics"
+	"github.com/sft-project/go-sft/metrics"
 )
 
 const (

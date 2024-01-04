@@ -21,10 +21,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/SFT-project/go-sft/common/hexutil"
-	"github.com/SFT-project/go-sft/common/mclock"
-	lps "github.com/SFT-project/go-sft/les/lespay/server"
-	"github.com/SFT-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/common/hexutil"
+	"github.com/sft-project/go-sft/common/mclock"
+	lps "github.com/sft-project/go-sft/les/lespay/server"
+	"github.com/sft-project/go-sft/p2p/enode"
 )
 
 var (

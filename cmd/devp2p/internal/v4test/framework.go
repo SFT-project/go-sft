@@ -22,9 +22,9 @@ import (
 	"net"
 	"time"
 
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/p2p/discover/v4wire"
-	"github.com/SFT-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/p2p/discover/v4wire"
+	"github.com/sft-project/go-sft/p2p/enode"
 )
 
 const waitTime = 300 * time.Millisecond

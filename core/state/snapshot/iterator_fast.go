@@ -21,7 +21,7 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/SFT-project/go-sft/common"
+	"github.com/sft-project/go-sft/common"
 )
 
 // weightedIterator is a iterator with an assigned weight. It is used to prioritise

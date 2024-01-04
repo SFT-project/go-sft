@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/log"
 )
 
 // Enabled is checked by the constructor functions for all of the

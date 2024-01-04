@@ -23,9 +23,9 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core/rawdb"
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core/rawdb"
+	"github.com/sft-project/go-sft/params"
 )
 
 // Genesis block for nodes which don't care about the DAO fork (i.e. not configured)

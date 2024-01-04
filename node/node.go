@@ -26,13 +26,13 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/SFT-project/go-sft/accounts"
-	"github.com/SFT-project/go-sft/core/rawdb"
-	"github.com/SFT-project/go-sft/sftdb"
-	"github.com/SFT-project/go-sft/event"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/p2p"
-	"github.com/SFT-project/go-sft/rpc"
+	"github.com/sft-project/go-sft/accounts"
+	"github.com/sft-project/go-sft/core/rawdb"
+	"github.com/sft-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/event"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/p2p"
+	"github.com/sft-project/go-sft/rpc"
 	"github.com/prometheus/tsdb/fileutil"
 )
 

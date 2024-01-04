@@ -21,13 +21,13 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core/rawdb"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/sftdb"
-	"github.com/SFT-project/go-sft/sftdb/memorydb"
-	"github.com/SFT-project/go-sft/rlp"
-	"github.com/SFT-project/go-sft/trie"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core/rawdb"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/sftdb/memorydb"
+	"github.com/sft-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/trie"
 )
 
 // testAccount is the data associated with an account used by the state tests.

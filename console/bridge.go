@@ -25,12 +25,12 @@ import (
 	"time"
 
 	"github.com/dop251/goja"
-	"github.com/SFT-project/go-sft/accounts/scwallet"
-	"github.com/SFT-project/go-sft/accounts/usbwallet"
-	"github.com/SFT-project/go-sft/common/hexutil"
-	"github.com/SFT-project/go-sft/console/prompt"
-	"github.com/SFT-project/go-sft/internal/jsre"
-	"github.com/SFT-project/go-sft/rpc"
+	"github.com/sft-project/go-sft/accounts/scwallet"
+	"github.com/sft-project/go-sft/accounts/usbwallet"
+	"github.com/sft-project/go-sft/common/hexutil"
+	"github.com/sft-project/go-sft/console/prompt"
+	"github.com/sft-project/go-sft/internal/jsre"
+	"github.com/sft-project/go-sft/rpc"
 )
 
 // bridge is a collection of JavaScript utility methods to bride the .js runtime

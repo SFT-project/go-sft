@@ -23,11 +23,11 @@ import (
 	"strings"
 
 	"github.com/dop251/goja"
-	"github.com/SFT-project/go-sft/internal/ethapi"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/signer/core"
-	"github.com/SFT-project/go-sft/signer/rules/deps"
-	"github.com/SFT-project/go-sft/signer/storage"
+	"github.com/sft-project/go-sft/internal/ethapi"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/signer/core"
+	"github.com/sft-project/go-sft/signer/rules/deps"
+	"github.com/sft-project/go-sft/signer/storage"
 )
 
 var (

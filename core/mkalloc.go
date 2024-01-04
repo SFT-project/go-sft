@@ -34,8 +34,8 @@ import (
 	"sort"
 	"strconv"
 
-	"github.com/SFT-project/go-sft/core"
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/core"
+	"github.com/sft-project/go-sft/rlp"
 )
 
 type allocItem struct{ Addr, Balance *big.Int }

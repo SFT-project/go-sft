@@ -22,13 +22,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/bitutil"
-	"github.com/SFT-project/go-sft/core/bloombits"
-	"github.com/SFT-project/go-sft/core/rawdb"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/sftdb"
-	"github.com/SFT-project/go-sft/node"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/bitutil"
+	"github.com/sft-project/go-sft/core/bloombits"
+	"github.com/sft-project/go-sft/core/rawdb"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/node"
 )
 
 func BenchmarkBloomBits512(b *testing.B) {

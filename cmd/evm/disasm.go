@@ -22,7 +22,7 @@ import (
 	"io/ioutil"
 	"strings"
 
-	"github.com/SFT-project/go-sft/core/asm"
+	"github.com/sft-project/go-sft/core/asm"
 	cli "gopkg.in/urfave/cli.v1"
 )
 

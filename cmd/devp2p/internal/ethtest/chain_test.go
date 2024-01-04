@@ -21,7 +21,7 @@ import (
 	"strconv"
 	"testing"
 
-	"github.com/SFT-project/go-sft/p2p"
+	"github.com/sft-project/go-sft/p2p"
 	"github.com/stretchr/testify/assert"
 )
 

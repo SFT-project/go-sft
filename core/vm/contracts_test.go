@@ -24,7 +24,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft/common"
+	"github.com/sft-project/go-sft/common"
 )
 
 // precompiledTest defines the input/output pairs for precompiled contract tests.

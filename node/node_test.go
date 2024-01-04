@@ -28,10 +28,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/sftdb"
-	"github.com/SFT-project/go-sft/p2p"
-	"github.com/SFT-project/go-sft/rpc"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/p2p"
+	"github.com/sft-project/go-sft/rpc"
 
 	"github.com/stretchr/testify/assert"
 )

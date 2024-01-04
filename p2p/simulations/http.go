@@ -29,11 +29,11 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/SFT-project/go-sft/event"
-	"github.com/SFT-project/go-sft/p2p"
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/p2p/simulations/adapters"
-	"github.com/SFT-project/go-sft/rpc"
+	"github.com/sft-project/go-sft/event"
+	"github.com/sft-project/go-sft/p2p"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/p2p/simulations/adapters"
+	"github.com/sft-project/go-sft/rpc"
 	"github.com/gorilla/websocket"
 	"github.com/julienschmidt/httprouter"
 )

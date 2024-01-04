@@ -21,8 +21,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/mclock"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/mclock"
 )
 
 func TestTopicRadius(t *testing.T) {

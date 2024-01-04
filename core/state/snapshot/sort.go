@@ -19,7 +19,7 @@ package snapshot
 import (
 	"bytes"
 
-	"github.com/SFT-project/go-sft/common"
+	"github.com/sft-project/go-sft/common"
 )
 
 // hashes is a helper to implement sort.Interface.

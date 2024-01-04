@@ -25,10 +25,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/SFT-project/go-sft/common/bitutil"
-	"github.com/SFT-project/go-sft/metrics"
-	"github.com/SFT-project/go-sft/p2p/rlpx"
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/common/bitutil"
+	"github.com/sft-project/go-sft/metrics"
+	"github.com/sft-project/go-sft/p2p/rlpx"
+	"github.com/sft-project/go-sft/rlp"
 )
 
 const (

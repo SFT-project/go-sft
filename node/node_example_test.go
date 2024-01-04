@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/SFT-project/go-sft/node"
+	"github.com/sft-project/go-sft/node"
 )
 
 // SampleLifecycle is a trivial network service that can be attached to a node for

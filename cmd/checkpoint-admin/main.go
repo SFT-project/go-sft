@@ -22,9 +22,9 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/SFT-project/go-sft/common/fdlimit"
-	"github.com/SFT-project/go-sft/internal/flags"
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/common/fdlimit"
+	"github.com/sft-project/go-sft/internal/flags"
+	"github.com/sft-project/go-sft/log"
 	"gopkg.in/urfave/cli.v1"
 )
 

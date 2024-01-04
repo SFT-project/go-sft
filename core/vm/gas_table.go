@@ -19,9 +19,9 @@ package vm
 import (
 	"errors"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/math"
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/math"
+	"github.com/sft-project/go-sft/params"
 )
 
 // memoryGasCost calculates the quadratic gas for memory expansion. It does so

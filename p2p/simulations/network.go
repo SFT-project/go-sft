@@ -27,11 +27,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/SFT-project/go-sft/event"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/p2p"
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/p2p/simulations/adapters"
+	"github.com/sft-project/go-sft/event"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/p2p"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/p2p/simulations/adapters"
 )
 
 var DialBanTimeout = 200 * time.Millisecond

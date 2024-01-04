@@ -25,9 +25,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/SFT-project/go-sft/event"
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/event"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/rlp"
 )
 
 // Msg defines the structure of a p2p message.

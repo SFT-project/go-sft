@@ -27,14 +27,14 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core/rawdb"
-	"github.com/SFT-project/go-sft/core/state"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/event"
-	"github.com/SFT-project/go-sft/params"
-	"github.com/SFT-project/go-sft/trie"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core/rawdb"
+	"github.com/sft-project/go-sft/core/state"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/event"
+	"github.com/sft-project/go-sft/params"
+	"github.com/sft-project/go-sft/trie"
 )
 
 // testTxPoolConfig is a transaction pool configuration without stateful disk

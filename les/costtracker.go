@@ -23,12 +23,12 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/SFT-project/go-sft/common/mclock"
-	"github.com/SFT-project/go-sft/eth"
-	"github.com/SFT-project/go-sft/sftdb"
-	"github.com/SFT-project/go-sft/les/flowcontrol"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/metrics"
+	"github.com/sft-project/go-sft/common/mclock"
+	"github.com/sft-project/go-sft/eth"
+	"github.com/sft-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/les/flowcontrol"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/metrics"
 )
 
 const makeCostStats = false // make request cost statistics during operation

@@ -19,8 +19,8 @@ package trie
 import (
 	"testing"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/sftdb/memorydb"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/sftdb/memorydb"
 )
 
 // Tests that the trie database returns a missing trie node error if attempting

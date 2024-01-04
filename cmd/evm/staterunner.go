@@ -23,10 +23,10 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/SFT-project/go-sft/core/state"
-	"github.com/SFT-project/go-sft/core/vm"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/tests"
+	"github.com/sft-project/go-sft/core/state"
+	"github.com/sft-project/go-sft/core/vm"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/tests"
 
 	cli "gopkg.in/urfave/cli.v1"
 )

@@ -20,7 +20,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/rlp"
 )
 
 func newTestFullNode(v []byte) []interface{} {

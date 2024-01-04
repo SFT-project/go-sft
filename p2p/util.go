@@ -19,7 +19,7 @@ package p2p
 import (
 	"container/heap"
 
-	"github.com/SFT-project/go-sft/common/mclock"
+	"github.com/sft-project/go-sft/common/mclock"
 )
 
 // expHeap tracks strings and their expiry time.

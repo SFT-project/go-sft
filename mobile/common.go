@@ -24,8 +24,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/hexutil"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/hexutil"
 )
 
 // Hash represents the 32 byte Keccak256 hash of arbitrary data.

@@ -19,7 +19,7 @@ package tests
 import (
 	"testing"
 
-	"github.com/SFT-project/go-sft/core/vm"
+	"github.com/sft-project/go-sft/core/vm"
 )
 
 func TestVM(t *testing.T) {

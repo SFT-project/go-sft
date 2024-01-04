@@ -19,7 +19,7 @@ package state
 import (
 	"math/big"
 
-	"github.com/SFT-project/go-sft/common"
+	"github.com/sft-project/go-sft/common"
 )
 
 // journalEntry is a modification entry in the state change journal that can be

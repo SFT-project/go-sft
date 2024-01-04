@@ -19,9 +19,9 @@ package simulations
 import (
 	"testing"
 
-	"github.com/SFT-project/go-sft/node"
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/p2p/simulations/adapters"
+	"github.com/sft-project/go-sft/node"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/p2p/simulations/adapters"
 )
 
 func newTestNetwork(t *testing.T, nodeCount int) (*Network, []enode.ID) {

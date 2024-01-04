@@ -26,16 +26,16 @@ import (
 	"time"
 
 	mapset "github.com/deckarep/golang-set"
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/bitutil"
-	"github.com/SFT-project/go-sft/core"
-	"github.com/SFT-project/go-sft/core/rawdb"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/sftdb"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/params"
-	"github.com/SFT-project/go-sft/rlp"
-	"github.com/SFT-project/go-sft/trie"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/bitutil"
+	"github.com/sft-project/go-sft/core"
+	"github.com/sft-project/go-sft/core/rawdb"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/params"
+	"github.com/sft-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/trie"
 )
 
 // IndexerConfig includes a set of configs for chain indexers.

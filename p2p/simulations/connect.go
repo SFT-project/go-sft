@@ -20,7 +20,7 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/SFT-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/p2p/enode"
 )
 
 var (

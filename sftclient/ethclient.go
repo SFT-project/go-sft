@@ -24,12 +24,12 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/SFT-project/go-sft"
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/hexutil"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/rlp"
-	"github.com/SFT-project/go-sft/rpc"
+	"github.com/sft-project/go-sft"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/hexutil"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/rpc"
 )
 
 // Client defines typed wrappers for the Ethereum RPC API.

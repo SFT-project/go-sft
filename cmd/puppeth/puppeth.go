@@ -23,7 +23,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/log"
 	"gopkg.in/urfave/cli.v1"
 )
 

@@ -16,7 +16,7 @@
 
 package core
 
-import "github.com/SFT-project/go-sft/common"
+import "github.com/sft-project/go-sft/common"
 
 // BadHashes represent a set of manually tracked bad hashes (usually hard forks)
 var BadHashes = map[common.Hash]bool{

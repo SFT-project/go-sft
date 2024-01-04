@@ -23,8 +23,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft/core"
-	"github.com/SFT-project/go-sft/light"
+	"github.com/sft-project/go-sft/core"
+	"github.com/sft-project/go-sft/light"
 )
 
 func TestLightPruner(t *testing.T) {

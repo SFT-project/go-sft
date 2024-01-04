@@ -19,10 +19,10 @@ package clique
 import (
 	"fmt"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/consensus"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/rpc"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/consensus"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/rpc"
 )
 
 // API is a user facing RPC API to allow controlling the signer and voting

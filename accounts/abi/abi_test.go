@@ -26,9 +26,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/math"
-	"github.com/SFT-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/math"
+	"github.com/sft-project/go-sft/crypto"
 )
 
 const jsondata = `

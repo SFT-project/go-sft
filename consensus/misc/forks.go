@@ -19,9 +19,9 @@ package misc
 import (
 	"fmt"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/params"
 )
 
 // VerifyForkHashes verifies that blocks conforming to network hard-forks do have

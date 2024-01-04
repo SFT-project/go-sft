@@ -19,7 +19,7 @@ package abi
 import (
 	"math/big"
 
-	"github.com/SFT-project/go-sft/common"
+	"github.com/sft-project/go-sft/common"
 )
 
 type packUnpackTest struct {

@@ -40,7 +40,7 @@ import (
 	"io"
 	"sort"
 
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/rlp"
 )
 
 const SizeLimit = 300 // maximum encoded size of a node record in bytes

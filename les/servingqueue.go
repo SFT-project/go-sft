@@ -21,8 +21,8 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/SFT-project/go-sft/common/mclock"
-	"github.com/SFT-project/go-sft/common/prque"
+	"github.com/sft-project/go-sft/common/mclock"
+	"github.com/sft-project/go-sft/common/prque"
 )
 
 // servingQueue allows running tasks in a limited number of threads and puts the

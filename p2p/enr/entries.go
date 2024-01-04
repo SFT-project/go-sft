@@ -21,7 +21,7 @@ import (
 	"io"
 	"net"
 
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/rlp"
 )
 
 // Entry is implemented by known node record entry types.

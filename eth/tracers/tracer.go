@@ -25,11 +25,11 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/hexutil"
-	"github.com/SFT-project/go-sft/core/vm"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/hexutil"
+	"github.com/sft-project/go-sft/core/vm"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/log"
 	duktape "gopkg.in/olebedev/go-duktape.v3"
 )
 

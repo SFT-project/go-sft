@@ -26,13 +26,13 @@ import (
 	"strconv"
 
 	"github.com/docker/docker/pkg/reexec"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/node"
-	"github.com/SFT-project/go-sft/p2p"
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/p2p/enr"
-	"github.com/SFT-project/go-sft/rpc"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/node"
+	"github.com/sft-project/go-sft/p2p"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/p2p/enr"
+	"github.com/sft-project/go-sft/rpc"
 	"github.com/gorilla/websocket"
 )
 

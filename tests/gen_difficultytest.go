@@ -6,8 +6,8 @@ import (
 	"encoding/json"
 	"math/big"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/math"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/math"
 )
 
 var _ = (*difficultyTestMarshaling)(nil)

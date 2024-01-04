@@ -19,9 +19,9 @@ package ethash
 import (
 	"errors"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/hexutil"
-	"github.com/SFT-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/hexutil"
+	"github.com/sft-project/go-sft/core/types"
 )
 
 var errEthashStopped = errors.New("ethash stopped")

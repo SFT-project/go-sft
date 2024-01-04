@@ -17,10 +17,10 @@
 package les
 
 import (
-	"github.com/SFT-project/go-sft/p2p"
-	"github.com/SFT-project/go-sft/p2p/dnsdisc"
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/p2p"
+	"github.com/sft-project/go-sft/p2p/dnsdisc"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/rlp"
 )
 
 // lesEntry is the "les" ENR entry. This is set for LES servers only.

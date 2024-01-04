@@ -23,7 +23,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/SFT-project/go-sft/core/vm"
+	"github.com/sft-project/go-sft/core/vm"
 )
 
 func TestState(t *testing.T) {

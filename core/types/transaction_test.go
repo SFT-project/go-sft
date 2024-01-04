@@ -24,9 +24,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/rlp"
 )
 
 // The values in those tests are from the Transaction Tests

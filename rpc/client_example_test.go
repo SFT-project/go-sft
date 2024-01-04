@@ -21,8 +21,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/SFT-project/go-sft/common/hexutil"
-	"github.com/SFT-project/go-sft/rpc"
+	"github.com/sft-project/go-sft/common/hexutil"
+	"github.com/sft-project/go-sft/rpc"
 )
 
 // In this example, our client wishes to track the latest 'block number'

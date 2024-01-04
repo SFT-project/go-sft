@@ -20,7 +20,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/SFT-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/sftdb"
 )
 
 func TestTableDatabase(t *testing.T)            { testTableDatabase(t, "prefix") }

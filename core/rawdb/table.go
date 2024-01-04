@@ -17,7 +17,7 @@
 package rawdb
 
 import (
-	"github.com/SFT-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/sftdb"
 )
 
 // table is a wrapper around a database that prefixes each key access with a pre-

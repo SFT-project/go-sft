@@ -21,8 +21,8 @@ import (
 	"math/rand"
 	"testing"
 
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/crypto"
 )
 
 // Tests that transactions can be added to strict lists and list contents and

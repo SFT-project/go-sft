@@ -21,7 +21,7 @@ import (
 	"sync"
 	"sync/atomic"
 
-	"github.com/SFT-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/core/types"
 )
 
 // resultStore implements a structure for maintaining fetchResults, tracking their

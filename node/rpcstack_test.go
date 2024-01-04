@@ -21,9 +21,9 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/SFT-project/go-sft/internal/testlog"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/rpc"
+	"github.com/sft-project/go-sft/internal/testlog"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/rpc"
 	"github.com/gorilla/websocket"
 	"github.com/stretchr/testify/assert"
 )

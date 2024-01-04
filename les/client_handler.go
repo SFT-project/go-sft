@@ -22,14 +22,14 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/mclock"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/eth/downloader"
-	"github.com/SFT-project/go-sft/light"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/p2p"
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/mclock"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/eth/downloader"
+	"github.com/sft-project/go-sft/light"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/p2p"
+	"github.com/sft-project/go-sft/params"
 )
 
 // clientHandler is responsible for receiving and processing all incoming server

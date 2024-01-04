@@ -22,13 +22,13 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core"
-	"github.com/SFT-project/go-sft/core/rawdb"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/core/vm"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core"
+	"github.com/sft-project/go-sft/core/rawdb"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/core/vm"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/params"
 )
 
 // testerAccountPool is a pool to maintain currently active tester accounts,
@@ -363,7 +363,7 @@ func TestClique(t *testing.T) {
 			failure: errRecentlySigned,
 		}, {
 			// Recent signatures should not reset on checkpoint blocks imported in a new
-			// batch (https://github.com/SFT-project/go-sft/issues/17593). Whilst this
+			// batch (https://github.com/sft/go-sft/issues/17593). Whilst this
 			// seems overly specific and weird, it was a Rinkeby consensus split.
 			epoch:   3,
 			signers: []string{"A", "B", "C"},

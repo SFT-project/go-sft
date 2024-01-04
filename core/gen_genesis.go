@@ -7,10 +7,10 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/hexutil"
-	"github.com/SFT-project/go-sft/common/math"
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/hexutil"
+	"github.com/sft-project/go-sft/common/math"
+	"github.com/sft-project/go-sft/params"
 )
 
 var _ = (*genesisSpecMarshaling)(nil)

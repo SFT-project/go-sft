@@ -21,12 +21,12 @@ import (
 	"net"
 	"os"
 
-	"github.com/SFT-project/go-sft/cmd/devp2p/internal/ethtest"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/internal/utesting"
-	"github.com/SFT-project/go-sft/p2p"
-	"github.com/SFT-project/go-sft/p2p/rlpx"
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/cmd/devp2p/internal/ethtest"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/internal/utesting"
+	"github.com/sft-project/go-sft/p2p"
+	"github.com/sft-project/go-sft/p2p/rlpx"
+	"github.com/sft-project/go-sft/rlp"
 	"gopkg.in/urfave/cli.v1"
 )
 

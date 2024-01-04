@@ -22,8 +22,8 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core/types"
 )
 
 func TestChainIterator(t *testing.T) {

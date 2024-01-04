@@ -27,7 +27,7 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/SFT-project/go-sft/common/hexutil"
+	"github.com/sft-project/go-sft/common/hexutil"
 	"golang.org/x/crypto/sha3"
 )
 

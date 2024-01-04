@@ -27,7 +27,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/p2p/enode"
 )
 
 func TestMocker(t *testing.T) {

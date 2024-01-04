@@ -21,8 +21,8 @@ import (
 	"bytes"
 	"encoding/binary"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/metrics"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/metrics"
 )
 
 // The fields below define the low level database schema prefixing.

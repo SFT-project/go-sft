@@ -17,12 +17,12 @@
 package eth
 
 import (
-	"github.com/SFT-project/go-sft/core"
-	"github.com/SFT-project/go-sft/core/forkid"
-	"github.com/SFT-project/go-sft/p2p"
-	"github.com/SFT-project/go-sft/p2p/dnsdisc"
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/core"
+	"github.com/sft-project/go-sft/core/forkid"
+	"github.com/sft-project/go-sft/p2p"
+	"github.com/sft-project/go-sft/p2p/dnsdisc"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/rlp"
 )
 
 // ethEntry is the "eth" ENR entry which advertises eth protocol

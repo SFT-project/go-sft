@@ -21,7 +21,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/SFT-project/go-sft/eth/tracers/internal/tracers"
+	"github.com/sft-project/go-sft/eth/tracers/internal/tracers"
 )
 
 // all contains all the built in JavaScript tracers by name.

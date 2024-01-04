@@ -26,7 +26,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/SFT-project/go-sft/common/math"
+	"github.com/sft-project/go-sft/common/math"
 )
 
 type testEncoder struct {

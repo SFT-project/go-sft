@@ -24,12 +24,12 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core/rawdb"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/sftdb"
-	"github.com/SFT-project/go-sft/event"
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core/rawdb"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/event"
+	"github.com/sft-project/go-sft/log"
 )
 
 // ChainIndexerBackend defines the methods needed to process chain segments in

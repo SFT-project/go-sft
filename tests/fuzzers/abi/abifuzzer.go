@@ -23,8 +23,8 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/SFT-project/go-sft/accounts/abi"
-	"github.com/SFT-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/accounts/abi"
+	"github.com/sft-project/go-sft/crypto"
 	fuzz "github.com/google/gofuzz"
 )
 

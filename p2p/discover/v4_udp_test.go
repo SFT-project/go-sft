@@ -31,11 +31,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft/internal/testlog"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/p2p/discover/v4wire"
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/p2p/enr"
+	"github.com/sft-project/go-sft/internal/testlog"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/p2p/discover/v4wire"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/p2p/enr"
 )
 
 // shared test variables

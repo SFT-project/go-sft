@@ -27,7 +27,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/params"
 )
 
 const (

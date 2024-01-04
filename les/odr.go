@@ -20,11 +20,11 @@ import (
 	"context"
 	"time"
 
-	"github.com/SFT-project/go-sft/common/mclock"
-	"github.com/SFT-project/go-sft/core"
-	"github.com/SFT-project/go-sft/sftdb"
-	"github.com/SFT-project/go-sft/light"
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/common/mclock"
+	"github.com/sft-project/go-sft/core"
+	"github.com/sft-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/light"
+	"github.com/sft-project/go-sft/log"
 )
 
 // LesOdr implements light.OdrBackend

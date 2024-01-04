@@ -21,7 +21,7 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/SFT-project/go-sft/common/hexutil"
+	"github.com/sft-project/go-sft/common/hexutil"
 )
 
 func TestBytesPadding(t *testing.T) {

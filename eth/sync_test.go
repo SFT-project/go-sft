@@ -21,9 +21,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft/eth/downloader"
-	"github.com/SFT-project/go-sft/p2p"
-	"github.com/SFT-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/eth/downloader"
+	"github.com/sft-project/go-sft/p2p"
+	"github.com/sft-project/go-sft/p2p/enode"
 )
 
 func TestFastSyncDisabling63(t *testing.T) { testFastSyncDisabling(t, 63) }

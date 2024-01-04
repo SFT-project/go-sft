@@ -23,9 +23,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/SFT-project/go-sft/accounts"
-	"github.com/SFT-project/go-sft/event"
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/accounts"
+	"github.com/sft-project/go-sft/event"
+	"github.com/sft-project/go-sft/log"
 	"github.com/karalabe/usb"
 )
 

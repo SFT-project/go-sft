@@ -7,7 +7,7 @@ import (
 	"regexp"
 	"time"
 
-	"github.com/SFT-project/go-sft/metrics"
+	"github.com/sft-project/go-sft/metrics"
 )
 
 // a regexp for extracting the unit from time.Duration.String

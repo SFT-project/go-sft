@@ -26,17 +26,17 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/SFT-project/go-sft/accounts"
-	"github.com/SFT-project/go-sft/accounts/external"
-	"github.com/SFT-project/go-sft/accounts/keystore"
-	"github.com/SFT-project/go-sft/accounts/scwallet"
-	"github.com/SFT-project/go-sft/accounts/usbwallet"
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/p2p"
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/rpc"
+	"github.com/sft-project/go-sft/accounts"
+	"github.com/sft-project/go-sft/accounts/external"
+	"github.com/sft-project/go-sft/accounts/keystore"
+	"github.com/sft-project/go-sft/accounts/scwallet"
+	"github.com/sft-project/go-sft/accounts/usbwallet"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/p2p"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/rpc"
 )
 
 const (

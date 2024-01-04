@@ -23,8 +23,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/SFT-project/go-sft/signer/core"
-	"github.com/SFT-project/go-sft/signer/fourbyte"
+	"github.com/sft-project/go-sft/signer/core"
+	"github.com/sft-project/go-sft/signer/fourbyte"
 )
 
 func init() {

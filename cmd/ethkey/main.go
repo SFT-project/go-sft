@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/SFT-project/go-sft/internal/flags"
+	"github.com/sft-project/go-sft/internal/flags"
 	"gopkg.in/urfave/cli.v1"
 )
 

@@ -22,8 +22,8 @@ import (
 	"math/big"
 	"reflect"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/math"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/math"
 )
 
 // packBytesSlice packs the given bytes as [L, V] as the canonical representation

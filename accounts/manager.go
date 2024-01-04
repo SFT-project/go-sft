@@ -21,8 +21,8 @@ import (
 	"sort"
 	"sync"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/event"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/event"
 )
 
 // Config contains the settings of the global account manager.

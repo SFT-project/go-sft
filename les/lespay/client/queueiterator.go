@@ -19,8 +19,8 @@ package client
 import (
 	"sync"
 
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/p2p/nodestate"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/p2p/nodestate"
 )
 
 // QueueIterator returns nodes from the specified selectable set in the same order as

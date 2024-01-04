@@ -21,8 +21,8 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/crypto"
 )
 
 func TestMakeTopics(t *testing.T) {

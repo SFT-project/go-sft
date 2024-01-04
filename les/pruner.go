@@ -20,10 +20,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/SFT-project/go-sft/common/math"
-	"github.com/SFT-project/go-sft/core"
-	"github.com/SFT-project/go-sft/sftdb"
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/common/math"
+	"github.com/sft-project/go-sft/core"
+	"github.com/sft-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/log"
 )
 
 // pruner is responsible for pruning historical light chain data.

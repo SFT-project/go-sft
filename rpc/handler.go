@@ -25,7 +25,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/log"
 )
 
 // handler handles JSON-RPC messages. There is one handler per connection. Note that

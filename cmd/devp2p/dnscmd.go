@@ -25,11 +25,11 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/SFT-project/go-sft/accounts/keystore"
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/console/prompt"
-	"github.com/SFT-project/go-sft/p2p/dnsdisc"
-	"github.com/SFT-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/accounts/keystore"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/console/prompt"
+	"github.com/sft-project/go-sft/p2p/dnsdisc"
+	"github.com/sft-project/go-sft/p2p/enode"
 	cli "gopkg.in/urfave/cli.v1"
 )
 

@@ -17,8 +17,8 @@
 package les
 
 import (
-	"github.com/SFT-project/go-sft/metrics"
-	"github.com/SFT-project/go-sft/p2p"
+	"github.com/sft-project/go-sft/metrics"
+	"github.com/sft-project/go-sft/p2p"
 )
 
 var (

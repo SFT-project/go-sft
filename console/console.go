@@ -29,11 +29,11 @@ import (
 	"syscall"
 
 	"github.com/dop251/goja"
-	"github.com/SFT-project/go-sft/console/prompt"
-	"github.com/SFT-project/go-sft/internal/jsre"
-	"github.com/SFT-project/go-sft/internal/jsre/deps"
-	"github.com/SFT-project/go-sft/internal/web3ext"
-	"github.com/SFT-project/go-sft/rpc"
+	"github.com/sft-project/go-sft/console/prompt"
+	"github.com/sft-project/go-sft/internal/jsre"
+	"github.com/sft-project/go-sft/internal/jsre/deps"
+	"github.com/sft-project/go-sft/internal/web3ext"
+	"github.com/sft-project/go-sft/rpc"
 	"github.com/mattn/go-colorable"
 	"github.com/peterh/liner"
 )

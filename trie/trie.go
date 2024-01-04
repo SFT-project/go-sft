@@ -22,10 +22,10 @@ import (
 	"fmt"
 	"sync"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/rlp"
 )
 
 var (

@@ -20,10 +20,10 @@ import (
 	"errors"
 	"sync"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/sftdb"
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/rlp"
 )
 
 // NodeSet stores a set of trie nodes. It implements trie.Database and can also

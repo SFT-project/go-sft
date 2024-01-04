@@ -20,8 +20,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/SFT-project/go-sft/eth"
-	"github.com/SFT-project/go-sft/node"
+	"github.com/sft-project/go-sft/eth"
+	"github.com/sft-project/go-sft/node"
 	"gopkg.in/urfave/cli.v1"
 )
 

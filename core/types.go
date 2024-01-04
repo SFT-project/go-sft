@@ -17,9 +17,9 @@
 package core
 
 import (
-	"github.com/SFT-project/go-sft/core/state"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/core/vm"
+	"github.com/sft-project/go-sft/core/state"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/core/vm"
 )
 
 // Validator is an interface which defines the standard for block validation. It

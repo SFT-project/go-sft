@@ -8,37 +8,37 @@ targets:
     corpus: ./fuzzers/rlp/corpus
     harness:
       function: Fuzz
-      package: github.com/SFT-project/go-sft/tests/fuzzers/rlp
-      checkout: github.com/SFT-project/go-sft/
+      package: github.com/geth-project/go-geth/tests/fuzzers/rlp
+      checkout: github.com/geth-project/go-geth/
   - name: keystore
     language: go
     version: "1.13"
     corpus: ./fuzzers/keystore/corpus
     harness:
       function: Fuzz
-      package: github.com/SFT-project/go-sft/tests/fuzzers/keystore
-      checkout: github.com/SFT-project/go-sft/
+      package: github.com/geth-project/go-geth/tests/fuzzers/keystore
+      checkout: github.com/geth-project/go-geth/
   - name: trie
     language: go
     version: "1.13"
     corpus: ./fuzzers/trie/corpus
     harness:
       function: Fuzz
-      package: github.com/SFT-project/go-sft/tests/fuzzers/trie
-      checkout: github.com/SFT-project/go-sft/
+      package: github.com/geth-project/go-geth/tests/fuzzers/trie
+      checkout: github.com/geth-project/go-geth/
   - name: txfetcher
     language: go
     version: "1.13"
     corpus: ./fuzzers/txfetcher/corpus
     harness:
       function: Fuzz
-      package: github.com/SFT-project/go-sft/tests/fuzzers/txfetcher
-      checkout: github.com/SFT-project/go-sft/
+      package: github.com/geth-project/go-geth/tests/fuzzers/txfetcher
+      checkout: github.com/geth-project/go-geth/
   - name: whisperv6
     language: go
     version: "1.13"
     corpus: ./fuzzers/whisperv6/corpus
     harness:
       function: Fuzz
-      package: github.com/SFT-project/go-sft/tests/fuzzers/whisperv6
-      checkout: github.com/SFT-project/go-sft/
+      package: github.com/geth-project/go-geth/tests/fuzzers/whisperv6
+      checkout: github.com/geth-project/go-geth/

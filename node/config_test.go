@@ -24,8 +24,8 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/p2p"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/p2p"
 )
 
 // Tests that datadirs can be successfully created, be them manually configured

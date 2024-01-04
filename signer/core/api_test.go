@@ -27,16 +27,16 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft/accounts"
-	"github.com/SFT-project/go-sft/accounts/keystore"
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/hexutil"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/internal/ethapi"
-	"github.com/SFT-project/go-sft/rlp"
-	"github.com/SFT-project/go-sft/signer/core"
-	"github.com/SFT-project/go-sft/signer/fourbyte"
-	"github.com/SFT-project/go-sft/signer/storage"
+	"github.com/sft-project/go-sft/accounts"
+	"github.com/sft-project/go-sft/accounts/keystore"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/hexutil"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/internal/ethapi"
+	"github.com/sft-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/signer/core"
+	"github.com/sft-project/go-sft/signer/fourbyte"
+	"github.com/sft-project/go-sft/signer/storage"
 )
 
 //Used for testing

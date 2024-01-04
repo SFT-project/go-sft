@@ -20,7 +20,7 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/SFT-project/go-sft/common/hexutil"
+	"github.com/sft-project/go-sft/common/hexutil"
 )
 
 func TestTextHash(t *testing.T) {

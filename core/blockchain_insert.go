@@ -19,10 +19,10 @@ package core
 import (
 	"time"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/mclock"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/mclock"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/log"
 )
 
 // insertStats tracks and reports on block insertion.

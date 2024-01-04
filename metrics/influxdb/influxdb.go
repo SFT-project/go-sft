@@ -5,8 +5,8 @@ import (
 	uurl "net/url"
 	"time"
 
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/metrics"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/metrics"
 	"github.com/influxdata/influxdb/client"
 )
 

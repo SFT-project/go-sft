@@ -26,11 +26,11 @@ import (
 	"os"
 	"strings"
 
-	"github.com/SFT-project/go-sft/core"
-	"github.com/SFT-project/go-sft/core/forkid"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/params"
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/core"
+	"github.com/sft-project/go-sft/core/forkid"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/params"
+	"github.com/sft-project/go-sft/rlp"
 )
 
 type Chain struct {

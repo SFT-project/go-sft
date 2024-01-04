@@ -20,9 +20,9 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/sftdb/memorydb"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/sftdb/memorydb"
 )
 
 // makeTestTrie create a sample test trie to test node-wise reconstruction.

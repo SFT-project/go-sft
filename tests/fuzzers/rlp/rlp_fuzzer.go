@@ -20,8 +20,8 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/rlp"
 )
 
 func decodeEncode(input []byte, val interface{}, i int) {

@@ -26,17 +26,17 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/consensus"
-	"github.com/SFT-project/go-sft/consensus/ethash"
-	"github.com/SFT-project/go-sft/core/rawdb"
-	"github.com/SFT-project/go-sft/core/state"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/core/vm"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/sftdb"
-	"github.com/SFT-project/go-sft/params"
-	"github.com/SFT-project/go-sft/trie"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/consensus"
+	"github.com/sft-project/go-sft/consensus/ethash"
+	"github.com/sft-project/go-sft/core/rawdb"
+	"github.com/sft-project/go-sft/core/state"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/core/vm"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/params"
+	"github.com/sft-project/go-sft/trie"
 )
 
 // So we can deterministically seed different blockchains
@@ -1428,7 +1428,7 @@ func TestEIP161AccountRemoval(t *testing.T) {
 // tests that under weird reorg conditions the blockchain and its internal header-
 // chain return the same latest block/header.
 //
-// https://github.com/SFT-project/go-sft/pull/15941
+// https://github.com/sft/go-sft/pull/15941
 func TestBlockchainHeaderchainReorgConsistency(t *testing.T) {
 	// Generate a canonical chain to act as the main dataset
 	engine := ethash.NewFaker()
@@ -1691,8 +1691,8 @@ func TestIncompleteAncientReceiptChainInsertion(t *testing.T) {
 // overtake the 'canon' chain until after it's passed canon by about 200 blocks.
 //
 // Details at:
-//  - https://github.com/SFT-project/go-sft/issues/18977
-//  - https://github.com/SFT-project/go-sft/pull/18988
+//  - https://github.com/sft/go-sft/issues/18977
+//  - https://github.com/sft/go-sft/pull/18988
 func TestLowDiffLongChain(t *testing.T) {
 	// Generate a canonical chain to act as the main dataset
 	engine := ethash.NewFaker()

@@ -21,7 +21,7 @@ import (
 	"encoding/hex"
 	"fmt"
 
-	"github.com/SFT-project/go-sft/core/vm"
+	"github.com/sft-project/go-sft/core/vm"
 )
 
 // Iterator for disassembled EVM instructions

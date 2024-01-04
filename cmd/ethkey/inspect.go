@@ -21,9 +21,9 @@ import (
 	"fmt"
 	"io/ioutil"
 
-	"github.com/SFT-project/go-sft/accounts/keystore"
-	"github.com/SFT-project/go-sft/cmd/utils"
-	"github.com/SFT-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/accounts/keystore"
+	"github.com/sft-project/go-sft/cmd/utils"
+	"github.com/sft-project/go-sft/crypto"
 	"gopkg.in/urfave/cli.v1"
 )
 

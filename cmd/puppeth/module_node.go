@@ -26,8 +26,8 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/log"
 )
 
 // nodeDockerfile is the Dockerfile required to run an Ethereum node.

@@ -19,15 +19,15 @@ package main
 import (
 	"strconv"
 
-	"github.com/SFT-project/go-sft/accounts"
-	"github.com/SFT-project/go-sft/accounts/abi/bind"
-	"github.com/SFT-project/go-sft/accounts/external"
-	"github.com/SFT-project/go-sft/cmd/utils"
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/contracts/checkpointoracle"
-	"github.com/SFT-project/go-sft/sftclient"
-	"github.com/SFT-project/go-sft/params"
-	"github.com/SFT-project/go-sft/rpc"
+	"github.com/sft-project/go-sft/accounts"
+	"github.com/sft-project/go-sft/accounts/abi/bind"
+	"github.com/sft-project/go-sft/accounts/external"
+	"github.com/sft-project/go-sft/cmd/utils"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/contracts/checkpointoracle"
+	"github.com/sft-project/go-sft/sftclient"
+	"github.com/sft-project/go-sft/params"
+	"github.com/sft-project/go-sft/rpc"
 	"gopkg.in/urfave/cli.v1"
 )
 

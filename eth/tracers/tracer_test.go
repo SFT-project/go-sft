@@ -24,10 +24,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core/state"
-	"github.com/SFT-project/go-sft/core/vm"
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core/state"
+	"github.com/sft-project/go-sft/core/vm"
+	"github.com/sft-project/go-sft/params"
 )
 
 type account struct{}

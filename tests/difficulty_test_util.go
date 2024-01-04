@@ -20,11 +20,11 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/math"
-	"github.com/SFT-project/go-sft/consensus/ethash"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/math"
+	"github.com/sft-project/go-sft/consensus/ethash"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/params"
 )
 
 //go:generate gencodec -type DifficultyTest -field-override difficultyTestMarshaling -out gen_difficultytest.go

@@ -26,7 +26,7 @@ import (
 	"path"
 	"strings"
 
-	"github.com/SFT-project/go-sft/common/math"
+	"github.com/sft-project/go-sft/common/math"
 	"gopkg.in/urfave/cli.v1"
 )
 

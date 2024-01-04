@@ -26,12 +26,12 @@ import (
 
 	cli "gopkg.in/urfave/cli.v1"
 
-	"github.com/SFT-project/go-sft/cmd/utils"
-	"github.com/SFT-project/go-sft/eth"
-	"github.com/SFT-project/go-sft/internal/ethapi"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/node"
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/cmd/utils"
+	"github.com/sft-project/go-sft/eth"
+	"github.com/sft-project/go-sft/internal/ethapi"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/node"
+	"github.com/sft-project/go-sft/params"
 	"github.com/naoina/toml"
 )
 

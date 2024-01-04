@@ -21,8 +21,8 @@ package geth
 import (
 	"math/big"
 
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/sftclient"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/sftclient"
 )
 
 // EthereumClient provides access to the Ethereum APIs.

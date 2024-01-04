@@ -20,8 +20,8 @@ import (
 	"bytes"
 	"testing"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/sftdb"
 )
 
 // Tests that the node iterator indeed walks over the entire database contents.

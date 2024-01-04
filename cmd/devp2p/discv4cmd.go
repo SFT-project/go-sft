@@ -23,13 +23,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/SFT-project/go-sft/cmd/devp2p/internal/v4test"
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/internal/utesting"
-	"github.com/SFT-project/go-sft/p2p/discover"
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/cmd/devp2p/internal/v4test"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/internal/utesting"
+	"github.com/sft-project/go-sft/p2p/discover"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/params"
 	"gopkg.in/urfave/cli.v1"
 )
 

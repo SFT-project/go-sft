@@ -24,13 +24,13 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/consensus/ethash"
-	"github.com/SFT-project/go-sft/core"
-	"github.com/SFT-project/go-sft/eth/downloader"
-	"github.com/SFT-project/go-sft/eth/gasprice"
-	"github.com/SFT-project/go-sft/miner"
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/consensus/ethash"
+	"github.com/sft-project/go-sft/core"
+	"github.com/sft-project/go-sft/eth/downloader"
+	"github.com/sft-project/go-sft/eth/gasprice"
+	"github.com/sft-project/go-sft/miner"
+	"github.com/sft-project/go-sft/params"
 )
 
 // DefaultFullGPOConfig contains default gasprice oracle settings for full node.

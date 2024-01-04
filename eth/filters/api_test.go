@@ -21,8 +21,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/rpc"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/rpc"
 )
 
 func TestUnmarshalJSONNewFilterArgs(t *testing.T) {

@@ -20,7 +20,7 @@ package utils
 import (
 	"fmt"
 
-	"github.com/SFT-project/go-sft/console/prompt"
+	"github.com/sft-project/go-sft/console/prompt"
 )
 
 // GetPassPhrase displays the given text(prompt) to the user and requests some textual

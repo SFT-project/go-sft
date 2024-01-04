@@ -22,10 +22,10 @@ import (
 	"sync"
 	"time"
 
-	"github.com/SFT-project/go-sft/internal/utesting"
-	"github.com/SFT-project/go-sft/p2p/discover/v5wire"
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/p2p/netutil"
+	"github.com/sft-project/go-sft/internal/utesting"
+	"github.com/sft-project/go-sft/p2p/discover/v5wire"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/p2p/netutil"
 )
 
 // Suite is the discv5 test suite.

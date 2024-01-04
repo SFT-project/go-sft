@@ -21,9 +21,9 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core/rawdb"
-	"github.com/SFT-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core/rawdb"
+	"github.com/sft-project/go-sft/sftdb"
 )
 
 // Iterator is an iterator to step over all the accounts or the specific

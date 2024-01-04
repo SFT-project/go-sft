@@ -23,8 +23,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/SFT-project/go-sft/eth"
-	"github.com/SFT-project/go-sft/node"
+	"github.com/sft-project/go-sft/eth"
+	"github.com/sft-project/go-sft/node"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -16,7 +16,7 @@
 
 package params
 
-import "github.com/SFT-project/go-sft/common"
+import "github.com/sft-project/go-sft/common"
 
 // MainnetBootnodes are the enode URLs of the P2P bootstrap nodes running on
 // the main Ethereum network.

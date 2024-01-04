@@ -23,11 +23,11 @@ import (
 	"io"
 	"math/big"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/crypto"
-	lpc "github.com/SFT-project/go-sft/les/lespay/client"
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/crypto"
+	lpc "github.com/sft-project/go-sft/les/lespay/client"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/rlp"
 )
 
 // Constants to match up protocol versions and messages

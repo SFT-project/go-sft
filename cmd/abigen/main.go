@@ -25,13 +25,13 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/SFT-project/go-sft/accounts/abi"
-	"github.com/SFT-project/go-sft/accounts/abi/bind"
-	"github.com/SFT-project/go-sft/cmd/utils"
-	"github.com/SFT-project/go-sft/common/compiler"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/internal/flags"
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/accounts/abi"
+	"github.com/sft-project/go-sft/accounts/abi/bind"
+	"github.com/sft-project/go-sft/cmd/utils"
+	"github.com/sft-project/go-sft/common/compiler"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/internal/flags"
+	"github.com/sft-project/go-sft/log"
 	"gopkg.in/urfave/cli.v1"
 )
 

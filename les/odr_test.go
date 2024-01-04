@@ -23,17 +23,17 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/math"
-	"github.com/SFT-project/go-sft/core"
-	"github.com/SFT-project/go-sft/core/rawdb"
-	"github.com/SFT-project/go-sft/core/state"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/core/vm"
-	"github.com/SFT-project/go-sft/sftdb"
-	"github.com/SFT-project/go-sft/light"
-	"github.com/SFT-project/go-sft/params"
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/math"
+	"github.com/sft-project/go-sft/core"
+	"github.com/sft-project/go-sft/core/rawdb"
+	"github.com/sft-project/go-sft/core/state"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/core/vm"
+	"github.com/sft-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/light"
+	"github.com/sft-project/go-sft/params"
+	"github.com/sft-project/go-sft/rlp"
 )
 
 type odrTestFn func(ctx context.Context, db sftdb.Database, config *params.ChainConfig, bc *core.BlockChain, lc *light.LightChain, bhash common.Hash) []byte

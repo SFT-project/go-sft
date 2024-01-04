@@ -23,8 +23,8 @@ import (
 	"math"
 	"strings"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/hexutil"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/hexutil"
 )
 
 // API describes the set of methods offered over the RPC interface

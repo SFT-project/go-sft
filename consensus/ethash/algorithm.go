@@ -27,10 +27,10 @@ import (
 	"time"
 	"unsafe"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/bitutil"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/bitutil"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/log"
 	"golang.org/x/crypto/sha3"
 )
 

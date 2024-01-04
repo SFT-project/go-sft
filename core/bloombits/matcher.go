@@ -26,8 +26,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/SFT-project/go-sft/common/bitutil"
-	"github.com/SFT-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/common/bitutil"
+	"github.com/sft-project/go-sft/crypto"
 )
 
 // bloomIndexes represents the bit indexes inside the bloom filter that belong

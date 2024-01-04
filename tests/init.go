@@ -21,7 +21,7 @@ import (
 	"math/big"
 	"sort"
 
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/params"
 )
 
 // Forks table defines supported forks and their chain config.

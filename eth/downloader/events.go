@@ -16,7 +16,7 @@
 
 package downloader
 
-import "github.com/SFT-project/go-sft/core/types"
+import "github.com/sft-project/go-sft/core/types"
 
 type DoneEvent struct {
 	Latest *types.Header

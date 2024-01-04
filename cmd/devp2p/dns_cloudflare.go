@@ -21,8 +21,8 @@ import (
 	"strings"
 
 	"github.com/cloudflare/cloudflare-go"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/p2p/dnsdisc"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/p2p/dnsdisc"
 	"gopkg.in/urfave/cli.v1"
 )
 

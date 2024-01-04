@@ -20,7 +20,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/SFT-project/go-sft/core/asm"
+	"github.com/sft-project/go-sft/core/asm"
 )
 
 func Compile(fn string, src []byte, debug bool) (string, error) {

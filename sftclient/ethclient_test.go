@@ -25,16 +25,16 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft"
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/consensus/ethash"
-	"github.com/SFT-project/go-sft/core"
-	"github.com/SFT-project/go-sft/core/rawdb"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/eth"
-	"github.com/SFT-project/go-sft/node"
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/consensus/ethash"
+	"github.com/sft-project/go-sft/core"
+	"github.com/sft-project/go-sft/core/rawdb"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/eth"
+	"github.com/sft-project/go-sft/node"
+	"github.com/sft-project/go-sft/params"
 )
 
 // Verify that Client implements the ethereum interfaces.

@@ -20,7 +20,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/params"
 	cli "gopkg.in/urfave/cli.v1"
 )
 

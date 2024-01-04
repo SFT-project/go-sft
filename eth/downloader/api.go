@@ -20,9 +20,9 @@ import (
 	"context"
 	"sync"
 
-	ethereum "github.com/SFT-project/go-sft"
-	"github.com/SFT-project/go-sft/event"
-	"github.com/SFT-project/go-sft/rpc"
+	ethereum "github.com/sft-project/go-sft"
+	"github.com/sft-project/go-sft/event"
+	"github.com/sft-project/go-sft/rpc"
 )
 
 // PublicDownloaderAPI provides an API which gives information about the current synchronisation status.

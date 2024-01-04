@@ -21,15 +21,15 @@ import (
 	"math/big"
 	"sync"
 
-	"github.com/SFT-project/go-sft"
-	"github.com/SFT-project/go-sft/accounts"
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/hexutil"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/event"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/rpc"
-	"github.com/SFT-project/go-sft/signer/core"
+	"github.com/sft-project/go-sft"
+	"github.com/sft-project/go-sft/accounts"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/hexutil"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/event"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/rpc"
+	"github.com/sft-project/go-sft/signer/core"
 )
 
 type ExternalBackend struct {

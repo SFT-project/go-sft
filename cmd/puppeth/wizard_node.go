@@ -21,9 +21,9 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/SFT-project/go-sft/accounts/keystore"
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/accounts/keystore"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/log"
 )
 
 // deployNode creates a new node configuration based on some user input.

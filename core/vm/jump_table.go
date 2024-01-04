@@ -17,7 +17,7 @@
 package vm
 
 import (
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/params"
 )
 
 type (

@@ -21,9 +21,9 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/SFT-project/go-sft/core/state"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/core/state"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/params"
 )
 
 var (

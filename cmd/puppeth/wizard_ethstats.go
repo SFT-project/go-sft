@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/log"
 )
 
 // deployEthstats queries the user for various input on deploying an sftstats

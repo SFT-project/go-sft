@@ -22,16 +22,16 @@ import (
 	"sync"
 	"time"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/consensus"
-	"github.com/SFT-project/go-sft/core"
-	"github.com/SFT-project/go-sft/core/rawdb"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/eth/fetcher"
-	"github.com/SFT-project/go-sft/sftdb"
-	"github.com/SFT-project/go-sft/light"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/consensus"
+	"github.com/sft-project/go-sft/core"
+	"github.com/sft-project/go-sft/core/rawdb"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/eth/fetcher"
+	"github.com/sft-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/light"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/p2p/enode"
 )
 
 const (

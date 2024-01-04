@@ -19,9 +19,9 @@ package client
 import (
 	"sync"
 
-	"github.com/SFT-project/go-sft/les/utils"
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/p2p/nodestate"
+	"github.com/sft-project/go-sft/les/utils"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/p2p/nodestate"
 )
 
 // WrsIterator returns nodes from the specified selectable set with a weighted random

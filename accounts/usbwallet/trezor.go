@@ -27,12 +27,12 @@ import (
 	"io"
 	"math/big"
 
-	"github.com/SFT-project/go-sft/accounts"
-	"github.com/SFT-project/go-sft/accounts/usbwallet/trezor"
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/hexutil"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/accounts"
+	"github.com/sft-project/go-sft/accounts/usbwallet/trezor"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/hexutil"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/log"
 	"github.com/golang/protobuf/proto"
 )
 

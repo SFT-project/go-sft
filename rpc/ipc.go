@@ -20,8 +20,8 @@ import (
 	"context"
 	"net"
 
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/p2p/netutil"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/p2p/netutil"
 )
 
 // ServeListener accepts connections on l, serving JSON-RPC on them.

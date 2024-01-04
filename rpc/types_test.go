@@ -20,8 +20,8 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/math"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/math"
 )
 
 func TestBlockNumberJSONUnmarshal(t *testing.T) {

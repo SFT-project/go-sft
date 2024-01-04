@@ -21,11 +21,11 @@ import (
 	"errors"
 	"time"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core/rawdb"
-	"github.com/SFT-project/go-sft/eth/downloader"
-	"github.com/SFT-project/go-sft/light"
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core/rawdb"
+	"github.com/sft-project/go-sft/eth/downloader"
+	"github.com/sft-project/go-sft/light"
+	"github.com/sft-project/go-sft/log"
 )
 
 var errInvalidCheckpoint = errors.New("invalid advertised checkpoint")

@@ -22,8 +22,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/SFT-project/go-sft/common/math"
-	"github.com/SFT-project/go-sft/core/vm"
+	"github.com/sft-project/go-sft/common/math"
+	"github.com/sft-project/go-sft/core/vm"
 )
 
 // Compiler contains information about the parsed source

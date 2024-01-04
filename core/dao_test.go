@@ -20,10 +20,10 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/SFT-project/go-sft/consensus/ethash"
-	"github.com/SFT-project/go-sft/core/rawdb"
-	"github.com/SFT-project/go-sft/core/vm"
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/consensus/ethash"
+	"github.com/sft-project/go-sft/core/rawdb"
+	"github.com/sft-project/go-sft/core/vm"
+	"github.com/sft-project/go-sft/params"
 )
 
 // Tests that DAO-fork enabled clients can properly filter out fork-commencing

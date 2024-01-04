@@ -25,7 +25,7 @@ import (
 	"strings"
 	"text/template"
 
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/log"
 )
 
 // sftstatsDockerfile is the Dockerfile required to build an sftstats backend

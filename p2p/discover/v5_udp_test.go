@@ -28,12 +28,12 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft/internal/testlog"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/p2p/discover/v5wire"
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/p2p/enr"
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/internal/testlog"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/p2p/discover/v5wire"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/p2p/enr"
+	"github.com/sft-project/go-sft/rlp"
 )
 
 // Real sockets, real crypto: this test checks end-to-end connectivity for UDPv5.

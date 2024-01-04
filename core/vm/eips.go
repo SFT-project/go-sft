@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"sort"
 
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/params"
 	"github.com/holiman/uint256"
 )
 

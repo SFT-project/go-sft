@@ -22,8 +22,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/SFT-project/go-sft/accounts/abi"
-	"github.com/SFT-project/go-sft/common"
+	"github.com/sft-project/go-sft/accounts/abi"
+	"github.com/sft-project/go-sft/common"
 )
 
 func verify(t *testing.T, jsondata, calldata string, exp []interface{}) {

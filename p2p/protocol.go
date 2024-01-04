@@ -19,8 +19,8 @@ package p2p
 import (
 	"fmt"
 
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/p2p/enr"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/p2p/enr"
 )
 
 // Protocol represents a P2P subprotocol implementation.

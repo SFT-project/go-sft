@@ -26,10 +26,10 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/params"
 )
 
 var (

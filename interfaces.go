@@ -22,8 +22,8 @@ import (
 	"errors"
 	"math/big"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core/types"
 )
 
 // NotFound is returned by API methods if the requested item does not exist.

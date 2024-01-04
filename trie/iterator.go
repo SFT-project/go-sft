@@ -21,8 +21,8 @@ import (
 	"container/heap"
 	"errors"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/rlp"
 )
 
 // Iterator is a key-value trie iterator that traverses a Trie.

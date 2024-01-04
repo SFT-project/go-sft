@@ -26,13 +26,13 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft"
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core/rawdb"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/sftdb"
-	"github.com/SFT-project/go-sft/event"
-	"github.com/SFT-project/go-sft/trie"
+	"github.com/sft-project/go-sft"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core/rawdb"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/event"
+	"github.com/sft-project/go-sft/trie"
 )
 
 // Reduce some of the parameters to make the tester faster.

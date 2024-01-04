@@ -22,8 +22,8 @@ import (
 	"net/http"
 	"sort"
 
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/metrics"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/metrics"
 )
 
 // Handler returns an HTTP handler which dump metrics in Prometheus format.

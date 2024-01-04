@@ -27,7 +27,7 @@ import (
 	"time"
 
 	"github.com/dop251/goja"
-	"github.com/SFT-project/go-sft/common"
+	"github.com/sft-project/go-sft/common"
 )
 
 // JSRE is a JS runtime environment embedding the goja interpreter.

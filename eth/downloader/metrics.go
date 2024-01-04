@@ -19,7 +19,7 @@
 package downloader
 
 import (
-	"github.com/SFT-project/go-sft/metrics"
+	"github.com/sft-project/go-sft/metrics"
 )
 
 var (

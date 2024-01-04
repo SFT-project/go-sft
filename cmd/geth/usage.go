@@ -22,9 +22,9 @@ import (
 	"io"
 	"sort"
 
-	"github.com/SFT-project/go-sft/cmd/utils"
-	"github.com/SFT-project/go-sft/internal/debug"
-	"github.com/SFT-project/go-sft/internal/flags"
+	"github.com/sft-project/go-sft/cmd/utils"
+	"github.com/sft-project/go-sft/internal/debug"
+	"github.com/sft-project/go-sft/internal/flags"
 	cli "gopkg.in/urfave/cli.v1"
 )
 

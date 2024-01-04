@@ -23,11 +23,11 @@ import (
 	"testing"
 
 	"github.com/VictoriaMetrics/fastcache"
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core/rawdb"
-	"github.com/SFT-project/go-sft/sftdb"
-	"github.com/SFT-project/go-sft/sftdb/leveldb"
-	"github.com/SFT-project/go-sft/sftdb/memorydb"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core/rawdb"
+	"github.com/sft-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/sftdb/leveldb"
+	"github.com/sft-project/go-sft/sftdb/memorydb"
 )
 
 // reverse reverses the contents of a byte slice. It's used to update random accs

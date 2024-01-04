@@ -41,24 +41,24 @@ import (
 	"sync"
 	"time"
 
-	"github.com/SFT-project/go-sft/accounts"
-	"github.com/SFT-project/go-sft/accounts/keystore"
-	"github.com/SFT-project/go-sft/cmd/utils"
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/eth"
-	"github.com/SFT-project/go-sft/eth/downloader"
-	"github.com/SFT-project/go-sft/sftclient"
-	"github.com/SFT-project/go-sft/sftstats"
-	"github.com/SFT-project/go-sft/les"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/node"
-	"github.com/SFT-project/go-sft/p2p"
-	"github.com/SFT-project/go-sft/p2p/discv5"
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/p2p/nat"
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/accounts"
+	"github.com/sft-project/go-sft/accounts/keystore"
+	"github.com/sft-project/go-sft/cmd/utils"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/eth"
+	"github.com/sft-project/go-sft/eth/downloader"
+	"github.com/sft-project/go-sft/sftclient"
+	"github.com/sft-project/go-sft/sftstats"
+	"github.com/sft-project/go-sft/les"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/node"
+	"github.com/sft-project/go-sft/p2p"
+	"github.com/sft-project/go-sft/p2p/discv5"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/p2p/nat"
+	"github.com/sft-project/go-sft/params"
 	"github.com/gorilla/websocket"
 )
 
@@ -469,7 +469,7 @@ func (f *faucet) apiHandler(w http.ResponseWriter, r *http.Request) {
 			username, avatar, address, err = authNoAuth(msg.URL)
 		default:
 			//lint:ignore ST1005 This error is to be displayed in the browser
-			err = errors.New("Something funky happened, please open an issue at https://github.com/SFT-project/go-sft/issues")
+			err = errors.New("Something funky happened, please open an issue at https://github.com/sft/go-sft/issues")
 		}
 		if err != nil {
 			if err = sendError(conn, err); err != nil {

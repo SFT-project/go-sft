@@ -29,10 +29,10 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/params"
 )
 
 // makeGenesis creates a new genesis struct based on some user input.

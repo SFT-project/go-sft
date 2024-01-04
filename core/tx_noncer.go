@@ -19,8 +19,8 @@ package core
 import (
 	"sync"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core/state"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core/state"
 )
 
 // txNoncer is a tiny virtual state database to manage the executable nonces of

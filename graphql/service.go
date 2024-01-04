@@ -17,8 +17,8 @@
 package graphql
 
 import (
-	"github.com/SFT-project/go-sft/internal/ethapi"
-	"github.com/SFT-project/go-sft/node"
+	"github.com/sft-project/go-sft/internal/ethapi"
+	"github.com/sft-project/go-sft/node"
 	"github.com/graph-gophers/graphql-go"
 	"github.com/graph-gophers/graphql-go/relay"
 )

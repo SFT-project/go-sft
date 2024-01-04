@@ -21,10 +21,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/sftdb/memorydb"
-	"github.com/SFT-project/go-sft/rlp"
-	"github.com/SFT-project/go-sft/trie"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/sftdb/memorydb"
+	"github.com/sft-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/trie"
 )
 
 // Tests that snapshot generation errors out correctly in case of a missing trie

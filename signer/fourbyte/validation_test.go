@@ -20,9 +20,9 @@ import (
 	"math/big"
 	"testing"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/hexutil"
-	"github.com/SFT-project/go-sft/signer/core"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/hexutil"
+	"github.com/sft-project/go-sft/signer/core"
 )
 
 func mixAddr(a string) (*common.MixedcaseAddress, error) {

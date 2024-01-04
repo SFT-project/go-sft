@@ -21,11 +21,11 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/prque"
-	"github.com/SFT-project/go-sft/sftdb"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/rlp"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/prque"
+	"github.com/sft-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/rlp"
 	"golang.org/x/crypto/sha3"
 )
 

@@ -22,7 +22,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft/les/utils"
+	"github.com/sft-project/go-sft/les/utils"
 )
 
 func TestTransition(t *testing.T) {

@@ -45,12 +45,12 @@ import (
 	"strings"
 	"text/tabwriter"
 
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/p2p"
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/p2p/simulations"
-	"github.com/SFT-project/go-sft/p2p/simulations/adapters"
-	"github.com/SFT-project/go-sft/rpc"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/p2p"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/p2p/simulations"
+	"github.com/sft-project/go-sft/p2p/simulations/adapters"
+	"github.com/sft-project/go-sft/rpc"
 	"gopkg.in/urfave/cli.v1"
 )
 

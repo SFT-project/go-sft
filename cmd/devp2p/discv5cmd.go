@@ -21,11 +21,11 @@ import (
 	"os"
 	"time"
 
-	"github.com/SFT-project/go-sft/cmd/devp2p/internal/v5test"
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/internal/utesting"
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/p2p/discover"
+	"github.com/sft-project/go-sft/cmd/devp2p/internal/v5test"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/internal/utesting"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/p2p/discover"
 	"gopkg.in/urfave/cli.v1"
 )
 

@@ -25,10 +25,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/internal/testlog"
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/internal/testlog"
+	"github.com/sft-project/go-sft/log"
 )
 
 // Tests whether remote HTTP servers are correctly notified of new work.

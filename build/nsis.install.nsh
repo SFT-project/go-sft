@@ -3,9 +3,9 @@ InstallDir "$InstDir"
 OutFile "${OUTPUTFILE}" # set through command line arguments
 
 # Links for "Add/Remove Programs"
-!define HELPURL "https://github.com/SFT-project/go-sft/issues"
-!define UPDATEURL "https://github.com/SFT-project/go-sft/releases"
-!define ABOUTURL "https://github.com/SFT-project/go-sft#ethereum-go"
+!define HELPURL "https://github.com/sft/go-sft/issues"
+!define UPDATEURL "https://github.com/sft/go-sft/releases"
+!define ABOUTURL "https://github.com/sft/go-sft#ethereum-go"
 !define /date NOW "%Y%m%d"
 
 PageEx license

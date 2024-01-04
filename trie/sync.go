@@ -20,10 +20,10 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/common/prque"
-	"github.com/SFT-project/go-sft/core/rawdb"
-	"github.com/SFT-project/go-sft/sftdb"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/common/prque"
+	"github.com/sft-project/go-sft/core/rawdb"
+	"github.com/sft-project/go-sft/sftdb"
 )
 
 // ErrNotRequested is returned by the trie sync when it's requested to process a

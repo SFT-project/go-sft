@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/SFT-project/go-sft/p2p"
-	"github.com/SFT-project/go-sft/rpc"
+	"github.com/sft-project/go-sft/p2p"
+	"github.com/sft-project/go-sft/rpc"
 )
 
 type gethrpc struct {

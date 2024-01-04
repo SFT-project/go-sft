@@ -22,9 +22,9 @@ import (
 	"path/filepath"
 	"sort"
 
-	"github.com/SFT-project/go-sft/internal/debug"
-	"github.com/SFT-project/go-sft/p2p/enode"
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/internal/debug"
+	"github.com/sft-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/params"
 	"gopkg.in/urfave/cli.v1"
 )
 

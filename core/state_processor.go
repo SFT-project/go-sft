@@ -17,14 +17,14 @@
 package core
 
 import (
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/consensus"
-	"github.com/SFT-project/go-sft/consensus/misc"
-	"github.com/SFT-project/go-sft/core/state"
-	"github.com/SFT-project/go-sft/core/types"
-	"github.com/SFT-project/go-sft/core/vm"
-	"github.com/SFT-project/go-sft/crypto"
-	"github.com/SFT-project/go-sft/params"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/consensus"
+	"github.com/sft-project/go-sft/consensus/misc"
+	"github.com/sft-project/go-sft/core/state"
+	"github.com/sft-project/go-sft/core/types"
+	"github.com/sft-project/go-sft/core/vm"
+	"github.com/sft-project/go-sft/crypto"
+	"github.com/sft-project/go-sft/params"
 )
 
 // StateProcessor is a basic Processor, which takes care of transitioning

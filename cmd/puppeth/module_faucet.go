@@ -26,8 +26,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/SFT-project/go-sft/common"
-	"github.com/SFT-project/go-sft/log"
+	"github.com/sft-project/go-sft/common"
+	"github.com/sft-project/go-sft/log"
 )
 
 // faucetDockerfile is the Dockerfile required to build a faucet container to

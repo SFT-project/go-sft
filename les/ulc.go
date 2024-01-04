@@ -19,8 +19,8 @@ package les
 import (
 	"errors"
 
-	"github.com/SFT-project/go-sft/log"
-	"github.com/SFT-project/go-sft/p2p/enode"
+	"github.com/sft-project/go-sft/log"
+	"github.com/sft-project/go-sft/p2p/enode"
 )
 
 type ulc struct {

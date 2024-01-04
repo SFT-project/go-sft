@@ -25,7 +25,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/SFT-project/go-sft/rpc"
+	"github.com/sft-project/go-sft/rpc"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/SFT-project/go-sft/common/mclock"
+	"github.com/sft-project/go-sft/common/mclock"
 )
 
 // logger collects events in string format and discards events older than the
